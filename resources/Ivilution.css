@@ -31,10 +31,20 @@
 
 /* Generic Colors & Color Scheme */
 body {
+	color-scheme:light!important;
     --alert-background-color:#dd3333;
     --warning-background-color:#ffcc33;
     --success-background-color:#14866d;
     --message-background-color:#575859;
+}
+
+/* Use Legible Generic Colors for Dark themes */
+body[dark-mode="true"] {
+	color-scheme:dark!important;
+    --alert-background-color:#ec8c8c;
+    --warning-background-color:#ffe38c;
+    --success-background-color:#51e5c4;
+    --message-background-color:#a0a1a2;
 }
 
 
@@ -1827,4 +1837,60 @@ input[type="checkbox"]:indeterminate:active  {
 	position:absolute!important;
 	width:100%!important;
 	height:100%!important;
+}
+
+.mw-checkbox-hack-checkbox {
+	display:none!important;
+}
+
+/* Mpisto & MpistoMicro theme aliasing */
+.config-skin-mpisto,
+.config-skin-mpistomicro {
+	--community-background-color:var(--background-color);
+	--anchor-background-color:var(--link-color);
+	--page-background-color:var(--content-bg);
+	--page-border-background-color:var(--content-border);
+	--page-text-background-color:var(--content-color);
+	--accent-background-color:var(--button-color);
+	--sticky-header-background-color:var(--personal-color);
+	--toolbar-background-color:rgb(var(--footer-color));
+}
+
+/* Dark theme config */
+.config-theme-dark.config-skin-monobook,
+.config-theme-dark.config-skin-vector,
+.config-theme-stellarbook.config-skin-vector {
+--community-background-image:url(https\:\/\/static\.wikia\.nocookie\.net\/zelda_gamepedia_en\/images\/0\/08\/Site-background-dark\/revision\/latest\?cb\=20210805155115);
+--community-background-color:#0b284f;
+--community-background-mode:standard;
+--community-background-horizontal-alignment:left;
+--community-background-vertical-alignment:top;
+--community-background-size:full;
+--community-background-no-tiling:false;
+--anchor-background-color:#f4f26b;
+--page-background-color:#17456e;
+--page-border-background-color:auto;
+--page-text-background-color:auto;
+--accent-background-color:#046f76;
+--sticky-header-background-color:#17456e;
+--toolbar-background-color:auto;
+--custom-secondary-font:"Rubik";
+}
+
+.config-theme-dark2.config-skin-vector {
+--community-background-image:url();
+--community-background-color:#000000;
+--community-background-mode:standard;
+--community-background-horizontal-alignment:center;
+--community-background-vertical-alignment:center;
+--community-background-size:cover;
+--community-background-no-tiling:false;
+--anchor-background-color:#d87320;
+--page-background-color:#202020;
+--page-border-background-color:auto;
+--page-text-background-color:auto;
+--accent-background-color:#666666;
+--sticky-header-background-color:#202020;
+--toolbar-background-color:auto;
+--custom-secondary-font:"Rubik";
 }
