@@ -31,7 +31,6 @@
 
 /* Generic Colors & Color Scheme */
 body {
-	color-scheme:light!important;
     --alert-background-color:#dd3333;
     --warning-background-color:#ffcc33;
     --success-background-color:#14866d;
@@ -106,18 +105,13 @@ body {
     --theme-message-label: var(--message-foreground-color);
 }
 
-* {
+[class*="cpe-"],
+[class*="cpe-"] * {
 	forced-color-adjust:none;
 }
 
 html {
 	position:relative;
-}
-
-/* Body Styling */
-body {
-  --global-filter:none;
-	--header-size:160px;
 }
 
 
@@ -801,7 +795,7 @@ margin-left:6px;
 	--icon-scale:1;
 	--icon-size:1;
 	--wireframe-size:1.1px;
-  font-family: 'Material Icons Round'!important;
+  font-family: 'Material Icons Round', 'Material Icons'!important;
   font-weight: normal;
   font-style: normal;
   display: inline-block;

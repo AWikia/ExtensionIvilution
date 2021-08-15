@@ -27,8 +27,10 @@ class Hooks implements \MediaWiki\Hook\BeforePageDisplayHook {
 	 */
 	public function onBeforePageDisplay( $out, $skin ): void {
 		$config = $out->getConfig();
-		$out->addModules( 'ext.Ivilution' );
-
+		if ( ($skin->getSkinName() === 'Evelution') ||  ($skin->getSkinName() === 'evelution') ) { // Only load in non-CPE_Langauge Skins
+		} else {
+			$out->addModules( 'ext.Ivilution' );
+		}
 	}
 
 public static function onSkinAddFooterLinks( Skin $skin, string $key, array &$footerlinks  ) {
