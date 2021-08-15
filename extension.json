@@ -14,12 +14,6 @@
 	"AutoloadNamespaces": {
 		"MediaWiki\\Extension\\Ivilution\\": "includes/"
 	},
-	"config": {
-		"IvilutionEnableFoo": {
-			"description": "Enable the Foo feature.",
-			"value": true
-		}
-	},
 	"HookHandlers": {
 		"IvilutionHooks": {
 			"class": "MediaWiki\\Extension\\Ivilution\\Hooks"
