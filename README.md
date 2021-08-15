@@ -20,7 +20,5 @@ wfLoadExtension( 'Ivilution' );
 # More Help
 Join to [our Discord Server](https://discord.gg/a6FbV6zWFs) for more help about Ivilution
 
-# Known Issue
-
 # Known Limitation
 - Some elements that rely on images (Particularly the Checkboxes on the default OOUI-theme will appear broken and only a mere check will appear. Checked checkboxes will have a blue background
