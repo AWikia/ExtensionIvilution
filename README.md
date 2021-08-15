@@ -1,22 +1,26 @@
-This is a blank extension template. It doesn't really do anything on its own.
-It is intended to provide a boiler template for an actual MediaWiki extension.
+# Description
+Ivilution is a MediaWiki extension that brings the CPE Language experience to other MediaWiki skins. It also brings out the following:
+- Themed OOUI Icons
+- Checkbox and Radio styling for non-ooui ones
+- Button and Input styling tweaks
+- Text Selection Styling
+- Partial Label Styling
+- Secondary font Styling (Fonts must be installed on your PC for now)
+- One static theme for use with the extension (Does not interfere with the Evelution's theming system)
 
-If you are checking this out from Git and intend to use it, you may use the
-following commands to make a clean directory of just this template without the
-Git meta-data and other examples.
+# Requirements
+To Run Ivilution on your wiki, you must have MediaWiki 1.36 or greater. Older versions are not supported
 
-	cd extensions
-	git clone https://gerrit.wikimedia.org/r/mediawiki/extensions/BoilerPlate.git
-	cp -r BoilerPlate ./MyExtension
-	rm -rf ./MyExtension/.git
+# Installation
+To Install Evelution, you must download the reposistory first. Make a folder called **Ivilution** in **Extensions** diractory where you have installed MediaWiki and extract the zipped file contents in **Ivilution** folder.  Lastly, put this in **LocalSettings.php**:
+```php
+wfLoadExtension( 'Ivilution' );
+```
 
-This automates the recommended code checkers for PHP and JavaScript code in Wikimedia projects
-(see https://www.mediawiki.org/wiki/Continuous_integration/Entry_points).
-To take advantage of this automation.
+# More Help
+Join to [our Discord Server](https://discord.gg/a6FbV6zWFs) for more help about Ivilution
 
-1. install nodejs, npm, and PHP composer
-2. change to the extension's directory
-3. `npm install`
-4. `composer install`
+# Known Issue
 
-Once set up, running `npm test` and `composer test` will run automated code checks.
+# Known Limitation
+- Some elements that rely on images (Particularly the Checkboxes on the default OOUI-theme will appear broken and only a mere check will appear. Checked checkboxes will have a blue background
