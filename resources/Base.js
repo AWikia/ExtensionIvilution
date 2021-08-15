@@ -23,15 +23,16 @@ $(' .cpe-dropdown')
 
 // Calls the function on all toggles
 function DropDownUpdate() {
-$('.cpe-dropdown > :first-child').off( "click" );			
+var dropdowns = document.querySelectorAll('.cpe-dropdown > :first-child')
+		dropdowns.forEach(function(x) {
+			$(x).off( "click" );			
+				$(x)
+				.click( function(e) { 
+							e.preventDefault(); 
+							DropDown(); 
+						});
+		});
 $('.cpe-dropdown').off( "mouseleave" );	
-// Process Menus		
-$(".cpe-dropdown > :first-child")
-					.click( function(e) { 
-						e.preventDefault(); 
-						DropDown(); 
-					});
-					
 // Close dropdowns on mouse leave
 $(' .cpe-dropdown')
 .mouseleave(function() {
