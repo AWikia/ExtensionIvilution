@@ -1,0 +1,53 @@
+{
+	"name": "Ivilution",
+	"author": [
+		"HM100"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:Iviluiton",
+	"descriptionmsg": "ivilution-desc",
+	"version": "1.0.0",
+	"license-name": "GPL-3.0-or-later",
+	"type": "skin",
+	"requires": {
+		"MediaWiki": ">= 1.36.0"
+	},
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\Ivilution\\": "includes/"
+	},
+	"config": {
+		"IvilutionEnableFoo": {
+			"description": "Enable the Foo feature.",
+			"value": true
+		}
+	},
+	"HookHandlers": {
+		"IvilutionHooks": {
+			"class": "MediaWiki\\Extension\\Ivilution\\Hooks"
+		}
+	},
+	"Hooks": {
+		"BeforePageDisplay": "IvilutionHooks"
+	},
+	"MessagesDirs": {
+		"Ivilution": [
+			"i18n"
+		]
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "resources",
+		"remoteExtPath": "Ivilution/resources"
+	},
+	"ResourceModules": {
+		"ext.Ivilution": {
+			"targets": [
+				"desktop",
+				"mobile"
+			],
+			"dependencies": [],
+			"messages": [],
+			"styles": ["Ivilution.css","OOUI.css"],
+			"scripts": ["init.js"]
+		}
+	},
+	"manifest_version": 2
+}
