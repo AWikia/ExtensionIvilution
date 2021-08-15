@@ -12,13 +12,13 @@ Ivilution is a MediaWiki extension that brings the CPE Language experience to ot
 To Run Ivilution on your wiki, you must have MediaWiki 1.36 or greater. Older versions are not supported
 
 # Installation
-To Install Evelution, you must download the reposistory first. Make a folder called **Ivilution** in **Extensions** diractory where you have installed MediaWiki and extract the zipped file contents in **Ivilution** folder.  Lastly, put this in **LocalSettings.php**:
+To Install Ivilution, you must download the reposistory first. Make a folder called **Ivilution** in **Extensions** diractory where you have installed MediaWiki and extract the zipped file contents in **Ivilution** folder.  Lastly, put this in **LocalSettings.php**:
 ```php
 wfLoadExtension( 'Ivilution' );
 ```
 
 # More Help
-Join to [our Discord Server](https://discord.gg/a6FbV6zWFs) for more help about Ivilution
+Join to [our Discord Server](https://discord.gg/a6FbV6zWFs) for more help about Ivilution and Evelution
 
 # Known Limitation
 - Some elements that rely on images (Particularly the Checkboxes on the default OOUI-theme will appear broken and only a mere check will appear. Checked checkboxes will have a blue background
