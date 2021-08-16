@@ -155,32 +155,32 @@ color:var(--accent-foreground-color)!important;
 
 
 
-/* Monaco Skin Compatibility CSS */
-.color1 {
+/* Monaco Skin Compatibility CSS outside Monaco */
+body:not(.skin-monaco) .color1 {
 	background-color: var(--accent-background-color);
 	color:var(--accent-foreground-color)
 }
 
-.color1 a {
+body:not(.skin-monaco)  .color1 a {
 	color:inherit;
 }
 
-.color2 {
-	background-color:var(--page-border-background-color);
+body:not(.skin-monaco)  .color2 {
+	background-color:var(--page-secondary-background-color);
 }
 
-.dark_text_1, .dark_text_2 {
+body:not(.skin-monaco)  .dark_text_1, body:not(.skin-monaco)  .dark_text_2 {
 	color:var(--anchor-background-color);
 }
 
 
-.accent	{
+body:not(.skin-monaco)  .accent	{
 	background-color:var(--accent-background-color-page-background-color-mix); /* var(--page-secondary-emphasis-background-color) */
 	border-color:var(--anchor-background-color);
 	color: var(--page-text-background-color);
 }
 
-.neutral {
+body:not(.skin-monaco)  .neutral {
 	background-color: var(--page-border-background-color);
 	border-color:var(--anchor-background-color);
 	color: var(--page-text-background-color);
@@ -1843,6 +1843,11 @@ input[type="checkbox"]:indeterminate:active  {
 	display:none!important;
 }
 
+.skin-refreshed a.sidebar-item,
+.skin-refreshed a.header-button, .skin-refreshed a.sidebar-button {
+	color:currentColor!important
+}
+
 /* Mpisto & MpistoMicro theme aliasing */
 .config-skin-mpisto,
 .config-skin-mpistomicro {
@@ -1857,6 +1862,26 @@ input[type="checkbox"]:indeterminate:active  {
 }
 
 /* Dark theme config */
+.config-theme-dark2.config-skin-vector,
+html[class*="config-theme-dark"] {
+--community-background-image:url();
+--community-background-color:#000000;
+--community-background-mode:standard;
+--community-background-horizontal-alignment:center;
+--community-background-vertical-alignment:center;
+--community-background-size:cover;
+--community-background-no-tiling:false;
+--anchor-background-color:#d87320;
+--page-background-color:#202020;
+--page-border-background-color:auto;
+--page-text-background-color:auto;
+--accent-background-color:#666666;
+--sticky-header-background-color:#202020;
+--toolbar-background-color:auto;
+--custom-secondary-font:"Rubik";
+}
+
+
 .config-theme-dark.config-skin-monobook,
 .config-theme-dark.config-skin-vector,
 .config-theme-stellarbook.config-skin-vector {
@@ -1877,20 +1902,20 @@ input[type="checkbox"]:indeterminate:active  {
 --custom-secondary-font:"Rubik";
 }
 
-.config-theme-dark2.config-skin-vector {
+
+.config-skin-cosmos:not(.config-theme-dark) {
 --community-background-image:url();
---community-background-color:#000000;
+--community-background-color:#1A1A1A;
 --community-background-mode:standard;
 --community-background-horizontal-alignment:center;
 --community-background-vertical-alignment:center;
 --community-background-size:cover;
 --community-background-no-tiling:false;
 --anchor-background-color:#d87320;
---page-background-color:#202020;
+--page-background-color:#ffffff;
 --page-border-background-color:auto;
 --page-text-background-color:auto;
---accent-background-color:#666666;
---sticky-header-background-color:#202020;
---toolbar-background-color:auto;
---custom-secondary-font:"Rubik";
+--accent-background-color:#c0c0c0;
+--sticky-header-background-color:#c0c0c0;
+--toolbar-background-color:#000000;
 }
