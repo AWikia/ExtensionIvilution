@@ -603,9 +603,9 @@ document.querySelector('html').style.setProperty("--toolbar-gradient-color-hover
 
 /* This goes before compiling Generic Colors or else they will think the theme is light */
 if (window.MW18darkmode) {
-	$('body').attr("dark-mode", isLightColor(getComputedStyle(document.querySelector('html')).getPropertyValue("--page-background-color")) );
+	$('html').attr("dark-mode", isLightColor(getComputedStyle(document.querySelector('html')).getPropertyValue("--page-background-color")) );
 } else {
-	$('body').attr("dark-mode", !(isLightColor(getComputedStyle(document.querySelector('html')).getPropertyValue("--page-background-color"))) );
+	$('html').attr("dark-mode", !(isLightColor(getComputedStyle(document.querySelector('html')).getPropertyValue("--page-background-color"))) );
 }
 
 

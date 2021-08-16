@@ -30,7 +30,7 @@
 }
 
 /* Generic Colors & Color Scheme */
-body {
+html {
 	color-scheme:light!important;
     --alert-background-color:#dd3333;
     --warning-background-color:#ffcc33;
@@ -39,7 +39,7 @@ body {
 }
 
 /* Use Legible Generic Colors for Dark themes */
-body[dark-mode="true"] {
+html[dark-mode="true"] {
 	color-scheme:dark!important;
     --alert-background-color:#ec8c8c;
     --warning-background-color:#ffe38c;
@@ -163,6 +163,17 @@ body:not(.skin-monaco) .color1 {
 
 body:not(.skin-monaco)  .color1 a {
 	color:inherit;
+}
+
+.skin-monaco .color1 {
+	color:#ffffff;
+}
+
+.skin-monaco .color1 a,
+.skin-monaco .color1 a:visited
+.skin-monaco .color1 a:hover,
+.skin-monaco .color1 a:visited:hover {
+	color:inherit!important;
 }
 
 body:not(.skin-monaco)  .color2 {
