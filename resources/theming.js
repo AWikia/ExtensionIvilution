@@ -45,7 +45,11 @@ function ColorTest(color,text=false,inv=false,dledlen=false) { // Regular Colors
 				return getComputedStyle(document.querySelector('html')).getPropertyValue("--dark-theme-foreground-color");
 			}
 		} else {
-			return ColorTestTwin(color,'#000000');
+			if (inv === false) {
+				return ColorTestTwin(color,'#000000');
+			} else {
+				return ColorTestTwin(color,'#ffffff');
+			}
 		}
 	} else {
 		if (text === true) {
@@ -55,7 +59,11 @@ function ColorTest(color,text=false,inv=false,dledlen=false) { // Regular Colors
 				return getComputedStyle(document.querySelector('html')).getPropertyValue("--dark-theme-foreground-color");
 			}
 		} else {
-			return ColorTestTwin(color, '#ffffff' );
+			if (inv === true) {
+				return ColorTestTwin(color,'#000000');
+			} else {
+				return ColorTestTwin(color,'#ffffff');
+			}
 		}
 	}
 
@@ -542,6 +550,33 @@ document.querySelector('html').style.setProperty("--community-foreground-color-i
 document.querySelector('html').style.setProperty("--community-foreground-color-hover-inverted-rgb", Color2(headcolor2tI));
 document.querySelector('html').style.setProperty("--community-gradient-color-rgb", Color2( getComputedStyle(document.querySelector('html')).getPropertyValue("--community-gradient-color") ));
 document.querySelector('html').style.setProperty("--community-gradient-color-hover-rgb", Color2( getComputedStyle(document.querySelector('html')).getPropertyValue("--community-gradient-color-hover") ));
+
+
+/** Community Header text color **/
+if ((getComputedStyle(document.querySelector('html')).getPropertyValue("--community-header-text-color") !== 'auto')  ) {
+	// Liatch Quirk
+	if ( (window.MW18darkmode === true) ) {
+		headertext_color = ColorInvert(getComputedStyle(document.querySelector('html')).getPropertyValue("--community-header-text-color"));
+	} else {
+		headertext_color = 'inherit';
+	}
+
+
+} else {
+	var headertext_color = getComputedStyle(document.querySelector('html')).getPropertyValue("--community-foreground-color");
+}
+
+document.querySelector('body').style.setProperty("--community-header-text-color", headertext_color);
+var headertext_color= getComputedStyle(document.querySelector('body')).getPropertyValue("--community-header-text-color");
+
+var headertextcolor1 = ColorTest(headertext_color,false,true,true);
+
+document.querySelector('html').style.setProperty("--community-header-text-color-hover", headertextcolor1);
+
+// RGB
+document.querySelector('html').style.setProperty("--community-header-text-color-rgb", Color2( getComputedStyle(document.querySelector('body')).getPropertyValue("--community-header-text-color") ));
+document.querySelector('html').style.setProperty("--community-header-text-color-hover-rgb", Color2(headertextcolor1));
+
 
 /* Floating Header Bg */
 if ((getComputedStyle(document.querySelector('html')).getPropertyValue("--toolbar-background-color") !== 'auto')  ) {

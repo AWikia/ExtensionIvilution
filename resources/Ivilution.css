@@ -8,6 +8,8 @@
 --page-border-background-color:auto;
 --page-text-background-color:auto;
 --toolbar-background-color:auto;
+--community-background-image-opacity:100%;
+--community-header-text-color:auto;
 --community-background-mode:standard;
 --community-background-alignment:var(--community-background-vertical-alignment) var(--community-background-horizontal-alignment);
 --community-background-horizontal-alignment:center;
@@ -113,6 +115,9 @@ body {
     --theme-success-label: var(--success-foreground-color);
     --theme-message-color: var(--message-background-color);
     --theme-message-label: var(--message-foreground-color);
+	--theme-community-header-color:rgb(var(--community-header-text-color-rgb));
+	--theme-community-header-color-hover:var(--community-header-text-color-hover);
+	--theme-background-image-opacity:var(--community-background-image-opacity);
 }
 
 [class*="cpe-"],
