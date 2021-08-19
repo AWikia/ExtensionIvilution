@@ -20,5 +20,8 @@ wfLoadExtension( 'Ivilution' );
 # More Help
 Join to [our Discord Server](https://discord.gg/a6FbV6zWFs) for more help about Ivilution and Evelution
 
+# Known Issue
+- Currently, no Powered by Ivilution icon is being added to the footer even though it is intended.
+
 # Known Limitation
 - Some elements that rely on images (Particularly the Checkboxes on the default OOUI-theme will appear broken and only a mere check will appear. Checked checkboxes will have a blue background
