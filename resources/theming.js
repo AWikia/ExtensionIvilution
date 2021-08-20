@@ -28,8 +28,19 @@ function CheckTheme() {
 
 /* Begin Color Parsers */
 function ColorTestTwin(color,color2,intensity=1,inter='hsl') {
-	return chroma.mix(color,color2,MW18HoverThreshold*intensity, inter);
+	return chroma.mix(color,color2,0.3*intensity, inter);
 }
+
+function GetHoverColor(color1='#ffffff',color2='#000000',inter='hsl',steps=4) {
+	colors = chroma.scale([color1, color2]).mode(inter).colors(steps);
+	return colors[1];
+}
+
+function GetActiveColor(color1='#ffffff',color2='#000000',inter='hsl',steps=4) {
+	colors = chroma.scale([GetHoverColor(color1,color2,inter,steps), color2]).mode(inter).colors(steps);
+	return colors[1];
+}
+
 
 function ColorTest(color,text=false,inv=false,dledlen=false) { // Regular Colors
 	if (dledlen === true) {
@@ -46,9 +57,9 @@ function ColorTest(color,text=false,inv=false,dledlen=false) { // Regular Colors
 			}
 		} else {
 			if (inv === false) {
-				return ColorTestTwin(color,'#000000');
+				return GetHoverColor(color, '#000000');
 			} else {
-				return ColorTestTwin(color,'#ffffff');
+				return GetHoverColor(color, '#ffffff');
 			}
 		}
 	} else {
@@ -60,9 +71,9 @@ function ColorTest(color,text=false,inv=false,dledlen=false) { // Regular Colors
 			}
 		} else {
 			if (inv === true) {
-				return ColorTestTwin(color,'#000000');
+				return GetHoverColor(color, '#000000');
 			} else {
-				return ColorTestTwin(color,'#ffffff');
+				return GetHoverColor(color, '#ffffff');
 			}
 		}
 	}
@@ -72,11 +83,9 @@ function ColorTest(color,text=false,inv=false,dledlen=false) { // Regular Colors
 
 function SuperColorTest(color) { // Double Amount
 	if (isLightColor(color)) {
-		var mix = ColorTestTwin(color, '#000000');
-		return ColorTestTwin(mix, '#000000');
+		return GetActiveColor(color, '#000000');
 	} else {
-		var mix = ColorTestTwin(color, '#ffffff');
-		return ColorTestTwin(mix, '#ffffff');
+		return GetActiveColor(color, '#ffffff');
 	}
 }
 
@@ -114,23 +123,22 @@ function Color3(r=0,g=0,b=0) {
 
 
 function isLightColor(color) {
-	return ((chroma.contrast(getComputedStyle(document.querySelector('html')).getPropertyValue("--light-theme-foreground-color"), color)) > MW18LightThreshold*0.1);
-//	return ((chroma(color).luminance()) > (MW18LightThreshold*0.01 - 0.001))
+	return ((chroma.contrast(getComputedStyle(document.querySelector('html')).getPropertyValue("--light-theme-foreground-color"), color)) > 5);
 }
 
 function isSuperLightColor(color) {
-	return ((chroma.contrast(getComputedStyle(document.querySelector('html')).getPropertyValue("--light-theme-foreground-color"), color)) > window.MW18LightThreshold*0.12);
-//	return ( (chroma(color).luminance()) > (MW18LightThreshold*0.012 - 0.001))
+	return ((chroma.contrast(getComputedStyle(document.querySelector('html')).getPropertyValue("--light-theme-foreground-color"), color)) > 6);
 }
 
 
 function isSuitableColor(color,color2) {
-return ((chroma.contrast(color, color2)) > MW18LightThreshold*0.06)
+return ((chroma.contrast(color, color2)) > 3)
 }
 
 function isSuitableColor2(color,color2) {
-return ((chroma.contrast(color, color2)) > MW18LightThreshold*0.03) // For Border Color
+return ((chroma.contrast(color, color2)) > 1.5) // For Border Color
 }
+
 
 /* Used to udpate all dynamical variables */
 function ColorUpdate(refresh=true,suitcheck=false) {
@@ -177,17 +185,17 @@ if ((getComputedStyle(document.querySelector('html')).getPropertyValue("--page-t
 }
 
 if (isLightColor(content_color)) {
-	var dropdowncolor = chroma.mix(content_color,getComputedStyle(document.querySelector('html')).getPropertyValue("--light-theme-text-background-color"),MW18HoverThreshold*0.55, 'hsv');
+	var dropdowncolor = chroma.mix(content_color,getComputedStyle(document.querySelector('html')).getPropertyValue("--light-theme-text-background-color"),0.15, 'hsv');
 	if ((getComputedStyle(document.querySelector('html')).getPropertyValue("--page-border-background-color") === 'auto')  ) {
-		var dropdowncolor2 = chroma.mix(content_color,getComputedStyle(document.querySelector('html')).getPropertyValue("--light-theme-text-background-color"),MW18HoverThreshold*2.5, 'hsv');
+		var dropdowncolor2 = chroma.mix(content_color,getComputedStyle(document.querySelector('html')).getPropertyValue("--light-theme-text-background-color"),7.5, 'hsv');
 	} else {
 		var dropdowncolor2 = 'inherit';
 	}
 
 } else {
-	var dropdowncolor = chroma.mix(content_color,getComputedStyle(document.querySelector('html')).getPropertyValue("--dark-theme-text-background-color"),MW18HoverThreshold*0.55, 'hsv');
+	var dropdowncolor = chroma.mix(content_color,getComputedStyle(document.querySelector('html')).getPropertyValue("--dark-theme-text-background-color"),0.15, 'hsv');
 	if ((getComputedStyle(document.querySelector('html')).getPropertyValue("--page-border-background-color") === 'auto')  ) {
-		var dropdowncolor2 = chroma.mix(content_color,getComputedStyle(document.querySelector('html')).getPropertyValue("--dark-theme-text-background-color"),MW18HoverThreshold*2.5, 'hsv');
+		var dropdowncolor2 = chroma.mix(content_color,getComputedStyle(document.querySelector('html')).getPropertyValue("--dark-theme-text-background-color"),7.5, 'hsv');
 	} else {
 		var dropdowncolor2 = 'inherit';
 	}
@@ -199,15 +207,15 @@ if ((getComputedStyle(document.querySelector('html')).getPropertyValue("--page-t
 	var content_text3 = SuperColorTest(content_text); // Scrollbar
 	var content_text4 = ColorTest(content_text,true);
 	var content_text4I = ColorTest(content_text,true,true);
-	colormixl = ColorTestTwin(content_color,content_text,0.8,'rgb');
-	colormix = ColorTestTwin(content_color,content_text,1.6,'rgb');
+	colormixl = GetHoverColor(content_color,content_text,'rgb',5);
+	colormix = GetActiveColor(content_color,content_text,'rgb',5);
 } else {
 	var content_text2 = ColorTest(dropdowncolor3);
 	var content_text3 = SuperColorTest(dropdowncolor3); // Scrollbar
 	var content_text4 = ColorTest(dropdowncolor3,true);
 	var content_text4I = ColorTest(dropdowncolor3,true,true);
-	colormixl = ColorTestTwin(content_color,dropdowncolor3,0.8,'rgb');
-	colormix = ColorTestTwin(content_color,dropdowncolor3,1.6,'rgb');
+	colormixl = GetHoverColor(content_color,dropdowncolor3,'rgb',5);
+	colormix = GetActiveColor(content_color,dropdowncolor3,'rgb',5);
 }
 	var content_text5 = ColorTest(content_text4,false);
 	var content_text5I = ColorTest(content_text4I,false);
@@ -305,8 +313,8 @@ document.querySelector('html').style.setProperty("--accent-gradient-color", butt
 document.querySelector('html').style.setProperty("--accent-gradient-color-hover", button_color);
 }
 
-buttonmixl = ColorTestTwin(content_color,button_color,0.8,'rgb');
-buttonmix = ColorTestTwin(content_color,button_color,1.6,'rgb');
+buttonmixl = GetHoverColor(content_color,button_color,'rgb',5);
+buttonmix = GetActiveColor(content_color,button_color,'rgb',5);
 
 
 /* Set Values */
@@ -355,8 +363,8 @@ document.querySelector('html').style.setProperty("--sticky-header-gradient-color
 document.querySelector('html').style.setProperty("--sticky-header-gradient-color-hover", header_color);
 }
 
-headermixl = ColorTestTwin(content_color,header_color,0.8,'rgb');
-headermix = ColorTestTwin(content_color,header_color,1.6,'rgb');
+headermixl = GetHoverColor(content_color,header_color,'rgb',5);
+headermix = GetActiveColor(content_color,header_color,'rgb',5);
 
 
 
@@ -417,8 +425,8 @@ document.querySelector('html').style.setProperty("--anchor-gradient-color", link
 document.querySelector('html').style.setProperty("--anchor-gradient-color-hover", link_color);
 }
 
-linkmixl = ColorTestTwin(content_color,link_color,0.8,'rgb');
-linkmix = ColorTestTwin(content_color,link_color,1.6,'rgb');
+linkmixl = GetHoverColor(content_color,link_color,'rgb',5);
+linkmix = GetActiveColor(content_color,link_color,'rgb',5);
 
 
 /* Set Values */
@@ -479,8 +487,8 @@ document.querySelector('html').style.setProperty("--page-border-gradient-color",
 document.querySelector('html').style.setProperty("--page-border-gradient-color-hover", border_color);
 }
 
-bordermixl = ColorTestTwin(content_color,border_color,0.8,'rgb');
-bordermix = ColorTestTwin(content_color,border_color,1.6,'rgb');
+bordermixl = GetHoverColor(content_color,border_color,'rgb',5);
+bordermix = GetActiveColor(content_color,border_color,'rgb',5);
 
 /* Set Values */
 document.querySelector('html').style.setProperty("--page-border-background-color-hover", bordercolor1);
@@ -528,8 +536,8 @@ document.querySelector('html').style.setProperty("--community-gradient-color", h
 document.querySelector('html').style.setProperty("--community-gradient-color-hover", head_color);
 }
 
-headmixl = ColorTestTwin(content_color,head_color,0.8,'rgb');
-headmix = ColorTestTwin(content_color,head_color,1.6,'rgb');
+headmixl = GetHoverColor(content_color,head_color,'rgb',5);
+headmix = GetActiveColor(content_color,head_color,'rgb',5);
 
 /* Set Values */
 document.querySelector('html').style.setProperty("--community-background-color-hover", headcolor1);
@@ -550,7 +558,6 @@ document.querySelector('html').style.setProperty("--community-foreground-color-i
 document.querySelector('html').style.setProperty("--community-foreground-color-hover-inverted-rgb", Color2(headcolor2tI));
 document.querySelector('html').style.setProperty("--community-gradient-color-rgb", Color2( getComputedStyle(document.querySelector('html')).getPropertyValue("--community-gradient-color") ));
 document.querySelector('html').style.setProperty("--community-gradient-color-hover-rgb", Color2( getComputedStyle(document.querySelector('html')).getPropertyValue("--community-gradient-color-hover") ));
-
 
 /** Community Header text color **/
 if ((getComputedStyle(document.querySelector('html')).getPropertyValue("--community-header-text-color") !== 'auto')  ) {
@@ -611,8 +618,8 @@ document.querySelector('html').style.setProperty("--toolbar-gradient-color", flo
 document.querySelector('html').style.setProperty("--toolbar-gradient-color-hover", floating_color);
 }
 
-floatmixl = ColorTestTwin(content_color,floating_color,0.8,'rgb');
-floatmix = ColorTestTwin(content_color,floating_color,1.6,'rgb');
+floatmixl = GetHoverColor(content_color,floating_color,'rgb',5);
+floatmix = GetActiveColor(content_color,floating_color,'rgb',5);
 
 
 document.querySelector('html').style.setProperty("--toolbar-background-color-hover", floatingcolor1);
@@ -663,8 +670,8 @@ document.querySelector('html').style.setProperty("--alert-gradient-color", alert
 document.querySelector('html').style.setProperty("--alert-gradient-color-hover", alert_color);
 }
 
-alertmixl = ColorTestTwin(content_color,alert_color,0.8,'rgb');
-alertmix = ColorTestTwin(content_color,alert_color,1.6,'rgb');
+alertmixl = GetHoverColor(content_color,alert_color,'rgb',5);
+alertmix = GetActiveColor(content_color,alert_color,'rgb',5);
 
 
 /* Set Values */
@@ -707,8 +714,8 @@ document.querySelector('html').style.setProperty("--warning-gradient-color", war
 document.querySelector('html').style.setProperty("--warning-gradient-color-hover", warning_color);
 }
 
-warningmixl = ColorTestTwin(content_color,warning_color,0.8,'rgb');
-warningmix = ColorTestTwin(content_color,warning_color,1.6,'rgb');
+warningmixl = GetHoverColor(content_color,warning_color,'rgb',5);
+warningmix = GetActiveColor(content_color,warning_color,'rgb',5);
 
 
 /* Set Values */
@@ -751,8 +758,8 @@ document.querySelector('html').style.setProperty("--success-gradient-color", suc
 document.querySelector('html').style.setProperty("--success-gradient-color-hover", success_color);
 }
 
-successmixl = ColorTestTwin(content_color,success_color,0.8,'rgb');
-successmix = ColorTestTwin(content_color,success_color,1.6,'rgb');
+successmixl = GetHoverColor(content_color,success_color,'rgb',5);
+successmix = GetActiveColor(content_color,success_color,'rgb',5);
 
 
 /* Set Values */
@@ -795,8 +802,8 @@ document.querySelector('html').style.setProperty("--message-gradient-color", mes
 document.querySelector('html').style.setProperty("--message-gradient-color-hover", message_color);
 }
 
-messagemixl = ColorTestTwin(content_color,message_color,0.8,'rgb');
-messagemix = ColorTestTwin(content_color,message_color,1.6,'rgb');
+messagemixl = GetHoverColor(content_color,message_color,'rgb',5);
+messagemix = GetActiveColor(content_color,message_color,'rgb',5);
 
 
 /* Set Values */
@@ -824,6 +831,7 @@ document.querySelector('html').style.setProperty("--message-gradient-color-hover
 document.querySelector('html').style.setProperty("--article-link-background-color-hover", ColorTest(link_color,false,false,true));
 document.querySelector('html').style.setProperty("--article-secondary-link-background-color-hover", ColorTest(button_color,false,false,true));
 document.querySelector('html').style.setProperty("--article-new-link-background-color-hover", ColorTest(alert_color,false,false,true));
+
 
 
 /* Cursor Theme */
