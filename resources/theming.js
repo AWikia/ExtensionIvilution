@@ -2,8 +2,6 @@
 window.MW18auto = true;
 window.MW18autoDark = false;
 window.MW18darkmode = false;
-window.MW18LightThreshold = 50;
-window.MW18HoverThreshold = 0.25;
 window.MW18ContrastNotice = false;
 
 ( function () {
