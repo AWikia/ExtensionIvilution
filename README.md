@@ -9,7 +9,9 @@ Ivilution is a MediaWiki extension that brings the CPE Language experience to ot
 - One static theme for use with the extension (Does not interfere with the Evelution's theming system)
 
 # Requirements
-To Run Ivilution on your wiki, you must have MediaWiki 1.36 or greater. Older versions are not supported. You must also have installed a MediaWiki skin other than Evelution as this extension is blocked running inside Evelution.
+To Run Ivilution on your wiki, you must have MediaWiki 1.36 or greater. Older versions are not supported. You must also have installed a MediaWiki skin other than the following ones as this extension is blocked running inside those skins:
+- Evelution
+- Tunic
 
 # Installation
 To Install Ivilution, you must download the reposistory first. Make a folder called **Ivilution** in **Extensions** diractory where you have installed MediaWiki and extract the zipped file contents in **Ivilution** folder.  Lastly, put this in **LocalSettings.php**:
