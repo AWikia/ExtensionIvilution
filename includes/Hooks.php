@@ -27,12 +27,13 @@ class Hooks implements \MediaWiki\Hook\BeforePageDisplayHook {
 	 */
 	public function onBeforePageDisplay( $out, $skin ): void {
 		$config = $out->getConfig();
-		if ( ($skin->getSkinName() === 'Evelution') ||  ($skin->getSkinName() === 'evelution') ) { // Only load in non-CPE_Langauge Skins
+		if ( ($skin->getSkinName() === 'Evelution') ||  ($skin->getSkinName() === 'evelution') ||  ($skin->getSkinName() === 'tunic') ) { // Only load in non-CPE_Langauge Skins
+			$out->addModules( 'ext.Ivilution2' );
 		} else {
 			$out->addModules( 'ext.Ivilution' );
 		}
 	}
-
+/*
 public static function onSkinAddFooterLinks( Skin $skin, string $key, array &$footerlinks  ) {
 		$wgFooterIcons['poweredby']['ivilution'] = [
 			"src" => "powered.png",
@@ -42,6 +43,6 @@ public static function onSkinAddFooterLinks( Skin $skin, string $key, array &$fo
 			"height" => "31"
 		];
 }
-
+*/
 
 }

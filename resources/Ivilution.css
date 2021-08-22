@@ -2112,7 +2112,7 @@ html[class*="config-theme-dark"] {
 --page-background-color:var(--background-color-content);
 --page-border-background-color:var(--border-color-content);
 --page-text-background-color:auto;
---accent-background-color:var(--color-link-visited);
+--accent-background-color:var(--color-link--visited);
 --sticky-header-background-color:var(--color-header);
 --toolbar-background-color:var(--background-color-footer);
 }
