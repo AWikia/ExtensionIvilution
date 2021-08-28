@@ -29,14 +29,14 @@ function ColorTestTwin(color,color2,intensity=1,inter='hsl') {
 	return chroma.mix(color,color2,0.3*intensity, inter);
 }
 
-function GetHoverColor(color1='#ffffff',color2='#000000',inter='hsl',steps=4) {
+function GetHoverColor(color1='#ffffff',color2='#000000',inter='hsl',steps=4,modi=1) {
 	colors = chroma.scale([color1, color2]).mode(inter).colors(steps);
-	return colors[1];
+	return colors[modi];
 }
 
-function GetActiveColor(color1='#ffffff',color2='#000000',inter='hsl',steps=4) {
-	colors = chroma.scale([GetHoverColor(color1,color2,inter,steps), color2]).mode(inter).colors(steps);
-	return colors[1];
+function GetActiveColor(color1='#ffffff',color2='#000000',inter='hsl',steps=4,modi=1) {
+	colors = chroma.scale([GetHoverColor(color1,color2,inter,steps,modi), color2]).mode(inter).colors(steps);
+	return colors[modi];
 }
 
 
@@ -55,9 +55,9 @@ function ColorTest(color,text=false,inv=false,dledlen=false) { // Regular Colors
 			}
 		} else {
 			if (inv === false) {
-				return GetHoverColor(color, '#000000');
+				return GetHoverColor(color, '#000000','hsl',10,3);
 			} else {
-				return GetHoverColor(color, '#ffffff');
+				return GetHoverColor(color, '#ffffff','hsl',10,3);
 			}
 		}
 	} else {
@@ -69,9 +69,9 @@ function ColorTest(color,text=false,inv=false,dledlen=false) { // Regular Colors
 			}
 		} else {
 			if (inv === true) {
-				return GetHoverColor(color, '#000000');
+				return GetHoverColor(color, '#000000','hsl',10,3);
 			} else {
-				return GetHoverColor(color, '#ffffff');
+				return GetHoverColor(color, '#ffffff','hsl',10,3);
 			}
 		}
 	}
@@ -79,11 +79,16 @@ function ColorTest(color,text=false,inv=false,dledlen=false) { // Regular Colors
 
 }
 
-function SuperColorTest(color) { // Double Amount
-	if (isLightColor(color)) {
-		return GetActiveColor(color, '#000000');
+function SuperColorTest(color,dledlen=false) { // Double Amount
+	if (dledlen === true) {
+		var color2 = getComputedStyle(document.querySelector('body')).getPropertyValue("--page-background-color");
 	} else {
-		return GetActiveColor(color, '#ffffff');
+		var color2 = color;
+	}
+	if (isLightColor(color2)) {
+		return GetActiveColor(color, '#000000','hsl',10,3);
+	} else {
+		return GetActiveColor(color, '#ffffff','hsl',10,3);
 	}
 }
 
@@ -826,9 +831,33 @@ document.querySelector('html').style.setProperty("--message-gradient-color-hover
 
 
 /* Article Link Colors */
-document.querySelector('html').style.setProperty("--article-link-background-color-hover", ColorTest(link_color,false,false,true));
-document.querySelector('html').style.setProperty("--article-secondary-link-background-color-hover", ColorTest(button_color,false,false,true));
-document.querySelector('html').style.setProperty("--article-new-link-background-color-hover", ColorTest(alert_color,false,false,true));
+document.querySelector('html').style.setProperty("--anchor-background-color-hover-dledlen", ColorTest(link_color,false,false,true));
+document.querySelector('html').style.setProperty("--anchor-background-color-active-dledlen", SuperColorTest(link_color,true));
+document.querySelector('html').style.setProperty("--accent-background-color-hover-dledlen", ColorTest(button_color,false,false,true));
+document.querySelector('html').style.setProperty("--accent-background-color-active-dledlen", SuperColorTest(button_color,true));
+document.querySelector('html').style.setProperty("--page-border-background-color-hover-dledlen", ColorTest(border_color,false,false,true));
+document.querySelector('html').style.setProperty("--page-border-background-color-active-dledlen", SuperColorTest(border_color,true));
+document.querySelector('html').style.setProperty("--community-background-color-hover-dledlen", ColorTest(head_color,false,false,true));
+document.querySelector('html').style.setProperty("--community-background-color-active-dledlen", SuperColorTest(head_color,true));
+document.querySelector('html').style.setProperty("--sticky-header-background-color-hover-dledlen", ColorTest(header_color,false,false,true));
+document.querySelector('html').style.setProperty("--sticky-header-background-color-active-dledlen", SuperColorTest(header_color,true));
+if ((getComputedStyle(document.querySelector('html')).getPropertyValue("--page-text-background-color") != 'auto') || (window.MW18darkmode === true) ) {
+	document.querySelector('html').style.setProperty("--page-text-background-color-hover-dledlen", ColorTest(content_text,false,false,true));
+	document.querySelector('html').style.setProperty("--page-text-background-color-active-dledlen", SuperColorTest(content_text,true));
+} else {
+	document.querySelector('html').style.setProperty("--page-text-background-color-hover-dledlen", ColorTest(dropdowncolor3,false,false,true));
+	document.querySelector('html').style.setProperty("--page-text-background-color-active-dledlen", SuperColorTest(dropdowncolor3,true));
+}
+document.querySelector('html').style.setProperty("--toolbar-background-color-hover-dledlen", ColorTest(floating_color,false,false,true));
+document.querySelector('html').style.setProperty("--toolbar-background-color-active-dledlen", SuperColorTest(floating_color,true));
+document.querySelector('html').style.setProperty("--alert-background-color-hover-dledlen", ColorTest(alert_color,false,false,true));
+document.querySelector('html').style.setProperty("--alert-background-color-active-dledlen", SuperColorTest(alert_color,true));
+document.querySelector('html').style.setProperty("--warning-background-color-hover-dledlen", ColorTest(warning_color,false,false,true));
+document.querySelector('html').style.setProperty("--warning-background-color-active-dledlen", SuperColorTest(warning_color,true));
+document.querySelector('html').style.setProperty("--success-background-color-hover-dledlen", ColorTest(success_color,false,false,true));
+document.querySelector('html').style.setProperty("--success-background-color-active-dledlen", SuperColorTest(success_color,true));
+document.querySelector('html').style.setProperty("--message-background-color-hover-dledlen", ColorTest(message_color,false,false,true));
+document.querySelector('html').style.setProperty("--message-background-color-active-dledlen", SuperColorTest(message_color,true));
 
 
 
