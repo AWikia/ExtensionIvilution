@@ -3,8 +3,8 @@
 --community-background-color:#f6f6f6;
 --community-background-color-hover:#b9b9b9;
 --community-background-color-active:#8a8a8a;
---community-gradient-color:#f6f6f6;
---community-gradient-color-hover:#b9b9b9;
+--community-background-color:#f6f6f6;
+--community-background-color-hover:#b9b9b9;
 --community-foreground-color:#000000;
 --community-foreground-color-hover:#404040;
 --community-foreground-color-inverted:#ffffff;
@@ -14,8 +14,8 @@
 --community-background-color-rgb:246,246,246;
 --community-background-color-hover-rgb:185,185,185;
 --community-background-color-active-rgb:138,138,138;
---community-gradient-color-rgb:246,246,246;
---community-gradient-color-hover-rgb:185,185,185;
+--community-background-color-rgb:246,246,246;
+--community-background-color-hover-rgb:185,185,185;
 --community-foreground-color-rgb:0,0,0;
 --community-foreground-color-hover-rgb:64,64,64;
 --community-foreground-color-inverted-rgb:255,255,255;
@@ -28,8 +28,8 @@
 --anchor-background-color:#0645ad;
 --anchor-background-color-hover:#0f66f7;
 --anchor-background-color-active:#4b8cf9;
---anchor-gradient-color:#0f66f7;
---anchor-gradient-color-hover:#0645ad;
+--anchor-background-color:#0f66f7;
+--anchor-background-color-hover:#0645ad;
 --anchor-foreground-color:#ffffff;
 --anchor-foreground-color-hover:#bfbfbf;
 --anchor-foreground-color-inverted:#000000;
@@ -39,8 +39,8 @@
 --anchor-background-color-rgb:6,69,173;
 --anchor-background-color-hover-rgb:15,102,247;
 --anchor-background-color-active-rgb:75,140,249;
---anchor-gradient-color-rgb:15,102,247;
---anchor-gradient-color-hover-rgb:6,69,173;
+--anchor-background-color-rgb:15,102,247;
+--anchor-background-color-hover-rgb:6,69,173;
 --anchor-foreground-color-rgb:255,255,255;
 --anchor-foreground-color-hover-rgb:191,191,191;
 --anchor-foreground-color-inverted-rgb:0,0,0;
@@ -60,8 +60,8 @@
 --page-border-background-color:#a2a9b1;
 --page-border-background-color-hover:#747e8a;
 --page-border-background-color-active:#575f68;
---page-border-gradient-color:#a2a9b1;
---page-border-gradient-color-hover:#747e8a;
+--page-border-background-color:#a2a9b1;
+--page-border-background-color-hover:#747e8a;
 --page-border-foreground-color:#000000;
 --page-border-foreground-color-inverted:#ffffff;
 --page-border-foreground-color-hover:#404040;
@@ -70,16 +70,16 @@
 --page-border-background-color-rgb:162,169,177;
 --page-border-background-color-hover-rgb:116,126,138;
 --page-border-background-color-active-rgb:87,95,104;
---page-border-gradient-color-rgb:162,169,177;
---page-border-gradient-color-hover-rgb:116,126,138;
+--page-border-background-color-rgb:162,169,177;
+--page-border-background-color-hover-rgb:116,126,138;
 --page-border-foreground-color-rgb:0,0,0;
 --page-border-foreground-color-inverted-rgb:255,255,255;
 --page-border-foreground-color-hover-rgb:64,64,64;
 --page-text-background-color:#000000;
 --page-text-background-color-hover:#404040;
 --page-text-background-color-active:#707070;
---page-text-gradient-color:#404040;
---page-text-gradient-color-hover:#000000;
+--page-text-background-color:#404040;
+--page-text-background-color-hover:#000000;
 --page-text-foreground-color:#ffffff;
 --page-text-foreground-color-hover:#bfbfbf;
 --page-text-foreground-color-inverted:#000000;
@@ -89,8 +89,8 @@
 --page-text-background-color-rgb:0,0,0;
 --page-text-background-color-hover-rgb:64,64,64;
 --page-text-background-color-active-rgb:112,112,112;
---page-text-gradient-color-rgb:64,64,64;
---page-text-gradient-color-hover-rgb:0,0,0;
+--page-text-background-color-rgb:64,64,64;
+--page-text-background-color-hover-rgb:0,0,0;
 --page-text-foreground-color-rgb:255,255,255;
 --page-text-foreground-color-hover-rgb:191,191,191;
 --page-text-foreground-color-inverted-rgb:0,0,0;
@@ -98,8 +98,8 @@
 --accent-background-color:#3366cc;
 --accent-background-color-hover:#668cd9;
 --accent-background-color-active:#8ca9e3;
---accent-gradient-color:#668cd9;
---accent-gradient-color-hover:#3366cc;
+--accent-background-color:#668cd9;
+--accent-background-color-hover:#3366cc;
 --accent-foreground-color:#ffffff;
 --accent-foreground-color-hover:#bfbfbf;
 --accent-foreground-color-inverted:#000000;
@@ -109,8 +109,8 @@
 --accent-background-color-rgb:51,102,204;
 --accent-background-color-hover-rgb:102,140,217;
 --accent-background-color-active-rgb:140,169,227;
---accent-gradient-color-rgb:102,140,217;
---accent-gradient-color-hover-rgb:51,102,204;
+--accent-background-color-rgb:102,140,217;
+--accent-background-color-hover-rgb:51,102,204;
 --accent-foreground-color-rgb:255,255,255;
 --accent-foreground-color-hover-rgb:191,191,191;
 --accent-foreground-color-inverted-rgb:0,0,0;
@@ -118,8 +118,8 @@
 --sticky-header-background-color:#a7d7f9;
 --sticky-header-background-color-hover:#46abf2;
 --sticky-header-background-color-active:#0f87db;
---sticky-header-gradient-color:#a7d7f9;
---sticky-header-gradient-color-hover:#46abf2;
+--sticky-header-background-color:#a7d7f9;
+--sticky-header-background-color-hover:#46abf2;
 --sticky-header-foreground-color:#000000;
 --sticky-header-foreground-color-hover:#404040;
 --sticky-header-foreground-color-inverted:#ffffff;
@@ -129,8 +129,8 @@
 --sticky-header-background-color-rgb:167,215,249;
 --sticky-header-background-color-hover-rgb:70,171,242;
 --sticky-header-background-color-active-rgb:15,135,219;
---sticky-header-gradient-color-rgb:167,215,249;
---sticky-header-gradient-color-hover-rgb:70,171,242;
+--sticky-header-background-color-rgb:167,215,249;
+--sticky-header-background-color-hover-rgb:70,171,242;
 --sticky-header-foreground-color-rgb:0,0,0;
 --sticky-header-foreground-color-hover-rgb:64,64,64;
 --sticky-header-foreground-color-inverted-rgb:255,255,255;
@@ -138,8 +138,8 @@
 --toolbar-background-color:#ffffff;
 --toolbar-background-color-hover:#bfbfbf;
 --toolbar-background-color-active:#8f8f8f;
---toolbar-gradient-color:#ffffff;
---toolbar-gradient-color-hover:#bfbfbf;
+--toolbar-background-color:#ffffff;
+--toolbar-background-color-hover:#bfbfbf;
 --toolbar-foreground-color:#000000;
 --toolbar-foreground-color-hover:#404040;
 --toolbar-foreground-color-inverted:#ffffff;
@@ -149,8 +149,8 @@
 --toolbar-background-color-rgb:255,255,255;
 --toolbar-background-color-hover-rgb:191,191,191;
 --toolbar-background-color-active-rgb:143,143,143;
---toolbar-gradient-color-rgb:255,255,255;
---toolbar-gradient-color-hover-rgb:191,191,191;
+--toolbar-background-color-rgb:255,255,255;
+--toolbar-background-color-hover-rgb:191,191,191;
 --toolbar-foreground-color-rgb:0,0,0;
 --toolbar-foreground-color-hover-rgb:64,64,64;
 --toolbar-foreground-color-inverted-rgb:255,255,255;
@@ -158,8 +158,8 @@
 --alert-background-color:#dd3333;
 --alert-background-color-hover:#e66666;
 --alert-background-color-active:#ec8c8c;
---alert-gradient-color:#e66666;
---alert-gradient-color-hover:#dd3333;
+--alert-background-color:#e66666;
+--alert-background-color-hover:#dd3333;
 --alert-foreground-color:#ffffff;
 --alert-foreground-color-hover:#bfbfbf;
 --alert-foreground-color-inverted:#000000;
@@ -169,8 +169,8 @@
 --alert-background-color-rgb:221,51,51;
 --alert-background-color-hover-rgb:230,102,102;
 --alert-background-color-active-rgb:236,140,140;
---alert-gradient-color-rgb:230,102,102;
---alert-gradient-color-hover-rgb:221,51,51;
+--alert-background-color-rgb:230,102,102;
+--alert-background-color-hover-rgb:221,51,51;
 --alert-foreground-color-rgb:255,255,255;
 --alert-foreground-color-hover-rgb:191,191,191;
 --alert-foreground-color-inverted-rgb:0,0,0;
@@ -178,8 +178,8 @@
 --warning-background-color:#ffcc33;
 --warning-background-color-hover:#e5ac00;
 --warning-background-color-active:#ac8100;
---warning-gradient-color:#ffcc33;
---warning-gradient-color-hover:#e5ac00;
+--warning-background-color:#ffcc33;
+--warning-background-color-hover:#e5ac00;
 --warning-foreground-color:#000000;
 --warning-foreground-color-hover:#404040;
 --warning-foreground-color-inverted:#ffffff;
@@ -189,8 +189,8 @@
 --warning-background-color-rgb:255,204,51;
 --warning-background-color-hover-rgb:229,172,0;
 --warning-background-color-active-rgb:172,129,0;
---warning-gradient-color-rgb:255,204,51;
---warning-gradient-color-hover-rgb:229,172,0;
+--warning-background-color-rgb:255,204,51;
+--warning-background-color-hover-rgb:229,172,0;
 --warning-foreground-color-rgb:0,0,0;
 --warning-foreground-color-hover-rgb:64,64,64;
 --warning-foreground-color-inverted-rgb:255,255,255;
@@ -198,8 +198,8 @@
 --success-background-color:#14866d;
 --success-background-color-hover:#20d3ac;
 --success-background-color-active:#51e5c4;
---success-gradient-color:#20d3ac;
---success-gradient-color-hover:#14866d;
+--success-background-color:#20d3ac;
+--success-background-color-hover:#14866d;
 --success-foreground-color:#ffffff;
 --success-foreground-color-hover:#bfbfbf;
 --success-foreground-color-inverted:#000000;
@@ -209,8 +209,8 @@
 --success-background-color-rgb:20,134,109;
 --success-background-color-hover-rgb:32,211,172;
 --success-background-color-active-rgb:81,229,196;
---success-gradient-color-rgb:32,211,172;
---success-gradient-color-hover-rgb:20,134,109;
+--success-background-color-rgb:32,211,172;
+--success-background-color-hover-rgb:20,134,109;
 --success-foreground-color-rgb:255,255,255;
 --success-foreground-color-hover-rgb:191,191,191;
 --success-foreground-color-inverted-rgb:0,0,0;
@@ -218,8 +218,8 @@
 --message-background-color:#575859;
 --message-background-color-hover:#808283;
 --message-background-color-active:#a0a1a2;
---message-gradient-color:#808283;
---message-gradient-color-hover:#575859;
+--message-background-color:#808283;
+--message-background-color-hover:#575859;
 --message-foreground-color:#ffffff;
 --message-foreground-color-hover:#bfbfbf;
 --message-foreground-color-inverted:#000000;
@@ -229,8 +229,8 @@
 --message-background-color-rgb:87,88,89;
 --message-background-color-hover-rgb:128,130,131;
 --message-background-color-active-rgb:160,161,162;
---message-gradient-color-rgb:128,130,131;
---message-gradient-color-hover-rgb:87,88,89;
+--message-background-color-rgb:128,130,131;
+--message-background-color-hover-rgb:87,88,89;
 --message-foreground-color-rgb:255,255,255;
 --message-foreground-color-hover-rgb:191,191,191;
 --message-foreground-color-inverted-rgb:0,0,0;
@@ -290,26 +290,27 @@
 }
 
 .messagebox {
-    background-color: var(--message-gradient-color);
-    border-color: var(--message-gradient-color-hover);
+    background-color: var(--message-background-color);
+    border-color: var(--message-background-color-hover);
 }
 
 .errorbox {
-    background-color: var(--alert-gradient-color);
-    border-color: var(--alert-gradient-color-hover);
+    background-color: var(--alert-background-color);
+    border-color: var(--alert-background-color-hover);
 }
 
 .warningbox {
-    background-color: var(--warning-gradient-color);
-    border-color: var(--warning-gradient-color-hover);
+    background-color: var(--warning-background-color);
+    border-color: var(--warning-background-color-hover);
 }
 
 .successbox {
-    background-color: var(--success-gradient-color);
-    border-color: var(--success-gradient-color-hover);
+    background-color: var(--success-background-color);
+    border-color: var(--success-background-color-hover);
 }
 
 
+/* Classic */
 .oo-ui-icon-arrowNext {
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3Enext%3C/title%3E%3Cpath d=%22M8.59 3.42L14.17 9H2v2h12.17l-5.58 5.59L10 18l8-8-8-8z%22/%3E%3C/svg%3E");
   mask-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3Enext%3C/title%3E%3Cpath d=%22M8.59 3.42L14.17 9H2v2h12.17l-5.58 5.59L10 18l8-8-8-8z%22/%3E%3C/svg%3E");
@@ -3873,4 +3874,26 @@
 .oo-ui-image-invert.oo-ui-indicator-required {
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3Erequired%3C/title%3E%3Cpath d=%22M8.5 0h3v20h-3z%22/%3E%3Cpath d=%22M19.41 13.701l-1.5 2.598L.59 6.3l1.5-2.598z%22/%3E%3Cpath d=%22M17.91 3.701l1.5 2.598-17.32 10-1.5-2.598z%22/%3E%3C/svg%3E");
   mask-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3Erequired%3C/title%3E%3Cpath d=%22M8.5 0h3v20h-3z%22/%3E%3Cpath d=%22M19.41 13.701l-1.5 2.598L.59 6.3l1.5-2.598z%22/%3E%3Cpath d=%22M17.91 3.701l1.5 2.598-17.32 10-1.5-2.598z%22/%3E%3C/svg%3E");
+}
+
+/* Extensive */
+.oo-ui-icon-pilcrow {
+    -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E %3Ctitle%3E pilcrow %3C/title%3E %3Cpath d=%22m 7.388022%2C2 h 9.278109 v 2 h -2 V 18 H 12.666277 V 4.0001848 H 9.333065 V 18 H 7.333138 V 9.990386 C 5.7072798%2C9.883573 4.2194862%2C9.482099 3.3271547%2C8.787866 2.4423848%2C8.087294 2%2C7.156403 2%2C5.9949814 2%2C4.7959481 2.4915387%2C3.8302979 3.4746161%2C3.0981365 4.4576935%2C2.365975 5.7621616%2C2 7.388022%2C2 Z%22 /%3E %3C/svg%3E");
+    mask-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E %3Ctitle%3E pilcrow %3C/title%3E %3Cpath d=%22m 7.388022%2C2 h 9.278109 v 2 h -2 V 18 H 12.666277 V 4.0001848 H 9.333065 V 18 H 7.333138 V 9.990386 C 5.7072798%2C9.883573 4.2194862%2C9.482099 3.3271547%2C8.787866 2.4423848%2C8.087294 2%2C7.156403 2%2C5.9949814 2%2C4.7959481 2.4915387%2C3.8302979 3.4746161%2C3.0981365 4.4576935%2C2.365975 5.7621616%2C2 7.388022%2C2 Z%22 /%3E %3C/svg%3E");
+}
+.oo-ui-icon-wrapping {
+    -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E %3Ctitle%3E wrapping %3C/title%3E %3Cpath d=%22m 1%2C5 v 2 h 14 c 1.125297%2C0 2%2C0.8747028 2%2C2 0%2C1.125297 -0.874703%2C2 -2%2C2 H 14 V 9 l -3%2C3 3%2C3 v -2 h 1 c 2.198703%2C0 4%2C-1.801297 4%2C-4 0%2C-2.1987028 -1.801297%2C-4 -4%2C-4 z%22 /%3E %3Cpath d=%22m 1%2C13 h 8 v 2 H 1 Z%22 /%3E %3Cpath d=%22m 1%2C9 h 8 v 2 H 1 Z%22 /%3E %3C/svg%3E");
+    mask-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E %3Ctitle%3E wrapping %3C/title%3E %3Cpath d=%22m 1%2C5 v 2 h 14 c 1.125297%2C0 2%2C0.8747028 2%2C2 0%2C1.125297 -0.874703%2C2 -2%2C2 H 14 V 9 l -3%2C3 3%2C3 v -2 h 1 c 2.198703%2C0 4%2C-1.801297 4%2C-4 0%2C-2.1987028 -1.801297%2C-4 -4%2C-4 z%22 /%3E %3Cpath d=%22m 1%2C13 h 8 v 2 H 1 Z%22 /%3E %3Cpath d=%22m 1%2C9 h 8 v 2 H 1 Z%22 /%3E %3C/svg%3E");
+}
+.oo-ui-icon-gotoLine {
+    -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E %3Ctitle%3E go to line %3C/title%3E %3Cpath d=%22M 2%2C6 H 3 V 1 H 1 v 1 h 1 z m -1%2C9 h 2 v 1 H 2 v 1 h 1 v 1 H 1 v 1 H 4 V 14 H 1 Z M 3.5%2C8 H 1 v 1 h 2 v 1 H 1.5 C 1.2238576%2C10 1%2C10.223858 1%2C10.5 V 13 H 4 V 12 H 2 V 11 H 3.5 C 3.7761424%2C11 4%2C10.776142 4%2C10.5 v -2 C 4%2C8.2238576 3.7761424%2C8 3.5%2C8 Z%22 /%3E %3Cpath d=%22M 10%2C7.5 6%2C10 10%2C12.5 V 11 h 9 V 9 h -9 z%22 /%3E %3C/svg%3E");
+    mask-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E %3Ctitle%3E go to line %3C/title%3E %3Cpath d=%22M 2%2C6 H 3 V 1 H 1 v 1 h 1 z m -1%2C9 h 2 v 1 H 2 v 1 h 1 v 1 H 1 v 1 H 4 V 14 H 1 Z M 3.5%2C8 H 1 v 1 h 2 v 1 H 1.5 C 1.2238576%2C10 1%2C10.223858 1%2C10.5 V 13 H 4 V 12 H 2 V 11 H 3.5 C 3.7761424%2C11 4%2C10.776142 4%2C10.5 v -2 C 4%2C8.2238576 3.7761424%2C8 3.5%2C8 Z%22 /%3E %3Cpath d=%22M 10%2C7.5 6%2C10 10%2C12.5 V 11 h 9 V 9 h -9 z%22 /%3E %3C/svg%3E");
+}
+.oo-ui-icon-topicCollapse {
+    -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2214%22 viewBox=%220 0 20 14%22%3E %3Cg fill=%22%2372777d%22 fill-rule=%22evenodd%22%3E %3Cpath d=%22M6.772 13.492a1.08 1.08 0 0 0-1.078-1.08H19.64c-.596 0-1.08.485-1.08 1.08V.36c0 .597.485 1.08 1.08 1.08H5.693A1.08 1.08 0 0 0 6.77.36v13.132zM.362 0H19.64c.2 0 .36.16.36.36v13.132c0 .2-.16.36-.36.36H.36c-.2 0-.36-.16-.36-.36V.36C0 .16.16 0 .36 0z%22/%3E %3Cpath d=%22M13.672 4.018v2.34L8.265 6.34v1.725h5.407v2.34l3.598-3.06-3.598-3.327zm-2.334 3.148v.072h-.072v-.072h.072z%22/%3E %3C/g%3E %3C/svg%3E");
+    mask-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2214%22 viewBox=%220 0 20 14%22%3E %3Cg fill=%22%2372777d%22 fill-rule=%22evenodd%22%3E %3Cpath d=%22M6.772 13.492a1.08 1.08 0 0 0-1.078-1.08H19.64c-.596 0-1.08.485-1.08 1.08V.36c0 .597.485 1.08 1.08 1.08H5.693A1.08 1.08 0 0 0 6.77.36v13.132zM.362 0H19.64c.2 0 .36.16.36.36v13.132c0 .2-.16.36-.36.36H.36c-.2 0-.36-.16-.36-.36V.36C0 .16.16 0 .36 0z%22/%3E %3Cpath d=%22M13.672 4.018v2.34L8.265 6.34v1.725h5.407v2.34l3.598-3.06-3.598-3.327zm-2.334 3.148v.072h-.072v-.072h.072z%22/%3E %3C/g%3E %3C/svg%3E");
+}
+.oo-ui-icon-topicExpand {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2214%22 viewBox=%220 0 20 14%22%3E %3Cg fill=%22%2372777d%22 fill-rule=%22evenodd%22%3E %3Cpath d=%22M6.772 13.492a1.08 1.08 0 0 0-1.078-1.08H19.64c-.596 0-1.08.485-1.08 1.08V.36c0 .597.485 1.08 1.08 1.08H5.693A1.08 1.08 0 0 0 6.77.36v13.132zM.362 0H19.64c.2 0 .36.16.36.36v13.132c0 .2-.16.36-.36.36H.36c-.2 0-.36-.16-.36-.36V.36C0 .16.16 0 .36 0z%22/%3E %3Cpath d=%22M11.862 4.018v2.34l5.408-.018v1.725h-5.408v2.34l-3.597-3.06 3.597-3.327zm2.335 3.148v.072h.072v-.072h-.075z%22/%3E %3C/g%3E %3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2214%22 viewBox=%220 0 20 14%22%3E %3Cg fill=%22%2372777d%22 fill-rule=%22evenodd%22%3E %3Cpath d=%22M6.772 13.492a1.08 1.08 0 0 0-1.078-1.08H19.64c-.596 0-1.08.485-1.08 1.08V.36c0 .597.485 1.08 1.08 1.08H5.693A1.08 1.08 0 0 0 6.77.36v13.132zM.362 0H19.64c.2 0 .36.16.36.36v13.132c0 .2-.16.36-.36.36H.36c-.2 0-.36-.16-.36-.36V.36C0 .16.16 0 .36 0z%22/%3E %3Cpath d=%22M11.862 4.018v2.34l5.408-.018v1.725h-5.408v2.34l-3.597-3.06 3.597-3.327zm2.335 3.148v.072h.072v-.072h-.075z%22/%3E %3C/g%3E %3C/svg%3E");
 }
