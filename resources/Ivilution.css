@@ -574,7 +574,6 @@ html {
 	--page-text-foreground-color:var(--dark-theme-foreground-color);
 	--accent-foreground-color:var(--dark-theme-foreground-color);
 	--sticky-header-foreground-color:var(--dark-theme-foreground-color);
-	--toolbar-foreground-color:var(--dark-theme-foreground-color);
 	--alert-foreground-color:var(--dark-theme-foreground-color);
 	--warning-foreground-color:var(--dark-theme-foreground-color);
 	--success-foreground-color:var(--dark-theme-foreground-color);
@@ -587,7 +586,6 @@ html {
 	--page-text-foreground-color-hover:var(--dark-theme-foreground-color-hover);
 	--accent-foreground-color-hover:var(--dark-theme-foreground-color-hover);
 	--sticky-header-foreground-color-hover:var(--dark-theme-foreground-color-hover);
-	--toolbar-foreground-color-hover:var(--dark-theme-foreground-color-hover);
 	--alert-foreground-color-hover:var(--dark-theme-foreground-color-hover);
 	--warning-foreground-color-hover:var(--dark-theme-foreground-color-hover);
 	--success-foreground-color-hover:var(--dark-theme-foreground-color-hover);
@@ -600,7 +598,6 @@ html {
 	--page-text-foreground-color-rgb:var(--dark-theme-foreground-color-rgb);
 	--accent-foreground-color-rgb:var(--dark-theme-foreground-color-rgb);
 	--sticky-header-foreground-color-rgb:var(--dark-theme-foreground-color-rgb);
-	--toolbar-foreground-color-rgb:var(--dark-theme-foreground-color-rgb);
 	--alert-foreground-color-rgb:var(--dark-theme-foreground-color-rgb);
 	--warning-foreground-color-rgb:var(--dark-theme-foreground-color-rgb);
 	--success-foreground-color-rgb:var(--dark-theme-foreground-color-rgb);
@@ -613,7 +610,6 @@ html {
 	--page-text-foreground-color-hover-rgb:var(--dark-theme-foreground-color-hover-rgb);
 	--accent-foreground-color-hover-rgb:var(--dark-theme-foreground-color-hover-rgb);
 	--sticky-header-foreground-color-hover-rgb:var(--dark-theme-foreground-color-hover-rgb);
-	--toolbar-foreground-color-hover-rgb:var(--dark-theme-foreground-color-hover-rgb);
 	--alert-foreground-color-hover-rgb:var(--dark-theme-foreground-color-hover-rgb);
 	--warning-foreground-color-hover-rgb:var(--dark-theme-foreground-color-hover-rgb);
 	--success-foreground-color-hover-rgb:var(--dark-theme-foreground-color-hover-rgb);
@@ -626,7 +622,6 @@ html {
 	--page-text-foreground-color-inverted:var(--dark-theme-foreground-color);
 	--accent-foreground-color-inverted:var(--dark-theme-foreground-color);
 	--sticky-header-foreground-color-inverted:var(--dark-theme-foreground-color);
-	--toolbar-foreground-color-inverted:var(--dark-theme-foreground-color);
 	--alert-foreground-color-inverted:var(--dark-theme-foreground-color);
 	--warning-foreground-color-inverted:var(--dark-theme-foreground-color);
 	--success-foreground-color-inverted:var(--dark-theme-foreground-color);
@@ -2932,7 +2927,6 @@ input[type="range"]::-moz-range-progress {
 	--page-text-background-color:var(--content-color);
 	--accent-background-color:var(--button-color);
 	--sticky-header-background-color:var(--personal-color);
-	--toolbar-background-color:rgb(var(--footer-color));
 }
 
 /* Dark theme config */
@@ -2946,7 +2940,6 @@ html[class*="config-theme-dark"] {
 --page-text-background-color:auto;
 --accent-background-color:#666666;
 --sticky-header-background-color:#202020;
---toolbar-background-color:auto;
 --custom-secondary-font:"Rubik";
 }
 
@@ -2962,7 +2955,6 @@ html[class*="config-theme-dark"] {
 --page-text-background-color:auto;
 --accent-background-color:#046f76;
 --sticky-header-background-color:#17456e;
---toolbar-background-color:auto;
 --custom-secondary-font:"Rubik";
 }
 
@@ -2980,7 +2972,6 @@ html[class*="config-theme-dark"] {
 --page-text-background-color:auto;
 --accent-background-color:#c0c0c0;
 --sticky-header-background-color:#c0c0c0;
---toolbar-background-color:#000000;
 }
 
 /* Lakeus skin by Lakejason0 */
@@ -2993,5 +2984,4 @@ html[class*="config-theme-dark"] {
 --page-text-background-color:auto;
 --accent-background-color:var(--color-link--visited);
 --sticky-header-background-color:var(--color-header);
---toolbar-background-color:var(--background-color-footer);
 }
