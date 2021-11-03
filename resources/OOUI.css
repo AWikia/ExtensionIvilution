@@ -1,13 +1,13 @@
 ﻿:root {
-	--community-background-image:url("");
-	--community-background-color:#f6f6f6;
-	--community-header-text-color:#000000;
-	--anchor-background-color:#0645ad;
+	--body-background-image:url("");
+	--body-background-color:#f6f6f6;
+	--superbar-text-color:#000000;
+	--secondary-accent-background-color:#0645ad;
 	--page-background-color:#ffffff;
 	--page-border-background-color:#a2a9b1;
 	--page-text-background-color:#000000;
 	--accent-background-color:#3366cc;
-	--sticky-header-background-color:#a7d7f9;
+	--caret-background-color:#a7d7f9;
 }
 
 
