@@ -3,77 +3,98 @@ if (navigator.userAgent.match("Mobile")) {
 document.querySelector("body").className += " phone"
 }
 
-/* Dropdowns */
-// Function to be used on the first child of .cpe-dropdown container
-function DropDownUpdate() {
- $('.cpe-dropdown').off( "mouseleave" );	
+function insertKey(key,value) {
+	window.localStorage.setItem('-evelution-pref-' + key, '' + value);
+}
 
-$(".cpe-dropdown")
-					.attr('tabindex', '-1')
+function getParams() {
+	if (window.location.search != "") {
+		var params = window.location.search.split("?")[1].split("&");
+    } else {
+		var params = []
+    }
+	return params
+}
+
+
+/* Dropdowns */
+// Calls the function on all toggles
+function DropDownUpdate() {
+	var dropdowns = document.querySelectorAll(".cpe-dropdown");
+	dropdowns.forEach(function(x) {
+		x.setAttribute('tabindex',-1);; // Add the CPE button class
+	});
+
 
 /* Select Inputs */
-$(' .cpe-dropdown.cpe-select .cpe-dropdown__content .cpe-list li:not(.cpe-dropdown-level-2)')
-.click(function(e) {
+	var select_items = document.querySelectorAll(".cpe-dropdown.cpe-select .cpe-dropdown__content .cpe-list li:not(.cpe-dropdown-level-2)");
+	select_items.forEach(function(y) {
+		y.setAttribute('onclick','UpdateSelectValue()')
+		y.addEventListener('click', (function(e) {
 						e.preventDefault();
-						var value = $(this).attr("value");
-						$(' .cpe-dropdown.cpe-select')
-						.click(function() {
-									var content = $('.cpe-select:focus-within .cpe-dropdown__content .cpe-list li:not(.cpe-dropdown-level-2):hover > a').html();
-									$('.cpe-select:focus-within .cpe-select__value').attr("value", value);
-									$('.cpe-select:focus-within .cpe-select__value').html(content);
-									$(this).blur();
-									$(' .cpe-dropdown.cpe-select').off( "click" );
-								});
-        });
+						var selected = this;
+
+
+		var x = document.querySelector(".cpe-dropdown.cpe-select:focus-within .cpe-dropdown__content .cpe-list li.selected");
+		if (x) {
+			x.classList.remove("selected");
+		}
+//		this.classList.add("selected");
+
+
+						var value = selected.getAttribute("value");
+						document.querySelector(' .cpe-dropdown.cpe-select:focus-within')
+						.addEventListener('click',(function() {
+									var content = selected.innerText;
+									document.querySelector('.cpe-select:focus-within .cpe-select__value').setAttribute("value", value);
+									document.querySelector('.cpe-select:focus-within .cpe-select__value').innerHTML= content;
+//									TestDynamicTheme(); // Change
+								}));
+        }) );
+	});
+
 					
 }
 
+function UpdateSelectValue() { // Handles Blurring
+		setTimeout(
+		(function() { document.querySelector(' .cpe-dropdown.cpe-select:focus-within').blur() } )
+	,0)
+}
 
 
-/* Enable New Global Navigation - No exception for now */
-window.MW18newnavblock=false;
-(function () {
-	AliasFandomComponents();
-	DropDownUpdate();
-	$('body').mouseenter( function(e) { DropDownUpdate(); CheckTheme(); } );		
-	$('body').mouseleave( function(e) { CheckTheme(); } );
-	if (window.MW18newnavblock === true) {
-		return
-	}
-/*
-	if ($("body.mpisto-2018").length || $("body.mpisto-discuss-2018").length) {
-		document.querySelector('.mpisto-gnav[style]').className += " newnav";
-		document.querySelector('.mpisto-gnav:not([style])').className += " newnav";
-	}
-*/
-})();
-
-
-/* Module Toggle */
-function ToggleModule() {
-
-		$('.mpisto-module')
-				.click(function() {
-						var $this = $(this);
-						if ($this.hasClass("hidden-module")) {
-							$this.removeClass("hidden-module");
-						} else {
-							$this.addClass("hidden-module");
-						}
-
-						$('.mpisto-module').off( "click" );
-
-
-			});
+function UpdateRange() {
+	var ranges = document.querySelectorAll('input[type="range"]');
+	ranges.forEach(function(x) {
+		x.style.setProperty("--range-percent",  (((x.value) * 100) / x.getAttribute('max')) + '%' );
+	});
 
 }
+
+function UpdateRangeInputs() {
+	UpdateRange();
+
+	var ranges2 = document.querySelectorAll('input[type="range"]');
+	ranges2.forEach(function(x) {
+		x.addEventListener("input", function(e) { UpdateRange(); });
+	});
+
+}
+
+/* Enable New Global Navigation - No exception for now */
+(function () {
+	AliasFandomComponents();
+	UpdateRangeInputs();
+	DropDownUpdate();
+})();
+
 
 /* Aliases all components with the .wds prefix to the ones from .cpe ones */
 function AliasFandomComponents() {
 
 	var highlightedItems = document.querySelectorAll(":not(svg)[class*='wds-'], [class*='cpe-is-'], [class*='cpe-has-']");
 
-	while ($(':not(svg)[class*="wds-"], [class*="cpe-is-"], [class*="cpe-has-"]').length > 0) {
+	while (document.querySelectorAll(':not(svg)[class*="wds-"], [class*="cpe-is-"], [class*="cpe-has-"]').length > 0) {
 		highlightedItems.forEach(function(x) {
 			x.className = x.className.replace("wds-is-", "is-");
 			x.className = x.className.replace("wds-has-", "has-");
@@ -91,20 +112,16 @@ function AliasFandomComponents() {
 
 /* Banners */
 function RemoveBanner() {
-$('#floatingbanner .cpe-banner-notification')
-	.click(function() {
-		var $this= $(this);
-		$this.addClass("is-transparent")
+		var banner= document.querySelector('#floatingbanner .cpe-banner-notification:focus-within');
+		banner.classList.add("is-transparent")
 		setTimeout(
 		(function () {
-			$this.remove();
-			$('#floatingbanner .cpe-banner-notification').off( "click" );
-	if (!($("#floatingbanner .cpe-banner-notification").length)) {
-		$('#floatingbanner').remove();
-	}
+			banner.remove();			
+			if (!(document.querySelectorAll("#floatingbanner .cpe-banner-notification").length)) {
+				document.querySelector('#floatingbanner').remove();
+			}
+			document.querySelector('body').focus();
 		}),405);
-	}
-	);
 	
 
 }
@@ -119,14 +136,14 @@ function AddFloatingBanner(content='Sample Content',kind='message',extraclass=''
 	} else {
 		var icon = 'info'
 	}
-	if (!($(".top-gap #floatingbanner").length)) {
-		$('.top-gap').prepend ( 
+	if (!(document.querySelector(".top-gap #floatingbanner"))) {
+		document.querySelector(".top-gap").insertAdjacentHTML('afterbegin', 
 			  '<div class="cpe-banner-notification__container" id="floatingbanner">' +
 			  '\n</div>'
 		);
 	}
 
-	$('.top-gap #floatingbanner').append ( 
+	document.querySelector(".top-gap #floatingbanner").insertAdjacentHTML('beforeend', 
 			'<div class=" cpe-banner-notification cpe-' + kind + '" id="' + extraclass  + '">' +
 			  '<div class="cpe-banner-notification__icon">' +
 				'<span class="cpe-icon cpe-icon-small material-icons">' +
@@ -134,16 +151,14 @@ function AddFloatingBanner(content='Sample Content',kind='message',extraclass=''
 				'</span>' +
 			  '</div>' +
 			  '<span class="cpe-banner-notification__text">' + content + '</span>' +
-			  '<svg onclick="RemoveBanner()" xmlns="http://www.w3.org/2000/svg" class="cpe-banner-notification__close cpe-icon cpe-icon-tiny">' +
-				'<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cpe-icons-cross-tiny" />' +
-			  '</svg>' +
+			  '<span tabindex="-1" onclick="RemoveBanner()" class="cpe-banner-notification__close">' +
+				'<span class="cpe-icon cpe-icon-tiny cpe-icon-large material-icons">close</span>' +
+			  '</span>' +
 			'</div>' 
 	);
 
 
 }
-
-
 
 /* File Downloader */
 /*! @source http://purl.eligrey.com/github/FileSaver.js/blob/master/FileSaver.js */

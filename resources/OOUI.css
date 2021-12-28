@@ -1,13 +1,13 @@
 ﻿:root {
-	--body-background-image:url("");
-	--body-background-color:#f6f6f6;
-	--superbar-text-color:#000000;
-	--secondary-accent-background-color:#0645ad;
-	--page-background-color:#ffffff;
-	--page-border-background-color:#a2a9b1;
-	--page-text-background-color:#000000;
-	--accent-background-color:#3366cc;
-	--caret-background-color:#a7d7f9;
+	--desktop-background-image:url("");
+	--desktop-background-color:#f6f6f6;
+	--desktop-text-color:#000000;
+	--hyperlink-background-color:#0645ad;
+	--canvas-background-color:#ffffff;
+	--inactive-text-background-color:#a2a9b1;
+	--canvas-text-background-color:#000000;
+	--highlight-background-color:#3366cc;
+	--active-title-background-color:#a7d7f9;
 }
 
 
