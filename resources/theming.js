@@ -927,15 +927,17 @@ var bordercolor1 = ColorTest(border_color);
 
 var head_color =	GetDesktop();
 
+
+
+// Liatch Quirk
+		var head_color = ColorInvert(head_color);
+
 	if (isLightColor(head_color)) {
 		var lightness2 = '#000000';
 	} else {
 		var lightness2 = '#ffffff';
 	}
 
-
-// Liatch Quirk
-		var head_color = ColorInvert(head_color);
 
 window.MW18BgColor = head_color
 
