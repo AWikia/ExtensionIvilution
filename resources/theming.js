@@ -29,6 +29,8 @@ window.MW18highContrast = 3.00;
 		'<span class="fc-highlight" style="color:highlight;"></span>' +
 						'</div>'
 					  );	// Helper for some things
+	document.querySelector('body').setAttribute('tabindex',-1);; // Add the CPE button class
+	document.querySelector('body').focus();
 	$("head").append('<style class="theming"></style>');
 	ColorUpdate(true);
 	console.log("Ivilution has been succesfully initialized")
