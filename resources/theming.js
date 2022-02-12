@@ -27,7 +27,9 @@ window.MW18highContrast = 3.00;
 		'<span class="fc-canvastext" style="color:canvastext;"></span>' +
 		'<span class="fc-highlight" style="color:highlight;"></span>' +
 		'<div class="cpe-theming visualcolors-standard theme-single"></div>' +
-						'</div>'
+						'</div>' +
+		'<div class="top-gap"></div>' +
+		'<div class="focus-overlay" tabindex="-1"></div>' +
 					  );	// Helper for some things
 	document.querySelector('body').setAttribute('tabindex',-1);; // Add the CPE button class
 	document.querySelector('body').focus();
