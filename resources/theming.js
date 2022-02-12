@@ -3,10 +3,9 @@ window.MW18darkmode = false;
 window.MW18spdarkmode = 0; // 0 = No special behavior | 1 = Inverted Colors Dark | 2 = Grayscale | 3 = Yellow Tint | 4 = Blue Tint | 5 = Inverted Colors Light | 6 = Temperature | 7 = Inverted Temperature
 window.MW18wikitheme = 'auto';
 window.MW18contrastmode = 'auto';
+window.MW18ActiveTheme = 'single';
+window.MW18ActiveColors = 'standard';
 /* Some Theming Colors */
-window.MW18PageColor = GetCanvasShort();
-window.MW18PageColorFG = '#000000';
-window.MW18BgColor = GetDesktop();
 /* Contrast Values */
 window.MW18lowContrast = 1.25;
 window.MW18highContrast = 3.00;
@@ -27,11 +26,15 @@ window.MW18highContrast = 3.00;
 		'<span class="fc-graytext" style="color:graytext;"></span>' +
 		'<span class="fc-canvastext" style="color:canvastext;"></span>' +
 		'<span class="fc-highlight" style="color:highlight;"></span>' +
+		'<div class="cpe-theming visualcolors-standard theme-single"></div>' +
 						'</div>'
 					  );	// Helper for some things
 	document.querySelector('body').setAttribute('tabindex',-1);; // Add the CPE button class
 	document.querySelector('body').focus();
 	$("head").append('<style class="theming"></style>');
+	window.MW18PageColor = GetCanvasShort();
+	window.MW18PageColorFG = '#000000';
+	window.MW18BgColor = GetDesktop();
 	ColorUpdate(true);
 	console.log("Ivilution has been succesfully initialized")
 }() );
@@ -77,18 +80,18 @@ function GetDesktop() {
 	if (ForcedColors()) {
 		return getComputedStyle(document.querySelector('.fc-buttonface')).getPropertyValue("color");
 	} else {
-		return getComputedStyle(document.querySelector('html')).getPropertyValue("--desktop-background-color").trim();
+		return getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-background-color").trim();
 	}
 }
 
 function GetDesktopText() {
 	if (ForcedColors()) {
 		return getComputedStyle(document.querySelector('.fc-buttontext')).getPropertyValue("color");
-	} else if (getComputedStyle(document.querySelector('html')).getPropertyValue("--desktop-text-background-color") === 'auto') {
+	} else if (getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-text-background-color") === 'auto') {
 		var color = window.MW18BgColor;
 		return GetForegroundVariables(color)[4];
 	} else {
-		return getComputedStyle(document.querySelector('html')).getPropertyValue("--desktop-text-background-color").trim();
+		return getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-text-background-color").trim();
 	}
 }
 
@@ -97,7 +100,7 @@ function GetCanvasShort() { // Like GetCanvas() without forced colors mode you g
 	if (ForcedColors()) {
 		return getComputedStyle(document.querySelector('.fc-canvas')).getPropertyValue("color");
 	} else {
-		return getComputedStyle(document.querySelector('html')).getPropertyValue("--canvas-background-color").trim();
+		return getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--canvas-background-color").trim();
 	}
 }
 
@@ -114,7 +117,7 @@ function GetHyperlink() {
 	if (ForcedColors()) {
 		return getComputedStyle(document.querySelector('.fc-linktext')).getPropertyValue("color");
 	} else {
-		return getComputedStyle(document.querySelector('html')).getPropertyValue("--hyperlink-background-color").trim();
+		return getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--hyperlink-background-color").trim();
 	}
 }
 
@@ -122,10 +125,10 @@ function GetHyperlink() {
 function GetInactiveText() {
 	if (ForcedColors()) {
 		return getComputedStyle(document.querySelector('.fc-graytext')).getPropertyValue("color");
-	} else if (getComputedStyle(document.querySelector('html')).getPropertyValue("--inactive-text-background-color") === 'auto') {
+	} else if (getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--inactive-text-background-color") === 'auto') {
 		return ColorTestTwin(window.MW18PageColor,window.MW18PageColorFG,window.MW18FinalContrast*2);
 	} else {
-		return getComputedStyle(document.querySelector('html')).getPropertyValue("--inactive-text-background-color").trim();
+		return getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--inactive-text-background-color").trim();
 	}
 }
 
@@ -133,11 +136,11 @@ function GetInactiveText() {
 function GetCanvasText() {
 	if (ForcedColors()) {
 		return getComputedStyle(document.querySelector('.fc-canvastext')).getPropertyValue("color");
-	} else if (getComputedStyle(document.querySelector('html')).getPropertyValue("--canvas-text-background-color") === 'auto') {
+	} else if (getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--canvas-text-background-color") === 'auto') {
 		var color = window.MW18PageColor;
 		return GetForegroundVariables(color)[4];
 	} else {
-		return getComputedStyle(document.querySelector('html')).getPropertyValue("--canvas-text-background-color").trim();
+		return getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--canvas-text-background-color").trim();
 	}
 }
 
@@ -145,28 +148,30 @@ function GetCanvasText() {
 function GetHighlight() {
 	if (ForcedColors()) {
 		return getComputedStyle(document.querySelector('.fc-highlight')).getPropertyValue("color");
+	} else if (getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--highlight-background-color") === 'auto') {
+		return GetHyperlink();
 	} else {
-		return getComputedStyle(document.querySelector('html')).getPropertyValue("--highlight-background-color").trim();
+		return getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--highlight-background-color").trim();
 	}
 }
 
 function GetActiveTitle() {
 	if (ForcedColors()) {
 		return getComputedStyle(document.querySelector('.fc-linktext')).getPropertyValue("color");
-	} else if (getComputedStyle(document.querySelector('html')).getPropertyValue("--active-title-background-color") === 'auto') {
+	} else if (getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--active-title-background-color") === 'auto') {
 		return GetHyperlink();
 	} else {
-		return getComputedStyle(document.querySelector('html')).getPropertyValue("--active-title-background-color").trim();
+		return getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--active-title-background-color").trim();
 	}
 }
 
 function GetInactiveTitle() {
 	if (ForcedColors()) {
 		return getComputedStyle(document.querySelector('.fc-graytext')).getPropertyValue("color");
-	} else if (getComputedStyle(document.querySelector('html')).getPropertyValue("--inactive-title-background-color") === 'auto') {
+	} else if (getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--inactive-title-background-color") === 'auto') {
 		return GetInactiveText();
 	} else {
-		return getComputedStyle(document.querySelector('html')).getPropertyValue("--inactive-title-background-color").trim();
+		return getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--inactive-title-background-color").trim();
 	}
 }
 
@@ -243,8 +248,8 @@ if (isLightColor(page)) { // ( chroma(page).get('hsl.l') < 0.5)
 	var colors = ['4%', '6%', '8%', '10%', '12%', '14%', '16%', '18%', '20%', '22%', '24%', '26%', '28%', '30%', '32%', '34%', '36%', '38%', '40%', '42%', '44%', '46%', '54%', '56%', '58%', '60%', '62%', '64%', '66%', '68%', '70%', '72%', '74%', '76%', '78%', '80%', '82%', '84%', '86%', '88%', '90%', '92%', '94%', '96%']
 }
 
-		alerth = 352 // 360
-		warningh = 29 // 38
+		alerth = 350 // 360
+		warningh = 30 // 38
 		successh = 140 // 150
 		messageh = -1 // -1
 		
@@ -337,15 +342,15 @@ function GetGradientVariable2(color,name="canvas", func="nil") {
 
 /* Downloads all modificative values of the current selected theme to a file */
 function DownloadTheme(full=false) {
-	wordfilter2 = getComputedStyle(document.querySelector('body')).getPropertyValue("--icon-filter-hover")
+	wordfilter2 = getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--icon-filter-hover")
 	if ( wordfilter2 == "" ) {
 		wordfilter2 == 'initial'
 	}
 	if (full) { // For use without Theme Management
-		result = '.theme-A.visualcolors-standard {\n' + // Beginning
+		result = '.visualcolors-standard.theme-A {\n' + // Beginning
 				// Body BG
 				 '--desktop-background-image:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--desktop-background-image")  + ';\n' +
-				 '--desktop-background-image-opacity:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--desktop-background-image-opacity")  + ';\n' +
+				 '--desktop-background-image-filter:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--desktop-background-image-filter")  + ';\n' +
 				// Body Color
 				 '--desktop-background-color:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--desktop-background-color")  + ';\n' +
 				 '--desktop-background-color-hover:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--desktop-background-color-hover")  + ';\n' +
@@ -384,9 +389,9 @@ function DownloadTheme(full=false) {
 				 '--desktop-background-no-vertical-tiling:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--desktop-background-no-vertical-tiling")  + ';\n' +
 				 // Page Color
 				 '--canvas-background-color:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-background-color")  + ';\n' +
-				 '--canvas-background-color-hover:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-3d-background-color-hover")  + ';\n' +
-				 '--canvas-3d-background-color:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-3d-background-color-dark")  + ';\n' +
-				 '--canvas-3d-background-color-dark:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-background-color")  + ';\n' +
+				 '--canvas-background-color-hover:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-background-color-hover")  + ';\n' +
+				 '--canvas-3d-background-color:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-3d-background-color")  + ';\n' +
+				 '--canvas-3d-background-color-dark:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-3d-background-color-dark")  + ';\n' +
 				 '--canvas-fadeout-color:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-fadeout-color")  + ';\n' +
 				 '--canvas-gradient-color:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-gradient-color")  + ';\n' +
 				 '--canvas-gradient-color-hover:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-gradient-color-hover")  + ';\n' +
@@ -546,6 +551,7 @@ function DownloadTheme(full=false) {
 				 '--message-foreground-color-hover-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--message-foreground-color-hover-rgb")  + ';\n' +
 				 '--message-alternative-foreground-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--message-alternative-foreground-color-rgb")  + ';\n' +
 				 // Miscs
+				 '--custom-font:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--custom-font")  + ';\n' +
 				 '--custom-secondary-font:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--custom-secondary-font")  + ';\n' +
 				 '--border-radius:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--border-radius")  + ';\n' +
 				 '--icon-filter:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--icon-filter")  + ';\n' +
@@ -555,31 +561,32 @@ function DownloadTheme(full=false) {
 				 '--system-acryllic-opacity:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--system-acryllic-opacity")  + ';\n' +
 				 '}' // Ending
 	} else { // For use with Theme Management
-		result = '.theme-A.visualcolors-standard {\n' + // Beginning
-				 '--desktop-background-image:' + getComputedStyle(document.querySelector('html')).getPropertyValue("--desktop-background-image")  + ';\n' +
-				 '--desktop-background-image-opacity:' + getComputedStyle(document.querySelector('html')).getPropertyValue("--desktop-background-image-opacity")  + ';\n' +
-				 '--desktop-background-color:' + getComputedStyle(document.querySelector('html')).getPropertyValue("--desktop-background-color")  + ';\n' +
-				 '--desktop-text-background-color:' + getComputedStyle(document.querySelector('html')).getPropertyValue("--desktop-text-background-color")  + ';\n' +
-				 '--desktop-background-mode:' + getComputedStyle(document.querySelector('html')).getPropertyValue("--desktop-background-mode")  + ';\n' +
-				 '--desktop-background-size:' + getComputedStyle(document.querySelector('html')).getPropertyValue("--desktop-background-size")  + ';\n' +
-				 '--desktop-background-horizontal-alignment:' + getComputedStyle(document.querySelector('container')).getPropertyValue("--desktop-background-horizontal-alignment")  + ';\n' +
-				 '--desktop-background-vertical-alignment:' + getComputedStyle(document.querySelector('html')).getPropertyValue("--desktop-background-vertical-alignment")  + ';\n' +
-				 '--desktop-background-no-horizontal-tiling:' + getComputedStyle(document.querySelector('container')).getPropertyValue("--desktop-background-no-horizontal-tiling")  + ';\n' +
-				 '--desktop-background-no-vertical-tiling:' + getComputedStyle(document.querySelector('container')).getPropertyValue("--desktop-background-no-vertical-tiling")  + ';\n' +
-				 '--canvas-background-color:' + getComputedStyle(document.querySelector('html')).getPropertyValue("--canvas-background-color")  + ';\n' +
-				 '--inactive-text-background-color:' + getComputedStyle(document.querySelector('html')).getPropertyValue("--inactive-text-background-color")  + ';\n' +
-				 '--canvas-text-background-color:' + getComputedStyle(document.querySelector('html')).getPropertyValue("--canvas-text-background-color")  + ';\n' +
-				 '--highlight-background-color:' + getComputedStyle(document.querySelector('html')).getPropertyValue("--highlight-background-color")  + ';\n' +
-				 '--hyperlink-background-color:' + getComputedStyle(document.querySelector('html')).getPropertyValue("--hyperlink-background-color")  + ';\n' +
-				 '--active-title-background-color:' + getComputedStyle(document.querySelector('html')).getPropertyValue("--active-title-background-color")  + ';\n' +
-				 '--inactive-title-background-color:' + getComputedStyle(document.querySelector('html')).getPropertyValue("--active-title-background-color")  + ';\n' +
-				 '--custom-secondary-font:' + getComputedStyle(document.querySelector('html')).getPropertyValue("--custom-secondary-font")  + ';\n' +
-				 '--border-radius:' + getComputedStyle(document.querySelector('html')).getPropertyValue("--border-radius")  + ';\n' +
-				 '--icon-filter:' + getComputedStyle(document.querySelector('html')).getPropertyValue("--icon-filter")  + ';\n' +
+		result = '.visualcolors-standard.theme-A {\n' + // Beginning
+				 '--desktop-background-image:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-background-image")  + ';\n' +
+				 '--desktop-background-image-filter:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-background-image-filter")  + ';\n' +
+				 '--desktop-background-color:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-background-color")  + ';\n' +
+				 '--desktop-text-background-color:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-text-background-color")  + ';\n' +
+				 '--desktop-background-mode:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-background-mode")  + ';\n' +
+				 '--desktop-background-size:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-background-size")  + ';\n' +
+				 '--desktop-background-horizontal-alignment:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-background-horizontal-alignment")  + ';\n' +
+				 '--desktop-background-vertical-alignment:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-background-vertical-alignment")  + ';\n' +
+				 '--desktop-background-no-horizontal-tiling:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-background-no-horizontal-tiling")  + ';\n' +
+				 '--desktop-background-no-vertical-tiling:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-background-no-vertical-tiling")  + ';\n' +
+				 '--canvas-background-color:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--canvas-background-color")  + ';\n' +
+				 '--inactive-text-background-color:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--inactive-text-background-color")  + ';\n' +
+				 '--canvas-text-background-color:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--canvas-text-background-color")  + ';\n' +
+				 '--highlight-background-color:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--highlight-background-color")  + ';\n' +
+				 '--hyperlink-background-color:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--hyperlink-background-color")  + ';\n' +
+				 '--active-title-background-color:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--active-title-background-color")  + ';\n' +
+				 '--inactive-title-background-color:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--active-title-background-color")  + ';\n' +
+				 '--custom-font:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--custom-font")  + ';\n' +
+				 '--custom-secondary-font:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--custom-secondary-font")  + ';\n' +
+				 '--border-radius:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--border-radius")  + ';\n' +
+				 '--icon-filter:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--icon-filter")  + ';\n' +
 				 '--icon-filter-hover:' + wordfilter2  + ';\n' +
-				 '--icon-filter-duration:' + getComputedStyle(document.querySelector('html')).getPropertyValue("--icon-filter-duration")  + ';\n' +
-				 '--icon-filter-delay:' + getComputedStyle(document.querySelector('html')).getPropertyValue("--icon-filter-delay")  + ';\n' +
-				 '--system-acryllic-opacity:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--system-acryllic-opacity")  + ';\n' +
+				 '--icon-filter-duration:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--icon-filter-duration")  + ';\n' +
+				 '--icon-filter-delay:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--icon-filter-delay")  + ';\n' +
+				 '--system-acryllic-opacity:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--system-acryllic-opacity")  + ';\n' +
 				 '}' // Ending
 	}
 	alert('Once you save the file, put the stylesheet contents to MediaWiki:Common.css for use in the wiki or upload it to any website.');
@@ -768,6 +775,15 @@ if (refresh === true) {
 	**/
 }
 
+//	ToggleTheme(window.MW18ActiveTheme,false,false);
+//	VisualColor(window.MW18ActiveColors,false,false);
+	if (window.MW18ActiveColors === 'nocolormanagement') {
+		var colorstyle =".color-management-on { display:none!important;}\n"
+	} else {
+		var colorstyle= "\n"
+	}
+
+
 /** Page BG **/
 /* Set Vars */
 // content_text is Content Color
@@ -788,15 +804,24 @@ var content_color =  GetCanvasShort();
 // Liatch Quirk
 	var content_color = ColorInvert(content_color)
 
-	window.MW18PageColor = content_color
+	window.MW18PageColor = content_color;
 	var darkpage = isLightColor(content_color);
 	if (refresh === true) {
 		if (!(darkpage)) {
-			document.querySelector('html').classList.add("theme-fandomdesktop-dark")
+			document.querySelector('html').classList.add("theme-fandomdesktop-dark");
 		} else {
-			document.querySelector('html').classList.add("theme-fandomdesktop-light")
+			document.querySelector('html').classList.add("theme-fandomdesktop-light");
 		}
 	}
+
+		if (!(darkpage)) {
+			var c3dlight = 0.5;
+			var c3ddark = 0.75;
+		} else {
+			var c3dlight = 0.75;
+			var c3ddark = 0.5;
+		}
+
 
 
 var content_color2 = ColorTest(content_color);
@@ -818,7 +843,7 @@ var dropdowncolorH = ColorTest(dropdowncolor,false,false,true);
 /** Page text color **/
 var content_text= GetCanvasText();
 
-if ((getComputedStyle(document.querySelector('html')).getPropertyValue("--canvas-text-background-color") !== 'auto')  ) {
+if ((getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--canvas-text-background-color") !== 'auto')  ) {
 	// Liatch Quirk
 		var content_text = ColorInvert(content_text);
 	
@@ -870,7 +895,7 @@ var linkcolor1 = ColorTest(link_color,false,false,true);
 
 var border_color =	dropdowncolor2;
 
-if ((getComputedStyle(document.querySelector('html')).getPropertyValue("--inactive-text-background-color") != 'auto') ) { // Only run Liatch quirk if not in autocolorization
+if ((getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--inactive-text-background-color") != 'auto') ) { // Only run Liatch quirk if not in autocolorization
 	// Liatch Quirk
 
 		var border_color = ColorInvert(border_color);
@@ -911,7 +936,7 @@ var headcolor1 = ColorTest(head_color,false,false,true);
 
 var headertext_color= GetDesktopText();
 
-if ((getComputedStyle(document.querySelector('html')).getPropertyValue("--desktop-text-background-color") !== 'auto')  ) {
+if ((getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-text-background-color") !== 'auto')  ) {
 	// Liatch Quirk
 		var headertext_color = ColorInvert(headertext_color);
 
@@ -977,8 +1002,10 @@ var message_color = generic[3];
 var messagecolor1 = ColorTest(message_color,false,false,true);
 
 
-if (['full','legacy'].includes(getComputedStyle(document.querySelector('html')).getPropertyValue("--desktop-background-mode"))) {
+if (['full','legacy'].includes(getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-background-mode"))) {
 	var overlay = ['none', '100%'];
+} else if (['half'].includes(getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-background-mode"))) {
+	var overlay = ['block', '50%'];
 } else {
 	var overlay = ['block', 'var(--header-size)'];
 }
@@ -1012,9 +1039,14 @@ var headertext_fg = GetForegroundVariables(headertext_color);
 var caret_fg = GetForegroundVariables(caret_color);
 var caret2_fg = GetForegroundVariables(caret2_color);
 
+	wordfilter2 = getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--icon-filter-hover")
+	if ( wordfilter2 == "" ) {
+		wordfilter2 == 'initial'
+	}
 
 /* Set Values for dynamical variables */
-	var result = 		  ":root {" +
+	var result = 		  colorstyle +
+						  ":root {" +
 						  "--desktop-alternative-foreground-color:" + head_fg[4] + ";\n" + 
 						  "--desktop-alternative-foreground-color-rgb:" + head_fg[5] + ";\n" +
 						  "--desktop-text-alternative-foreground-color:" + headertext_fg[4] + ";\n" + 
@@ -1043,8 +1075,8 @@ var caret2_fg = GetForegroundVariables(caret2_color);
 						  "--message-alternative-foreground-color-rgb:" + message_fg[5] + "!important;\n" +
 						  "--canvas-secondary-background-color:" + dropdowncolor + ";\n" + 
 						  "--canvas-secondary-background-color-hover:" + dropdowncolorH + ";\n" + 
-						  "--canvas-3d-background-color:" + ColorTestTwin(dropdowncolor,"#ffffff",0.75) + ";\n" +
-						  "--canvas-3d-background-color-dark:" + ColorTestTwin(dropdowncolor,"#000000",0.5) + ";\n" +
+						  "--canvas-3d-background-color:" + ColorTestTwin(dropdowncolor,"#ffffff",c3dlight) + ";\n" +
+						  "--canvas-3d-background-color-dark:" + ColorTestTwin(dropdowncolor,"#000000",c3ddark) + ";\n" +
 						  "--canvas-background-color-hover:" + content_color2 + ";\n" +
 						  "--canvas-foreground-color:" + content_color_fg[0] + ";\n" +
 						  "--canvas-foreground-color-hover:" +  content_color_fg[1] + ";\n" + 
@@ -1153,7 +1185,7 @@ var caret2_fg = GetForegroundVariables(caret2_color);
 						  "--message-foreground-color-hover-rgb:" + message_fg[3] + "!important;\n" +
 						  "}" +
 						  //
-						  "body {" +
+						  ":root {" +
 						  "--canvas-background-color:" + content_color + ";\n" +
 						  "--canvas-gradient-color:" + content_color_gradient[0] + ";\n" +
 						  "--canvas-gradient-color-hover:" + content_color_gradient[1] + ";\n" +
@@ -1183,9 +1215,24 @@ var caret2_fg = GetForegroundVariables(caret2_color);
 						  "--inactive-title-background-color:" + caret2_color + ";\n" +
 						  "--inactive-title-gradient-color:" + caret2_gradient[0] + ";\n" +
 						  "--inactive-title-gradient-color-hover:" + caret2_gradient[1] + ";\n" +
-						  "--bg-size:" + ['cover','contain','100% 100%','auto'][["cover", "contain", "stretched", "full"].indexOf( getComputedStyle(document.querySelector('html')).getPropertyValue("--desktop-background-size") ) ] + ";\n" +
-						  "--bg-tile-x:" + ['repeat','no-repeat'][["false", "true"].indexOf( getComputedStyle(document.querySelector('html')).getPropertyValue("--desktop-background-no-horizontal-tiling") ) ] + ";\n" +
-						  "--bg-tile-y:" + ['repeat','no-repeat'][["false", "true"].indexOf( getComputedStyle(document.querySelector('html')).getPropertyValue("--desktop-background-no-vertical-tiling") ) ] + ";\n" +
+// Misc Variables
+						'--desktop-background-image:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-background-image")  + ';\n' +
+						'--desktop-background-image-filter:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-background-image-filter")  + ';\n' +
+					 '--desktop-background-horizontal-alignment:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-background-horizontal-alignment")  + ';\n' +
+					 '--desktop-background-vertical-alignment:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-background-vertical-alignment")  + ';\n' +
+						 '--custom-font:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--custom-font")  + ';\n' +
+						 '--custom-secondary-font:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--custom-secondary-font")  + ';\n' +
+						 '--border-radius:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--border-radius")  + ';\n' +
+						 '--icon-filter:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--icon-filter")  + ';\n' +
+						 '--icon-filter-hover:' + wordfilter2  + ';\n' +
+						 '--icon-filter-duration:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--icon-filter-duration")  + ';\n' +
+						 '--icon-filter-delay:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--icon-filter-delay")  + ';\n' +
+						 '--system-acryllic-opacity:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--system-acryllic-opacity")  + ';\n' +
+
+// Misc Background Settings
+						  "--bg-size:" + ['cover','contain','100% 100%','auto'][["cover", "contain", "stretched", "full"].indexOf( getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-background-size") ) ] + ";\n" +
+						  "--bg-tile-x:" + ['repeat','no-repeat'][["false", "true"].indexOf( getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-background-no-horizontal-tiling") ) ] + ";\n" +
+						  "--bg-tile-y:" + ['repeat','no-repeat'][["false", "true"].indexOf( getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--desktop-background-no-vertical-tiling") ) ] + ";\n" +
 						  "--bg-overlay-display:" + overlay[0] + ";\n" +
 						  "--bg-overlay-size:" + overlay[1] + ";\n" +
 						  "--invertion-filter:" + [['none','none','grayscale(100%)','sepia(1) hue-rotate(20deg)','sepia(1) hue-rotate(200deg)','hue-rotate(180deg)','opacity(0.5) sepia(1)', 'opacity(0.5) sepia(1) hue-rotate(180deg)'][window.MW18spdarkmode],['invert(1) hue-rotate(180deg)','invert(1)','invert(1) grayscale(100%)','invert(1) sepia(1) hue-rotate(20deg)','invert(1) sepia(1) hue-rotate(200deg)','invert(1) hue-rotate(180deg)','invert(1) opacity(0.5) sepia(1)', 'invert(1) opacity(0.5) sepia(1) hue-rotate(180deg)'][window.MW18spdarkmode]][[false, true].indexOf(window.MW18darkmode) ] + ";\n" +
@@ -1194,5 +1241,4 @@ var caret2_fg = GetForegroundVariables(caret2_color);
 
 /* Write them to the stylesheet */
 document.querySelector("head .theming").innerHTML = result;
-
 }

@@ -3,6 +3,16 @@ if (navigator.userAgent.match("Mobile")) {
 document.querySelector("body").className += " phone"
 }
 
+/* Local Storage */
+function getKey(key) {
+var str = window.localStorage,
+    result = str.getItem('-evelution-pref-'+key);
+if (!result) {
+   return '-1';
+}
+return result;
+}
+
 function insertKey(key,value) {
 	window.localStorage.setItem('-evelution-pref-' + key, '' + value);
 }
@@ -66,7 +76,12 @@ function UpdateSelectValue() { // Handles Blurring
 function UpdateRange() {
 	var ranges = document.querySelectorAll('input[type="range"]');
 	ranges.forEach(function(x) {
-		x.style.setProperty("--range-percent",  (((x.value) * 100) / x.getAttribute('max')) + '%' );
+		x.style.setProperty("--range-percent",  (( ((x.value) - x.getAttribute('min') ) * 100) / (x.getAttribute('max') - x.getAttribute('min')) ) + '%'  );
+	});
+
+	var progresses = document.querySelectorAll('progress');
+	progresses.forEach(function(x) {
+		x.style.setProperty("--range-percent",  (( ((x.getAttribute('value')) - 0 ) * 100) / (x.getAttribute('max') - 0) ) + '%'  );
 	});
 
 }
@@ -86,6 +101,8 @@ function UpdateRangeInputs() {
 	AliasFandomComponents();
 	UpdateRangeInputs();
 	DropDownUpdate();
+	$('body').mouseenter( function(e) { DropDownUpdate(); CheckTheme(); } );		
+	$('body').mouseleave( function(e) { CheckTheme(); } );
 })();
 
 
@@ -120,7 +137,7 @@ function RemoveBanner() {
 			if (!(document.querySelectorAll("#floatingbanner .cpe-banner-notification").length)) {
 				document.querySelector('#floatingbanner').remove();
 			}
-			document.querySelector('body').focus();
+			document.querySelector('.top-gap').focus();
 		}),405);
 	
 

@@ -5,7 +5,7 @@
 	],
 	"url": "https://www.mediawiki.org/wiki/Extension:Ivilution",
 	"descriptionmsg": "ivilution-desc",
-	"version": "6.0.0",
+	"version": "7.0.0",
 	"license-name": "GPL-3.0-or-later",
 	"type": "skin",
 	"requires": {
@@ -40,7 +40,7 @@
 			"dependencies": [],
 			"messages": [],
 			"styles": ["OOUI.css","Ivilution.css"],
-			"scripts": ["chroma.js","jquery.js","init.js","theming.js","Base.js"]
+			"scripts": ["chroma.js","init.js","theming.js","Base.js"]
 		},
 		"ext.Ivilution2": {
 			"targets": [
