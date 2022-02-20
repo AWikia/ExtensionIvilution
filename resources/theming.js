@@ -29,9 +29,9 @@ window.MW18highContrast = 3.00;
 		'<div class="cpe-theming visualcolors-standard theme-single"></div>' +
 						'</div>' +
 		'<div class="top-gap"></div>' +
-		'<div class="focus-overlay" tabindex="-1"></div>' +
+		'<div class="focus-overlay" tabindex="-1"></div>'
 					  );	// Helper for some things
-	document.querySelector('body').setAttribute('tabindex',-1);; // Add the CPE button class
+	document.querySelector('body').setAttribute('tabindex',-1); // Add the CPE button class
 	document.querySelector('body').focus();
 	$("head").append('<style class="theming"></style>');
 	window.MW18PageColor = GetCanvasShort();
