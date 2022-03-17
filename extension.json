@@ -39,7 +39,7 @@
 			],
 			"dependencies": [],
 			"messages": [],
-			"styles": ["OOUI.css","Ivilution.css"],
+			"styles": ["Ivilution.css", "OOUI.css"],
 			"scripts": ["chroma.js","init.js","theming.js","Base.js"]
 		},
 		"ext.Ivilution2": {

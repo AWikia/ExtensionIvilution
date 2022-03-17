@@ -1,6 +1,6 @@
 /* Mobile Only CSS */
 if (navigator.userAgent.match("Mobile")) {
-document.querySelector("body").className += " phone"
+document.querySelector("html").className += " phone"
 }
 
 /* Local Storage */
@@ -68,7 +68,7 @@ function DropDownUpdate() {
 
 function UpdateSelectValue() { // Handles Blurring
 		setTimeout(
-		(function() { document.querySelector(' .cpe-dropdown.cpe-select:focus-within').blur() } )
+		(function() { document.querySelector(' .cpe-dropdown.cpe-select:focus-within').blur(); 	document.querySelector('.focus-overlay').focus(); } )
 	,0)
 }
 
@@ -99,12 +99,68 @@ function UpdateRangeInputs() {
 /* Enable New Global Navigation - No exception for now */
 (function () {
 	AliasFandomComponents();
+	if (getKey('content-full') === '-1') {
+		insertKey('content-full', 'false' );
+	}
+	if (getKey('right-rail-full') === '-1') {
+		insertKey('right-rail-full', 'true' );
+	}
+	if (getKey('left-rail-full') === '-1') {
+		insertKey('left-rail-full', 'true' );
+	}
+	var content_full = getKey('content-full')
+	var right_rail_full = getKey('right-rail-full');
+	var left_rail_full = getKey('left-rail-full');
+    getParams().forEach(function (param) {
+        var key = param.split("=")[0];
+        var value = param.split("=")[1];
+
+        switch (key) {
+            case 'fullwidth':
+				content_full = value;
+				console.info('Article width settings overriden')
+                break;
+            case 'hiderail':
+				if (value === 'true') {
+					right_rail_full = 'false';
+					left_rail_full = 'false';
+				} else {
+					right_rail_full = 'true';
+					left_rail_full = 'true';
+				}
+				console.info('Pane visibility settings overriden')
+                break;
+            case 'hiderightrail':
+				if (value === 'true') {
+					right_rail_full = 'false';
+				} else {
+					right_rail_full = 'true';
+				}
+				console.info('Right pane visibility settings overriden')
+                break;
+            case 'hideleftrail':
+				if (value === 'true') {
+					left_rail_full = 'false';
+				} else {
+					left_rail_full = 'true';
+				}
+				console.info('Left pane visibility settings overriden')
+                break;
+
+        }
+    });
+    if (content_full === 'true') {
+		document.querySelector(' body ').classList.add('is-wide');
+	}
+    if (right_rail_full === 'true') {
+		document.querySelector(' body ').classList.add('has-right-rail');
+	}
+    if (left_rail_full === 'true') {
+		document.querySelector(' body ').classList.add('has-left-rail');
+	}
 	UpdateRangeInputs();
 	DropDownUpdate();
-	$('body').mouseenter( function(e) { DropDownUpdate(); CheckTheme(); } );		
-	$('body').mouseleave( function(e) { CheckTheme(); } );
 })();
-
 
 /* Aliases all components with the .wds prefix to the ones from .cpe ones */
 function AliasFandomComponents() {
@@ -137,31 +193,55 @@ function RemoveBanner() {
 			if (!(document.querySelectorAll("#floatingbanner .cpe-banner-notification").length)) {
 				document.querySelector('#floatingbanner').remove();
 			}
-			document.querySelector('.top-gap').focus();
+			document.querySelector('.focus-overlay').focus();
 		}),405);
 	
 
 }
 
+function RemoveBanners() {
+	var banners = document.querySelectorAll('#floatingbanner .cpe-banner-notification');
+	banners.forEach(function(banner) {
+		banner.classList.add("is-transparent")
+		setTimeout(
+		(function () {
+			banner.remove();			
+			if (!(document.querySelectorAll("#floatingbanner .cpe-banner-notification").length)) {
+				document.querySelector('#floatingbanner').remove();
+			}
+			document.querySelector('.focus-overlay').focus();
+		}),405);
+
+	});
+
+}
+
 function AddFloatingBanner(content='Sample Content',kind='message',extraclass='') {
-	if (kind === 'warning') {
-		var icon = 'report_problem'
-	} else if (kind === 'alert') {
+	if (kind === 'alert') {
 		var icon = 'report'
+	} else if (kind === 'pause') {
+		var icon = 'pause'
+	} else if (kind === 'warning') {
+		var icon = 'report_problem'
 	} else if (kind === 'success') {
 		var icon = 'done'
+	} else if (kind === 'progress') {
+		var icon = 'pending'
 	} else {
 		var icon = 'info'
 	}
+	var nogap = false;
 	if (!(document.querySelector(".top-gap #floatingbanner"))) {
+		var nogap = true;
 		document.querySelector(".top-gap").insertAdjacentHTML('afterbegin', 
-			  '<div class="cpe-banner-notification__container" id="floatingbanner">' +
-			  '\n</div>'
+			  '<div class="cpe-banner-notification__container" id="floatingbanner" style="pointer-events:none;">' +
+			  '<div style="display:flex; flex-flow:column;"><button style="pointer-events:auto; align-self:flex-end; margin-right:8.5px;" class="cpe-button" onclick="RemoveBanners()">Clear all</button></div>' +
+			  '\n<div class="banners" style="pointer-events:auto;"></div></div>'
 		);
 	}
 
-	document.querySelector(".top-gap #floatingbanner").insertAdjacentHTML('beforeend', 
-			'<div class=" cpe-banner-notification cpe-' + kind + '" id="' + extraclass  + '">' +
+	document.querySelector(".top-gap #floatingbanner .banners").insertAdjacentHTML('beforeend', 
+			'<div class=" cpe-banner-notification is-' + kind + '" id="' + extraclass  + '">' +
 			  '<div class="cpe-banner-notification__icon">' +
 				'<span class="cpe-icon cpe-icon-small material-icons">' +
 					icon + 
@@ -173,6 +253,7 @@ function AddFloatingBanner(content='Sample Content',kind='message',extraclass=''
 			  '</span>' +
 			'</div>' 
 	);
+	
 
 
 }
