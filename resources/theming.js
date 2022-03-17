@@ -854,6 +854,18 @@ function MiniColorTest2(color) { // Regular Colors
 	}
 }
 
+function MiniColorTest3(color,color2) { // Regular Colors
+	var func = (isLightColor(color2));
+	var light = chroma(color).get('hsl.l');
+	if (func) {
+		return chroma(color).set('hsl.l', light-0.02).hex();
+	} else {
+		return chroma(color).set('hsl.l', light+0.02).hex();
+	}
+}
+
+
+
 function ColorInvert(color) {
 	if (window.MW18spdarkmode === 6) { // Special Case
 		var color2 = color;
