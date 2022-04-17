@@ -1,3 +1,6 @@
+// MediaWiki
+	var mediawiki = document.querySelector("html:not(.ivilution-loaded) body.mediawiki");
+
 /* Mobile Only CSS */
 if (navigator.userAgent.match("Mobile")) {
 document.querySelector("html").className += " phone"
@@ -6,7 +9,7 @@ document.querySelector("html").className += " phone"
 /* Local Storage */
 function getKey(key) {
 var str = window.localStorage,
-    result = str.getItem('-evelution-pref-'+key);
+    result = str.getItem('-evelution-preference-'+key);
 if (!result) {
    return '-1';
 }
@@ -14,7 +17,7 @@ return result;
 }
 
 function insertKey(key,value) {
-	window.localStorage.setItem('-evelution-pref-' + key, '' + value);
+	window.localStorage.setItem('-evelution-preference-' + key, '' + value);
 }
 
 function getParams() {
@@ -32,7 +35,7 @@ function getParams() {
 function DropDownUpdate() {
 	var dropdowns = document.querySelectorAll(".cpe-dropdown");
 	dropdowns.forEach(function(x) {
-		x.setAttribute('tabindex',-1);; // Add the CPE button class
+		x.setAttribute('tabindex',-1); // Add the CPE button class
 	});
 
 
@@ -98,68 +101,11 @@ function UpdateRangeInputs() {
 
 /* Enable New Global Navigation - No exception for now */
 (function () {
-	AliasFandomComponents();
-	if (getKey('content-full') === '-1') {
-		insertKey('content-full', 'false' );
-	}
-	if (getKey('right-rail-full') === '-1') {
-		insertKey('right-rail-full', 'true' );
-	}
-	if (getKey('left-rail-full') === '-1') {
-		insertKey('left-rail-full', 'true' );
-	}
-	var content_full = getKey('content-full')
-	var right_rail_full = getKey('right-rail-full');
-	var left_rail_full = getKey('left-rail-full');
-    getParams().forEach(function (param) {
-        var key = param.split("=")[0];
-        var value = param.split("=")[1];
-
-        switch (key) {
-            case 'fullwidth':
-				content_full = value;
-				console.info('Article width settings overriden')
-                break;
-            case 'hiderail':
-				if (value === 'true') {
-					right_rail_full = 'false';
-					left_rail_full = 'false';
-				} else {
-					right_rail_full = 'true';
-					left_rail_full = 'true';
-				}
-				console.info('Pane visibility settings overriden')
-                break;
-            case 'hiderightrail':
-				if (value === 'true') {
-					right_rail_full = 'false';
-				} else {
-					right_rail_full = 'true';
-				}
-				console.info('Right pane visibility settings overriden')
-                break;
-            case 'hideleftrail':
-				if (value === 'true') {
-					left_rail_full = 'false';
-				} else {
-					left_rail_full = 'true';
-				}
-				console.info('Left pane visibility settings overriden')
-                break;
-
-        }
-    });
-    if (content_full === 'true') {
-		document.querySelector(' body ').classList.add('is-wide');
-	}
-    if (right_rail_full === 'true') {
-		document.querySelector(' body ').classList.add('has-right-rail');
-	}
-    if (left_rail_full === 'true') {
-		document.querySelector(' body ').classList.add('has-left-rail');
-	}
+//	AliasFandomComponents();
 	UpdateRangeInputs();
 	DropDownUpdate();
+	document.querySelector("body").addEventListener("mouseenter", ( function(e) { CheckTheme(); } ) );
+	document.querySelector("body").addEventListener("mouseleave", ( function(e) { DropDownUpdate(); CheckTheme(); } ) );
 })();
 
 /* Aliases all components with the .wds prefix to the ones from .cpe ones */
@@ -322,3 +268,4 @@ var saveAs=saveAs||function(e){"use strict";if(typeof e==="undefined"||typeof na
 function DownloadData(contents,filename,ext) {
 eval("saveFileAs(contents,\'text/"+ext+";charset=utf-8\', filename)");
 }
+
