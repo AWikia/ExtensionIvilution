@@ -58,10 +58,13 @@ function DropDownUpdate() {
 						var value = selected.getAttribute("value");
 						document.querySelector(' .cpe-dropdown.cpe-select:focus-within')
 						.addEventListener('click',(function() {
-									var content = selected.innerText;
-									document.querySelector('.cpe-select:focus-within .cpe-select__value').setAttribute("value", value);
-									document.querySelector('.cpe-select:focus-within .cpe-select__value').innerHTML= content;
-//									TestDynamicTheme(); // Change
+									if (selected != undefined) {
+										var content = selected.innerText;
+										document.querySelector('.cpe-select:focus-within .cpe-select__value').setAttribute("value", value);
+										document.querySelector('.cpe-select:focus-within .cpe-select__value').innerHTML= content;
+										selected = undefined;
+//										TestDynamicTheme(); // Change
+									}
 								}));
         }) );
 	});

@@ -2,27 +2,47 @@
 @font-face {
   font-family: 'Material Icons Round';
   font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/materialiconsround/v69/LDItaoyNOAY6Uewc665JcIzCKsKc_M9flwmP.woff2) format('woff2');
+  font-weight: 100 700;
+  src: url(https://fonts.gstatic.com/s/sandbox/materialsymbolsround/v2/memvYb6uxn-H26BBAbZGK9B8OqQfIvT0-sWzfS0.woff2) format('woff2');
+}
+
+
+/* Sharp */
+@font-face {
+  font-family: 'Material Icons Sharp';
+  font-style: normal;
+  font-weight: 100 700;
+  src: url(https://fonts.gstatic.com/s/sandbox/materialsymbolssharp/v7/gNMVW2J8Roq16WD5tFNRaeLQk6-SHQ_R00k4aWE.woff2) format('woff2');
+}
+
+/* Regular */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 100 700;
+  src: url(https://fonts.gstatic.com/s/sandbox/materialsymbolsoutlined/v7/kJEhBvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oFsI.woff2) format('woff2');
 }
 
 .theme-single { /* Standard */
 /* Aliases */
 --highlight-background-color:auto;
+--highlight-text-background-color:auto;
 --inactive-text-background-color:auto;
 --canvas-secondary-background-color:auto;
 --canvas-text-background-color:auto;
 --canvas-text-secondary-background-color:auto;
 --desktop-background-image-filter:opacity(100%);
+--desktop-background-image-blend-mode:normal;
 --desktop-text-background-color:auto;
---desktop-background-mode:header;
 --desktop-background-horizontal-alignment:center;
 --desktop-background-vertical-alignment:center;
 --desktop-background-size:cover;
 --desktop-background-no-horizontal-tiling:false;
 --desktop-background-no-vertical-tiling:false;
 --active-title-background-color:auto;
+--active-title-text-background-color:auto;
 --inactive-title-background-color:auto;
+--inactive-title-text-background-color:auto;
 --custom-font:"Roboto";
 --custom-secondary-font:"Rubik";
 --border-radius:5px;
@@ -59,10 +79,8 @@ font-family:Trebuchet MS;
 /* BG Align */
 --desktop-background-alignment:var(--desktop-background-vertical-alignment) var(--desktop-background-horizontal-alignment);
 /* Acryllic */
---acryllic-filter:blur( calc(30px * calc(1.2 - var(--system-acryllic-opacity) ) ) ) ;
---mica-filter:blur(calc(160px * calc(1.2 - var(--system-acryllic-opacity)))) brightness(125%) contrast(125%) opacity(0.7);
---tabbed-filter:blur( calc(160px * calc(1.2 - var(--system-acryllic-opacity) ) ) ) contrast(75%) brightness(125%) saturate(125%);
---tabbed-filter-dark:blur(calc(160px * calc(1.2 - var(--system-acryllic-opacity)))) contrast(150%) brightness(50%) saturate(150%);
+--acryllic-filter:blur( calc(30px * calc(1.2 - var(--system-acryllic-opacity) ) ) ) saturate(125%);
+--mica-filter:blur( calc(120px * calc(1.2 - var(--system-acryllic-opacity) ) ) );
 /* Transition */
 --transitioner:cubic-bezier(0.25,0.25,0,1);
 /* Fonts */
@@ -150,8 +168,11 @@ body {
 
 /* Unaccented */
 body,
-body [force-active] {
+body [force-active],
+body [force-unaccented] {
 	--luna-background-color:var(--canvas-secondary-background-color);
+	--luna-mica-background-color:var(--mica-background-color);
+	--luna-mica-background-color-2:transparent;
 	--luna-background-color-rgb:var(--canvas-secondary-background-color-rgb);
 	--luna-background-color-hover:var(--canvas-secondary-background-color-hover);
 	--luna-text-background-color:var(--canvas-text-secondary-background-color);
@@ -168,42 +189,46 @@ body [force-active] {
 	--luna-alternative-foreground-color-hover:var(--canvas-secondary-alternative-foreground-color-hover);
 	--luna-alternative-foreground-color-rgb:var(--canvas-secondary-alternative-foreground-color-rgb);
 	--luna-hyperlink-background-color:var(--hyperlink-secondary-background-color);
+	--luna-hyperlink-background-color-hover:var(--hyperlink-secondary-background-color-hover);
 	--luna-hyperlink-background-color-rgb:var(--hyperlink-secondary-background-color-rgb);
 }
 
 /* Unaccented (Unfocused) */
 body:not(:focus):not(:focus-within),
-body [force-inactive] {
+body [force-inactive],
+body:not(:focus):not(:focus-within) [force-unaccented] {
 	--dropdown-opacity:1;
-	--mica-opacity:1;
-	--simple-fallback-color:var(--canvas-background-color)!important;
-	--luna-background-color:var(--canvas-background-color);
-	--luna-background-color-rgb:var(--canvas-background-color-rgb);
-	--luna-background-color-hover:var(--canvas-background-color-hover);
-	--luna-text-background-color:var(--canvas-text-background-color-hover);
-	--luna-text-background-color-hover:var(--canvas-text-background-color);
-	--luna-text-background-color-rgb:var(--canvas-text-background-color-hover-rgb);
-	--luna-text-background-color-hover-rgb:var(--canvas-text-background-color-rgb);	
-	--luna-border-background-color:var(--canvas-background-color-hover);
-	--luna-foreground-color:var(--canvas-foreground-color-hover);
-	--luna-foreground-color-inverted:var(--canvas-foreground-color-hover);
-	--luna-foreground-color-hover:var(--canvas-foreground-color);
-	--luna-foreground-color-rgb:var(--canvas-foreground-color-hover-rgb);
-	--luna-foreground-color-hover-rgb:var(--canvas-foreground-color-rgb);
-	--luna-alternative-foreground-color:var(--canvas-alternative-foreground-color);
-	--luna-alternative-foreground-color-hover:var(--canvas-alternative-foreground-color-hover);
+	--mica-opacity:2;
+	--simple-fallback-color:var(--canvas-secondary-background-color)!important;
+	--luna-background-color:var(--canvas-secondary-background-color);
+	--luna-background-color-rgb:var(--canvas-secondary-background-color-rgb);
+	--luna-background-color-hover:var(--canvas-secondary-background-color-hover);
+	--luna-text-background-color:var(--canvas-text-secondary-background-color-hover);
+	--luna-text-background-color-hover:var(--canvas-text-secondary-background-color);
+	--luna-text-background-color-rgb:var(--canvas-text-secondary-background-color-hover-rgb);
+	--luna-text-background-color-hover-rgb:var(--canvas-text-secondary-background-color-rgb);	
+	--luna-border-background-color:var(--canvas-secondary-background-color-hover);
+	--luna-foreground-color:var(--canvas-secondary-foreground-color-hover);
+	--luna-foreground-color-inverted:var(--canvas-secondary-foreground-color-hover);
+	--luna-foreground-color-hover:var(--canvas-secondary-foreground-color);
+	--luna-foreground-color-rgb:var(--canvas-secondary-foreground-color-hover-rgb);
+	--luna-foreground-color-hover-rgb:var(--canvas-secondary-foreground-color-rgb);
+	--luna-alternative-foreground-color:var(--canvas-secondary-alternative-foreground-color);
+	--luna-alternative-foreground-color-hover:var(--canvas-secondary-alternative-foreground-color-hover);
 }
 
 /* Accented (Focused) */
 :root.has-accents body,
 :root.has-accents body [force-active] {
 	--luna-background-color:var(--active-title-background-color);
+	--luna-mica-background-color:var(--luna-background-color);
+	--luna-mica-background-color-2:var(--luna-background-color);
 	--luna-background-color-rgb:var(--active-title-background-color-rgb);
 	--luna-background-color-hover:var(--active-title-background-color-hover);
-	--luna-text-background-color:var(--active-title-alternative-foreground-color);
-	--luna-text-background-color-hover:var(--active-title-alternative-foreground-color-hover);
-	--luna-text-background-color-rgb:var(--active-title-alternative-foreground-color-rgb);
-	--luna-text-background-color-hover-rgb:var(--active-title-alternative-foreground-color-hover-rgb);	
+	--luna-text-background-color:var(--active-title-text-background-color);
+	--luna-text-background-color-hover:var(--active-title-text-background-color-hover);
+	--luna-text-background-color-rgb:var(--active-title-text-background-color-rgb);
+	--luna-text-background-color-hover-rgb:var(--active-title-text-background-color-hover-rgb);	
 	--luna-border-background-color:var(--active-title-background-color-hover);
 	--luna-foreground-color:var(--active-title-foreground-color);
 	--luna-foreground-color-inverted:var(--active-title-foreground-color-inverted);
@@ -214,6 +239,7 @@ body [force-inactive] {
 	--luna-alternative-foreground-color-hover:var(--active-title-alternative-foreground-color-hover);
 	--luna-alternative-foreground-color-rgb:var(--active-title-alternative-foreground-color-rgb);
 	--luna-hyperlink-background-color:var(--hyperlink-tertiary-background-color);
+	--luna-hyperlink-background-color-hover:var(--hyperlink-tertiary-background-color-hover);
 	--luna-hyperlink-background-color-rgb:var(--hyperlink-tertiary-background-color-rgb);
 }
 
@@ -223,10 +249,10 @@ body [force-inactive] {
 	--luna-background-color:var(--inactive-title-background-color);
 	--luna-background-color-rgb:var(--inactive-title-background-color-rgb);
 	--luna-background-color-hover:var(--inactive-title-background-color-hover);
-	--luna-text-background-color:var(--inactive-title-alternative-foreground-color-hover);
-	--luna-text-background-color-hover:var(--inactive-title-alternative-foreground-color);
-	--luna-text-background-color-rgb:var(--inactive-title-alternative-foreground-color-hover-rgb);
-	--luna-text-background-color-hover-rgb:var(--inactive-title-alternative-foreground-color-rgb);	
+	--luna-text-background-color:var(--inactive-title-text-background-color-hover);
+	--luna-text-background-color-hover:var(--inactive-title-text-background-color);
+	--luna-text-background-color-rgb:var(--inactive-title-text-background-color-hover-rgb);
+	--luna-text-background-color-hover-rgb:var(--inactive-title-text-background-color-rgb);	
 	--luna-border-background-color:var(--inactive-title-background-color-hover);
 	--luna-foreground-color:var(--inactive-title-foreground-color-hover);
 	--luna-foreground-color-inverted:var(--inactive-title-foreground-color-inverted);
@@ -270,11 +296,13 @@ body {
     --theme-body-text-color--rgb: var(--desktop-foreground-color-rgb);
     --theme-body-text-color--hover: var(--desktop-foreground-color-hover);
     --theme-sticky-nav-background-color: var(--active-title-background-color);
+    --theme-sticky-nav-background-color--rgb: var(--active-title-background-color-rgb);
     --theme-sticky-nav-text-color: var(--active-title-foreground-color);
     --theme-sticky-nav-text-color--hover: var(--active-title-foreground-color-hover);
     --theme-page-background-color: var(--canvas-background-color);
     --theme-page-background-color--rgb: var(--canvas-background-color-rgb);
     --theme-page-background-color--secondary: var(--canvas-secondary-background-color);
+    --theme-page-background-color--secondary--rgb: var(--canvas-secondary-background-color-rgb);
     --theme-page-text-color: var(--canvas-text-background-color);
     --theme-page-text-color--rgb: var(--canvas-text-background-color-rgb);
     --theme-page-text-color--hover: var(--canvas-text-background-color-hover);
@@ -295,18 +323,23 @@ body {
     --theme-alert-color: var(--alert-background-color);
     --theme-alert-color--rgb: var(--alert-background-color-rgb);
     --theme-alert-color--hover: var(--alert-background-color-hover);
+    --theme-alert-color--secondary: var(--alert-secondary-background-color);
     --theme-alert-label: var(--alert-foreground-color);
     --theme-warning-color: var(--warning-background-color);
     --theme-warning-color--rgb: var(--warning-background-color-rgb);
+    --theme-warning-color--secondary: var(--warning-secondary-background-color);
     --theme-warning-label: var(--warning-foreground-color);
     --theme-success-color:  var(--success-background-color);
     --theme-success-color--rgb: var(--success-background-color-rgb);
+    --theme-success-color--secondary: var(--success-secondary-background-color);
     --theme-success-label: var(--success-foreground-color);
     --theme-message-color: var(--message-background-color);
     --theme-message-label: var(--message-foreground-color);
 	--theme-community-header-color:var(--desktop-text-background-color);
 	--theme-community-header-color--hover:var(--desktop-text-background-color-hover);
 	--theme-background-image-opacity:100%;
+    --theme-page-text-opacity-factor: 0.85;
+    --theme-body-text-opacity-factor: 0.85;
 }
 
 
@@ -323,10 +356,9 @@ body {
 	}
 	.theme-single {
 		--desktop-background-image:url("")!important;
-		--desktop-background-image-opacity:100%!important;
-		--desktop-background-color:buttonface!important;
-		--desktop-text-background-color:buttontext!important;
-		--desktop-background-mode:standard!important;
+		--desktop-background-image-filter:none!important;
+		--desktop-background-color:background!important;
+		--desktop-text-background-color:auto!important;
 		--desktop-background-horizontal-alignment:center!important;
 		--desktop-background-vertical-alignment:center!important;
 		--desktop-background-size:cover!important;
@@ -334,17 +366,25 @@ body {
 		--desktop-background-no-vertical-tiling:false!important;
 		--hyperlink-background-color:linktext!important;
 		--canvas-background-color:canvas!important;
+		--canvas-secondary-background-color:buttonface!important;
 		--inactive-text-background-color:graytext!important;
 		--canvas-text-background-color:canvastext!important;
+		--canvas-text-secondary-background-color:buttontext!important;
 		--highlight-background-color:highlight!important;
-		--active-title-background-color:highlight!important;
-		--inactive-title-background-color:graytext!important;
+		--highlight-text-background-color:highlighttext;
+		--active-title-background-color:activecaption!important;
+		--active-title-text-background-color:captiontext!important;
+		--inactive-title-background-color:inactivecaption!important;
+		--inactive-title-text-background-color:inactivecaptiontext!important;
+		--custom-font:""!important;
 		--custom-secondary-font:""!important;
-		--border-radius:3px!important;
+		--border-radius:5px!important;
 		--icon-filter:opacity(1)!important;
 		--icon-filter-hover:opacity(1)!important;
 		--icon-filter-duration:0ms!important;
 		--icon-filter-delay:0ms!important;
+		--system-visual-style:contrast;
+		--system-acryllic-opacity:0.6!important;
 	}
 }
 
@@ -363,7 +403,10 @@ body {
   --cpe-text-cursor:text!important;
   --cpe-hand-cursor:pointer!important;
 	--dropdown-opacity:var(--system-acryllic-opacity);
-	--mica-opacity:var(--system-acryllic-opacity);
+	--simple-fallback-color:transparent;
+	--simple-fallback-opacity:var(--system-acryllic-opacity);
+	--mica-opacity:calc(var(--system-acryllic-opacity) * 1.01);
+	accent-color:var(--highlight-background-color);
 	--icon-font-family:'Material Icons Round';
 	--mica-content:"";
 /** Dropdown Theming **/	
@@ -517,7 +560,8 @@ body:not(.skin-monaco)  .neutral {
 /* Selection */
 
 ::selection {
-background-color:rgba(var(--hyperlink-background-color-rgb), 0.5);
+color:var(--highlight-text-background-color);
+background-color:var(--highlight-background-color);
 cursor:inherit;
 text-shadow:none;
 }
@@ -573,7 +617,7 @@ vertical-align:middle;
 
 label {
 	display:inline;
-	font-size:20px;
+/*	font-size:20px; */
 	background:transparent;
 	transition:background-color 200ms var(--transitioner);
 }
@@ -1406,11 +1450,13 @@ margin-left:5px;
 .has-icon-labels li > a:before,
 .oo-ui-iconElement-icon:before,
 .oo-ui-indicatorElement-indicator:before,
+.mw-specialpagesgroup:before,
 input[type="checkbox"]::after, input[type="radio"]::after {
 	--icon-scale:1;
+	--icon-grow:1;
 	--icon-size:1;
   font-family: var(--icon-font-family)!important;
-  font-weight: normal;
+  font-weight: inherit;
   font-style: normal;
   display: inline-block;
   cursor:inherit;
@@ -1449,6 +1495,7 @@ input[type="checkbox"]::after, input[type="radio"]::after {
 .oo-ui-indicatorElement-indicator:before,
 input[type="checkbox"]::after, input[type="radio"]::after {
 	--icon-scale:1;
+	--icon-grow:1;
 	--icon-size:1;
     --icon-rotate:0deg;
   fill:currentColor;
@@ -1457,7 +1504,7 @@ input[type="checkbox"]::after, input[type="radio"]::after {
   min-width:1em!important;
   min-height:1em!important;
   font-size:calc(24px * var(--icon-size))!important;
-  transform:scale(var(--icon-scale)) rotate(var(--icon-rotate));
+  transform:scale(calc(var(--icon-scale) * var(--icon-grow)))  rotate(var(--icon-rotate));
   vertical-align:middle;
   text-indent:0;
 }
@@ -1479,10 +1526,10 @@ input[type="checkbox"]::after, input[type="radio"]::after {
 }
 
 .evelution-module h2.has-icon:before {
-	vertical-align:top;
 	content:"article";
 	--icon-size:1;
 	display:inline;
+	margin-right:0;
 }
 
 .has-icon-labels li > a:before {
@@ -1492,17 +1539,33 @@ input[type="checkbox"]::after, input[type="radio"]::after {
 	content:"";
 }
 
-
 .cpe-button.has-icon:before,
 .has-icon-labels li > .cpe-button:before {
 	--icon-size:0.7;
 	--icon-scale:1;
 }
 
+/* Filled Icons on Selected and Focused states */
+body * > :focus > :first-child,
+body * > :focus > .cpe-icon,
+body * > .cpe-dropdown:focus-within > :first-child,
+body * > .cpe-dropdown:focus-within > .cpe-icon,
+body * > .has-icon:focus:before,
+body .has-icon-labels > li > :focus:before,
+body * > .selected > :first-child,
+body * > .selected > .cpe-icon,
+body .has-icon-labels > .selected > :focus:before,
+body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-buttonElement-active > .oo-ui-buttonElement-button > .oo-ui-iconElement-icon:before,
+body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-buttonElement-active > .oo-ui-buttonElement-button > .oo-ui-indicatorElement-indicator:before {
+  font-variation-settings:'FILL' 1;
+}
+
+
+
 .cpe-avatar {
 width:calc(24px * var(--icon-size, 1))!important;
 height:calc(24px * var(--icon-size, 1))!important;
-transform:none;
+transform:scale(var(--icon-grow));
 border:calc(2px * var(--icon-size, 1)) solid currentcolor;
 -webkit-box-decoration-break:clone;
 box-decoration-break:clone;
@@ -1545,6 +1608,10 @@ margin:1px 0;
 height:auto;
 margin:0 2px;
 /*white-space:nowrap;*/
+}
+
+.cpe-button-group .cpe-button.is-square {
+	height:34px;
 }
 
 .cpe-button-group:not(.force-tertiary)>.cpe-button:not(:first-child):not(:last-child):not(.is-tertiary),
@@ -1902,14 +1969,13 @@ max-height:152px;
 	grid:auto-flow / repeat(4, 1fr);
 }
 
-.explore-menu .cpe-dropdown__content .cpe-list.is-linked.has-icons,
-.user-profile .cpe-dropdown__content .cpe-list.is-linked.has-icons {
+.cpe-dropdown__content .cpe-list.is-linked.has-icons.is-single-row {
 	grid:repeat(1,0fr) / auto-flow; /* Unlimited columns in one row */
 	justify-content:flex-start;
 }
 
-.cpe-dropdown__content .cpe-list.cpe-device-themes.is-linked.has-icons {
-	grid:repeat(1,0fr) / auto-flow; /* Unlimited columns in one row */
+.cpe-dropdown__content .cpe-list.cpe-visual-modes.is-linked.has-icons,
+.cpe-dropdown__content .cpe-list.cpe-dcm-types.is-linked.has-icons {
 	justify-content:center;
 }
 
@@ -1917,7 +1983,17 @@ max-height:152px;
 .cpe-dropdown__content .cpe-list.is-linked.has-icons li > a {
 	display:flex;
 	justify-content:center;
+	position:relative;
 }
+
+.cpe-dropdown__content .cpe-list.is-linked.has-icons > li > a .cpe-icon-badge {
+	position:absolute; 
+	top:0; 
+	right:0; 
+	z-index:1;
+	font-variation-settings:'FILL' 1;
+}
+
 
 .cpe-dropdown__content.cpe-visual-appearance .cpe-list.is-linked.cpe-themes > li,
 .cpe-dropdown__content.cpe-visual-appearance .cpe-list.is-linked.cpe-visual-styles > .custom {
@@ -1945,7 +2021,10 @@ max-height:152px;
    position:relative
 }
 
- .cpe-dropdown__content .cpe-list{padding:0 9px; margin:0 -9px;}
+ .cpe-dropdown__content .cpe-list {
+	padding:0 9px; 
+	margin:0 -9px;
+}
 
  .cpe-dropdown__content .cpe-list>li{
 	 margin:0;
@@ -2000,6 +2079,21 @@ max-height:152px;
  transition-timing-function:var(--transitioner);
  border:1px solid transparent;
  border-radius:calc(var(--border-radius) * 0.6);
+}
+
+.cpe-dropdown__content .cpe-list.is-linked>li>.action-link:not(.cpe-button) {
+ display:flex;
+ align-items:center;
+ gap:0 5px;
+}
+
+.cpe-dropdown__content .cpe-list.is-linked>li>.action-link:not(.cpe-button) > .cpe-icon {
+	--icon-size:0.5;
+	--icon-scale:1.4;
+}
+
+.cpe-dropdown__content .cpe-list.is-linked>li>.action-link:not(.cpe-button) > .cpe-icon.cpe-icon-large {
+	--icon-scale:2;
 }
 
  .cpe-dropdown__content .cpe-list.is-linked>li.is-selected>a:not(.cpe-button),
@@ -2124,9 +2218,9 @@ position:relative;
 
 
 .cpe-dropdown__content .cpe-list.is-linked .cpe-dropdown-level-2>a:not(.cpe-button) {
-	padding-right:16px;
 	display:flex;
 }
+
 
 .cpe-dropdown__content .cpe-list.is-linked .cpe-dropdown-level-2>a:not(.cpe-button) > span:not(.cpe-icon) {
 	flex:1;
@@ -2223,24 +2317,22 @@ margin-right:16px;
 }
 
 
-/* Disable Luna Levit on Dropdowns */
-	.cpe-dropdown__content .has-levit {
-		--mica-opacity:1!important;
+/* Disable Luna Levit on Dropdowns 
+	.cpe-dropdown__content .lunalevit:not(.backdrop) {
+		--mica-opacity:2!important;
 		--mica-content:none;
 	}
 
 
-	.cpe-dropdown__content .has-levit {
+	.cpe-dropdown__content .lunalevit {
 		--mica-filter:none!important;
-		--tabbed-filter:none!important;
-		--tabbed-filter-dark:none!important;
 	}
 	
-	.cpe-dropdown__content .has-levit::before,
-	.cpe-dropdown__content .has-levit::after {
+	.cpe-dropdown__content .lunalevit::before,
+	.cpe-dropdown__content .lunalevit::after {
 		content:none!important;
 	}
-
+*/
 
 /* Gliding Menu */
 
@@ -2575,7 +2667,9 @@ margin-right:16px;
   width: 38px;
 }
 
-/* Various Styles */
+/** Various Styles **/
+
+/* Alert Background Color */
 .cpe-floating-button.critical {
   --floating-button-color:var(--alert-background-color);
   --floating-button-color-hover:var(--alert-background-color-hover);
@@ -2584,6 +2678,16 @@ margin-right:16px;
   --floating-button-fadeout-color:var(--alert-background-color-rgb);
 }
 
+/* Pause Background Color */
+.cpe-floating-button.halt {
+  --floating-button-color:var(--pause-background-color);
+  --floating-button-color-hover:var(--pause-background-color-hover);
+  --floating-button-color-active:var(--pause-foreground-color);
+  --floating-button-background-color-active:var(--pause-background-color);
+  --floating-button-fadeout-color:var(--pause-background-color-rgb);
+}
+
+/* Success Background Color */
 .cpe-floating-button.good {
   --floating-button-color:var(--success-background-color);
   --floating-button-color-hover:var(--success-background-color-hover);
@@ -2592,7 +2696,7 @@ margin-right:16px;
   --floating-button-fadeout-color:var(--success-background-color-rgb);
 }
 
-
+/* Accented */
 .cpe-floating-button.accent {
   --floating-button-color:var(--hyperlink-background-color);
   --floating-button-color-hover:var(--hyperlink-background-color-hover);
@@ -2803,8 +2907,8 @@ margin-right:16px;
 
 /* Banners */
 .cpe-banner-notification{
-	background-color:rgba(var(--canvas-secondary-background-color-rgb),var(--dropdown-opacity));
-	color:var(--canvas-text-secondary-background-color);
+	background-color:rgba(var(--luna-background-color-rgb),var(--dropdown-opacity));
+	color:var(--luna-text-background-color);
 	display:flex;
 	transition:opacity .6s var(--transitioner), transform .6s var(--transitioner); 
 	overflow:hidden; 
@@ -2815,7 +2919,7 @@ margin-right:16px;
     backdrop-filter:var(--acryllic-filter);
     border-radius:var(--border-radius);
 	box-shadow:0 0 6px 0 rgba(var(--canvas-text-background-color-rgb),.2), 0 0 6px 0 rgba(var(--canvas-background-color-rgb),0.4);
-	border:1px solid var(--inactive-text-background-color);
+	border:1px solid var(--luna-border-background-color);
 	margin-bottom:5px;
 }
 
@@ -2873,6 +2977,18 @@ margin-right:16px;
 	line-height:1.29;
 	padding:13px 12px;
 }
+
+.cpe-banner-notification a,
+.cpe-banner-notification a:visited {
+color:var(--luna-hyperlink-background-color);
+}
+
+.cpe-banner-notification a:hover,
+.cpe-banner-notification a:hover:visited {
+color:var(--luna-hyperlink-background-color-hover);
+}
+
+
 .cpe-banner-notification__close{
 	cursor:var(--cpe-hand-cursor);
 	padding:12px 12px;
@@ -3061,7 +3177,7 @@ input[type="radio"]:checked::after  {
 /* Progresses */
 progress {
   --range-percent:0%;
-  --range-filler-color:var(--progress-background-color);
+  --range-filler-color:var(--highlight-background-color);
   color: var(--canvas-text-background-color);
   margin: 0 auto;
   background-color: var(--canvas-secondary-background-color);
@@ -3245,6 +3361,480 @@ input[type="range"]::-moz-range-progress {
 }
 }
 
+/** Visual Modes **/
+/* General */
+.visualmode-lite .standard-on,
+.visualmode-contrast .standard-on {
+	display:none!important;
+}
+
+html:not(.visualmode-lite) .lite-on {
+	display:none!important;
+}
+
+html:not(.visualmode-contrast) .contrast-on {
+	display:none!important;
+}
+
+/* Lite */
+.visualmode-lite body,
+.visualmode-lite .cpe-dropdown__content,
+.visualmode-lite .cpe-dropdown__content .cpe-list.is-linked .cpe-dropdown-level-2 .cpe-dropdown-level-2__content,
+.visualmode-contrast body,
+.visualmode-contrast .cpe-dropdown__content,
+.visualmode-contrast .cpe-dropdown__content .cpe-list.is-linked .cpe-dropdown-level-2 .cpe-dropdown-level-2__content {
+	--dropdown-opacity:1!important;
+	--mica-opacity:2!important;
+	--simple-fallback-color:var(--canvas-background-color);
+}
+
+
+.visualmode-lite body,
+.visualmode-contrast body {
+	--acryllic-filter:none!important;
+    --mica-filter:none!important;
+	--mica-content:none;
+}
+
+
+/* Contrast */
+.visualmode-contrast body {
+/* Mica */
+--mica-background-color:var(--canvas-secondary-background-color);
+/* Luna Colors */
+--luna-border-background-color:var(--luna-foreground-color)!important;
+/* Desktop */
+--desktop-background-color-hover:var(--desktop-background-color)!important;
+--desktop-foreground-color-hover:var(--desktop-foreground-color)!important;
+--desktop-alternative-foreground-color-hover:var(--desktop-alternative-foreground-color)!important;
+--desktop-foreground-color-inverted:var(--desktop-foreground-color)!important;
+--desktop-foreground-color-hover-rgb:var(--desktop-foreground-color-rgb)!important;
+--desktop-alternative-foreground-color-hover-rgb:var(--desktop-alternative-foreground-color-rgb)!important;
+/* Desktop Text */
+--desktop-text-background-color-hover:var(--desktop-text-background-color)!important;
+--desktop-text-foreground-color-hover:var(--desktop-text-foreground-color)!important;
+--desktop-text-alternative-foreground-color-hover:var(--desktop-text-alternative-foreground-color)!important;
+--desktop-text-foreground-color-inverted:var(--desktop-text-foreground-color)!important;
+--desktop-text-background-color-hover-rgb:var(--desktop-text-background-color-rgb)!important;
+--desktop-text-foreground-color-hover-rgb:var(--desktop-text-foreground-color-rgb)!important;
+--desktop-text-alternative-foreground-color-hover-rgb:var(--desktop-text-alternative-foreground-color-rgb)!important;
+/* Canvas */
+--canvas-background-color-hover:var(--canvas-background-color)!important;
+--canvas-foreground-color-hover:var(--canvas-foreground-color)!important;
+--canvas-alternative-foreground-color-hover:var(--canvas-alternative-foreground-color)!important;
+--canvas-foreground-color-inverted:var(--canvas-foreground-color)!important;
+--canvas-foreground-color-hover-rgb:var(--canvas-foreground-color-rgb)!important;
+--canvas-alternative-foreground-color-hover-rgb:var(--canvas-alternative-foreground-color-rgb)!important;
+/* 2nd Canvas */
+--canvas-secondary-background-color-hover:var(--canvas-secondary-background-color)!important;
+--canvas-secondary-foreground-color-hover:var(--canvas-secondary-foreground-color)!important;
+--canvas-secondary-alternative-foreground-color-hover:var(--canvas-secondary-alternative-foreground-color)!important;
+--canvas-secondary-foreground-color-inverted:var(--canvas-secondary-foreground-color)!important;
+--canvas-secondary-foreground-color-hover-rgb:var(--canvas-secondary-foreground-color-rgb)!important;
+--canvas-secondary-alternative-foreground-color-hover-rgb:var(--canvas-secondary-alternative-foreground-color-rgb)!important;
+/* Inactive Text */
+--inactive-text-background-color-hover:var(--inactive-text-background-color)!important;
+--inactive-text-foreground-color-hover:var(--inactive-text-foreground-color)!important;
+--inactive-text-alternative-foreground-color-hover:var(--inactive-text-alternative-foreground-color)!important;
+--inactive-text-foreground-color-inverted:var(--inactive-text-foreground-color)!important;
+--inactive-text-foreground-color-hover-rgb:var(--inactive-text-foreground-color-rgb)!important;
+--inactive-text-alternative-foreground-color-hover-rgb:var(--inactive-text-alternative-foreground-color-rgb)!important;
+/* Desktop Text */
+--canvas-text-background-color-hover:var(--canvas-text-background-color)!important;
+--canvas-text-foreground-color-hover:var(--canvas-text-foreground-color)!important;
+--canvas-text-alternative-foreground-color-hover:var(--canvas-text-alternative-foreground-color)!important;
+--canvas-text-foreground-color-inverted:var(--canvas-text-foreground-color)!important;
+--canvas-text-background-color-hover-rgb:var(--canvas-text-background-color-rgb)!important;
+--canvas-text-foreground-color-hover-rgb:var(--canvas-text-foreground-color-rgb)!important;
+--canvas-text-alternative-foreground-color-hover-rgb:var(--canvas-text-alternative-foreground-color-rgb)!important;
+/* 2nd Desktop Text */
+--canvas-text-secondary-background-color-hover:var(--canvas-text-secondary-background-color)!important;
+--canvas-text-secondary-foreground-color-hover:var(--canvas-text-secondary-foreground-color)!important;
+--canvas-text-secondary-alternative-foreground-color-hover:var(--canvas-text-secondary-alternative-foreground-color)!important;
+--canvas-text-secondary-foreground-color-inverted:var(--canvas-text-secondary-foreground-color)!important;
+--canvas-text-secondary-background-color-hover-rgb:var(--canvas-text-secondary-background-color-rgb)!important;
+--canvas-text-secondary-foreground-color-hover-rgb:var(--canvas-text-secondary-foreground-color-rgb)!important;
+--canvas-text-secondary-alternative-foreground-color-hover-rgb:var(--canvas-text-secondary-alternative-foreground-color-rgb)!important;
+/* Highlight */
+--highlight-background-color-hover:var(--highlight-background-color)!important;
+--highlight-foreground-color-hover:var(--highlight-foreground-color)!important;
+--highlight-alternative-foreground-color-hover:var(--highlight-alternative-foreground-color)!important;
+--highlight-foreground-color-inverted:var(--highlight-foreground-color)!important;
+--highlight-foreground-color-hover-rgb:var(--highlight-foreground-color-rgb)!important;
+--highlight-alternative-foreground-color-hover-rgb:var(--highlight-alternative-foreground-color-rgb)!important;
+/* Highlight Text */
+--highlight-text-background-color-hover:var(--highlight-text-background-color)!important;
+--highlight-text-foreground-color-hover:var(--highlight-text-foreground-color)!important;
+--highlight-text-alternative-foreground-color-hover:var(--highlight-text-alternative-foreground-color)!important;
+--highlight-text-foreground-color-inverted:var(--highlight-text-foreground-color)!important;
+--highlight-text-foreground-color-hover-rgb:var(--highlight-text-foreground-color-rgb)!important;
+--highlight-text-alternative-foreground-color-hover-rgb:var(--highlight-text-alternative-foreground-color-rgb)!important;
+/* Hyperlink */
+--hyperlink-background-color-hover:var(--hyperlink-background-color)!important;
+--hyperlink-foreground-color-hover:var(--hyperlink-foreground-color)!important;
+--hyperlink-alternative-foreground-color-hover:var(--hyperlink-alternative-foreground-color)!important;
+--hyperlink-foreground-color-inverted:var(--hyperlink-foreground-color)!important;
+--hyperlink-background-color-hover-rgb:var(--hyperlink-background-color-rgb)!important;
+--hyperlink-foreground-color-hover-rgb:var(--hyperlink-foreground-color-rgb)!important;
+--hyperlink-alternative-foreground-color-hover-rgb:var(--hyperlink-alternative-foreground-color-rgb)!important;
+/* Hyperlink */
+--hyperlink-secondary-background-color-hover:var(--hyperlink-secondary-background-color)!important;
+--hyperlink-tertiary-background-color-hover:var(--hyperlink-tertiary-background-color)!important;
+/* Active Title */
+--active-title-background-color-hover:var(--active-title-background-color)!important;
+--active-title-foreground-color-hover:var(--active-title-foreground-color)!important;
+--active-title-alternative-foreground-color-hover:var(--active-title-alternative-foreground-color)!important;
+--active-title-foreground-color-inverted:var(--active-title-foreground-color)!important;
+--active-title-foreground-color-hover-rgb:var(--active-title-foreground-color-rgb)!important;
+--active-title-alternative-foreground-color-hover-rgb:var(--active-title-alternative-foreground-color-rgb)!important;
+/* Active Title Text */
+--active-title-text-background-color-hover:var(--active-title-text-background-color)!important;
+--active-title-text-foreground-color-hover:var(--active-title-text-foreground-color)!important;
+--active-title-text-alternative-foreground-color-hover:var(--active-title-text-alternative-foreground-color)!important;
+--active-title-text-foreground-color-inverted:var(--active-title-text-foreground-color)!important;
+--active-title-text-foreground-color-hover-rgb:var(--active-title-text-foreground-color-rgb)!important;
+--active-title-text-alternative-foreground-color-hover-rgb:var(--active-title-text-alternative-foreground-color-rgb)!important;
+/* Inactive Title */
+--inactive-title-background-color-hover:var(--inactive-title-background-color)!important;
+--inactive-title-foreground-color-hover:var(--inactive-title-foreground-color)!important;
+--inactive-title-alternative-foreground-color-hover:var(--inactive-title-alternative-foreground-color)!important;
+--inactive-title-foreground-color-inverted:var(--inactive-title-foreground-color)!important;
+--inactive-title-foreground-color-hover-rgb:var(--inactive-title-foreground-color-rgb)!important;
+--inactive-title-alternative-foreground-color-hover-rgb:var(--inactive-title-alternative-foreground-color-rgb)!important;
+/* Inactive Title Text */
+--inactive-title-text-background-color-hover:var(--inactive-title-text-background-color)!important;
+--inactive-title-text-foreground-color-hover:var(--inactive-title-text-foreground-color)!important;
+--inactive-title-text-alternative-foreground-color-hover:var(--inactive-title-text-alternative-foreground-color)!important;
+--inactive-title-text-foreground-color-inverted:var(--inactive-title-text-foreground-color)!important;
+--inactive-title-text-foreground-color-hover-rgb:var(--inactive-title-text-foreground-color-rgb)!important;
+--inactive-title-text-alternative-foreground-color-hover-rgb:var(--inactive-title-text-alternative-foreground-color-rgb)!important;
+/* Alert */
+--alert-alternative-foreground-color:var(--hyperlink-alternative-foreground-color)!important;
+--alert-alternative-foreground-color-rgb:var(--hyperlink-alternative-foreground-color-rgb)!important;
+--alert-fadeout-color:var(--hyperlink-fadeout-color)!important;
+--alert-background-color:var(--hyperlink-background-color)!important;
+--alert-background-color-hover:var(--hyperlink-background-color-hover)!important;
+--alert-background-color-hover-2:var(--hyperlink-background-color-hover)!important;
+--alert-gradient-color:var(--hyperlink-gradient-color)!important;
+--alert-gradient-color-hover:var(--hyperlink-gradient-color-hover)!important;
+--alert-foreground-color:var(--hyperlink-foreground-color)!important;
+--alert-foreground-color-hover:var(--hyperlink-foreground-color-hover)!important;
+--alert-foreground-color-inverted:var(--hyperlink-foreground-color-inverted)!important;
+--alert-background-color-rgb:var(--hyperlink-background-color-rgb)!important;
+--alert-foregrouund-color-rgb:var(--hyperlink-foreground-color-rgb)!important;
+--alert-foreground-color-hover-rgb:var(--hyperlink-foreground-color-hover-rgb)!important;
+--alert-secondary-background-color:var(--hyperlink-secondary-background-color)!important;
+--alert-secondary-background-color-hover:var(--alert-secondary-background-color)!important;
+--alert-secondary-background-color-rgb:var(--hyperlink-secondary-background-color-rgb)!important;
+/* Pause */
+--pause-alternative-foreground-color:var(--canvas-text-alternative-foreground-color)!important;
+--pause-alternative-foreground-color-rgb:var(--canvas-text-alternative-foreground-color-rgb)!important;
+--pause-fadeout-color:var(--canvas-text-fadeout-color)!important;
+--pause-background-color:var(--canvas-text-background-color)!important;
+--pause-background-color-hover:var(--canvas-text-background-color-hover)!important;
+--pause-background-color-hover-2:var(--canvas-text-background-color-hover)!important;
+--pause-gradient-color:var(--canvas-text-gradient-color)!important;
+--pause-gradient-color-hover:var(--canvas-text-gradient-color-hover)!important;
+--pause-foreground-color:var(--canvas-text-foreground-color)!important;
+--pause-foreground-color-hover:var(--canvas-text-foreground-color-hover)!important;
+--pause-foreground-color-inverted:var(--canvas-text-foreground-color-inverted)!important;
+--pause-background-color-rgb:var(--canvas-text-background-color-rgb)!important;
+--pause-foregrouund-color-rgb:var(--canvas-text-foreground-color-rgb)!important;
+--pause-foreground-color-hover-rgb:var(--canvas-text-foreground-color-hover-rgb)!important;
+--pause-secondary-background-color:var(--canvas-text-secondary-background-color)!important;
+--pause-secondary-background-color-hover:var(--pause-secondary-background-color)!important;
+--pause-secondary-background-color-rgb:var(--canvas-text-secondary-background-color-rgb)!important;
+/* Warning */
+--warning-alternative-foreground-color:var(--hyperlink-alternative-foreground-color)!important;
+--warning-alternative-foreground-color-rgb:var(--hyperlink-alternative-foreground-color-rgb)!important;
+--warning-fadeout-color:var(--hyperlink-fadeout-color)!important;
+--warning-background-color:var(--hyperlink-background-color)!important;
+--warning-background-color-hover:var(--hyperlink-background-color-hover)!important;
+--warning-background-color-hover-2:var(--hyperlink-background-color-hover)!important;
+--warning-gradient-color:var(--hyperlink-gradient-color)!important;
+--warning-gradient-color-hover:var(--hyperlink-gradient-color-hover)!important;
+--warning-foreground-color:var(--hyperlink-foreground-color)!important;
+--warning-foreground-color-hover:var(--hyperlink-foreground-color-hover)!important;
+--warning-foreground-color-inverted:var(--hyperlink-foreground-color-inverted)!important;
+--warning-background-color-rgb:var(--hyperlink-background-color-rgb)!important;
+--warning-foregrouund-color-rgb:var(--hyperlink-foreground-color-rgb)!important;
+--warning-foreground-color-hover-rgb:var(--hyperlink-foreground-color-hover-rgb)!important;
+--warning-secondary-background-color:var(--hyperlink-secondary-background-color)!important;
+--warning-secondary-background-color-hover:var(--warning-secondary-background-color)!important;
+--warning-secondary-background-color-rgb:var(--hyperlink-secondary-background-color-rgb)!important;
+/* Success */
+--success-alternative-foreground-color:var(--canvas-text-alternative-foreground-color)!important;
+--success-alternative-foreground-color-rgb:var(--canvas-text-alternative-foreground-color-rgb)!important;
+--success-fadeout-color:var(--canvas-text-fadeout-color)!important;
+--success-background-color:var(--canvas-text-background-color)!important;
+--success-background-color-hover:var(--canvas-text-background-color-hover)!important;
+--success-background-color-hover-2:var(--canvas-text-background-color-hover)!important;
+--success-gradient-color:var(--canvas-text-gradient-color)!important;
+--success-gradient-color-hover:var(--canvas-text-gradient-color-hover)!important;
+--success-foreground-color:var(--canvas-text-foreground-color)!important;
+--success-foreground-color-hover:var(--canvas-text-foreground-color-hover)!important;
+--success-foreground-color-inverted:var(--canvas-text-foreground-color-inverted)!important;
+--success-background-color-rgb:var(--canvas-text-background-color-rgb)!important;
+--success-foregrouund-color-rgb:var(--canvas-text-foreground-color-rgb)!important;
+--success-foreground-color-hover-rgb:var(--canvas-text-foreground-color-hover-rgb)!important;
+--success-secondary-background-color:var(--canvas-text-secondary-background-color)!important;
+--success-secondary-background-color-hover:var(--success-secondary-background-color)!important;
+--success-secondary-background-color-rgb:var(--canvas-text-secondary-background-color-rgb)!important;
+/* Progress */
+--progress-alternative-foreground-color:var(--hyperlink-alternative-foreground-color)!important;
+--progress-alternative-foreground-color-rgb:var(--hyperlink-alternative-foreground-color-rgb)!important;
+--progress-fadeout-color:var(--hyperlink-fadeout-color)!important;
+--progress-background-color:var(--hyperlink-background-color)!important;
+--progress-background-color-hover:var(--hyperlink-background-color-hover)!important;
+--progress-background-color-hover-2:var(--hyperlink-background-color-hover)!important;
+--progress-gradient-color:var(--hyperlink-gradient-color)!important;
+--progress-gradient-color-hover:var(--hyperlink-gradient-color-hover)!important;
+--progress-foreground-color:var(--hyperlink-foreground-color)!important;
+--progress-foreground-color-hover:var(--hyperlink-foreground-color-hover)!important;
+--progress-foreground-color-inverted:var(--hyperlink-foreground-color-inverted)!important;
+--progress-background-color-rgb:var(--hyperlink-background-color-rgb)!important;
+--progress-foregrouund-color-rgb:var(--hyperlink-foreground-color-rgb)!important;
+--progress-foreground-color-hover-rgb:var(--hyperlink-foreground-color-hover-rgb)!important;
+--progress-secondary-background-color:var(--hyperlink-secondary-background-color)!important;
+--progress-secondary-background-color-hover:var(--progress-secondary-background-color)!important;
+--progress-secondary-background-color-rgb:var(--hyperlink-secondary-background-color-rgb)!important;
+/* Message */
+--message-alternative-foreground-color:var(--canvas-text-alternative-foreground-color)!important;
+--message-alternative-foreground-color-rgb:var(--canvas-text-alternative-foreground-color-rgb)!important;
+--message-fadeout-color:var(--canvas-text-fadeout-color)!important;
+--message-background-color:var(--canvas-text-background-color)!important;
+--message-background-color-hover:var(--canvas-text-background-color-hover)!important;
+--message-background-color-hover-2:var(--canvas-text-background-color-hover)!important;
+--message-gradient-color:var(--canvas-text-gradient-color)!important;
+--message-gradient-color-hover:var(--canvas-text-gradient-color-hover)!important;
+--message-foreground-color:var(--canvas-text-foreground-color)!important;
+--message-foreground-color-hover:var(--canvas-text-foreground-color-hover)!important;
+--message-foreground-color-inverted:var(--canvas-text-foreground-color-inverted)!important;
+--message-background-color-rgb:var(--canvas-text-background-color-rgb)!important;
+--message-foregrouund-color-rgb:var(--canvas-text-foreground-color-rgb)!important;
+--message-foreground-color-hover-rgb:var(--canvas-text-foreground-color-hover-rgb)!important;
+--message-secondary-background-color:var(--canvas-text-secondary-background-color)!important;
+--message-secondary-background-color-hover:var(--message-secondary-background-color)!important;
+--message-secondary-background-color-rgb:var(--canvas-text-secondary-background-color-rgb)!important;
+}
+
+.visualmode-contrast body [force-active] {/* Luna Colors */
+--luna-border-background-color:var(--luna-foreground-color)!important;
+}
+
+
+.visualmode-contrast container *:not(progress), .visualmode-contrast container :after  {
+  text-shadow:none!important;
+  box-shadow:none!important;
+}
+
+
+.visualmode-contrast .cpe-dropdown.has-shadow .cpe-dropdown__content {
+box-shadow:0 2px 0 4px rgba(var(--canvas-text-background-color-rgb),.4), 0 2px 0 4px rgba(var(--canvas-background-color-rgb),0.4)!important;
+}
+
+.visualmode-contrast .cpe-dropdown.has-dark-shadow .cpe-dropdown__content {
+box-shadow:0 2px 0 6px rgba(var(--canvas-text-background-color-rgb),.4), 0 2px 0 6px rgba(var(--canvas-background-color-rgb),0.4)!important;
+}
+
+
+.visualmode-contrast .cpe-dropdown.has-shadow[cpe-orient="land"] .cpe-dropdown__content {
+box-shadow:2px 0 0 4px rgba(var(--canvas-text-background-color-rgb),.4), 2px 0 0 4px rgba(var(--canvas-background-color-rgb),0.4)!important;
+}
+
+.visualmode-contrast .cpe-dropdown.has-dark-shadow[cpe-orient="land"] .cpe-dropdown__content {
+box-shadow:2px 0 0 6px rgba(var(--canvas-text-background-color-rgb),.4), 2px 0 0 6px rgba(var(--canvas-background-color-rgb),0.4)!important;
+}
+
+@media only screen and (min-width:760px) {
+	.visualmode-contrast .cpe-dropdown.has-shadow[cpe-orient="land-desktop"] .cpe-dropdown__content {
+	box-shadow:2px 0 0 4px rgba(var(--canvas-text-background-color-rgb),.4), 2px 0 0 4px rgba(var(--canvas-background-color-rgb),0.4)!important;
+	}
+
+	.visualmode-contrast .cpe-dropdown.has-dark-shadow[cpe-orient="land-desktop"] .cpe-dropdown__content {
+	box-shadow:2px 0 0 6px rgba(var(--canvas-text-background-color-rgb),.4), 2px 0 0 6px rgba(var(--canvas-background-color-rgb),0.4)!important;
+	}
+}
+
+.visualmode-contrast .cpe-toggle__input:checked+.cpe-toggle__label::before{
+background-color:var(--highlight-foreground-color);
+}
+.visualmode-contrast .cpe-toggle__input:checked+.cpe-toggle__label::after{
+background-color:var(--highlight-background-color);
+}
+
+.visualmode-contrast body {
+/* Link Styling */
+--dropdown-hyperlink-background-color:var(--highlight-background-color);
+--dropdown-hyperlink-border-color:transparent;
+--dropdown-hyperlink-text-color:var(--highlight-text-background-color);
+}
+
+
+.visualmode-contrast .cpe-floating-button {
+  --floating-button-color-hover:var(--highlight-text-background-color);
+  --floating-button-color-active:var(--floating-button-background-color-hover);
+  --floating-button-background-color-hover:var(--highlight-background-color);
+  --floating-button-background-color-active:var(--floating-button-color-hover);
+  --floating-button-border-color:var(--floating-button-color);
+  --floating-button-border-color-hover:var(--floating-button-background-color-hover);
+  --floating-button-border-color-active:var(--floating-button-background-color-active);
+}
+
+
+.visualmode-contrast stroke {
+  color:var(--canvas-text-background-color)!important;
+}
+
+.visualmode-contrast pre, .visualmode-contrast code {
+  background-color:var(--canvas-background-color);
+  color:var(--canvas-text-background-color);
+  border-color:var(--inactive-text-background-color);
+}
+
+.visualmode-contrast mark {
+color:var(--highlight-text-background-color);
+background-color:var(--highlight-background-color);
+}
+
+/* Primary, Secondary and Frameless */
+.visualmode-contrast .cpe-button:hover,
+.visualmode-contrast .cpe-button:active, 
+.visualmode-contrast .cpe-button:focus:not(:active), 
+.visualmode-contrast .cpe-button.is-active, 
+.visualmode-contrast .selected .cpe-button,
+.visualmode-contrast .cpe-dropdown:focus > .cpe-button,
+.visualmode-contrast .cpe-dropdown:focus-within > .cpe-button,
+/* OOUI */
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover,
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-flaggedElement-progressive  > .oo-ui-buttonElement-button:hover,
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-flaggedElement-primary  > .oo-ui-buttonElement-button:hover,
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-flaggedElement-destructive  > .oo-ui-buttonElement-button:hover,
+.visualmode-contrast body .mw-ui-button:not(:disabled):hover,
+.visualmode-contrast body .mw-ui-button:hover,
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:active, 
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-buttonElement-pressed > .oo-ui-buttonElement-button,
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-flaggedElement-progressive > .oo-ui-buttonElement-button:active, 
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-buttonElement-pressed.oo-ui-flaggedElement-progressive > .oo-ui-buttonElement-button,
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-flaggedElement-primary > .oo-ui-buttonElement-button:active, 
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-buttonElement-pressed.oo-ui-flaggedElement-primary > .oo-ui-buttonElement-button,
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-flaggedElement-destructive > .oo-ui-buttonElement-button:active, 
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-buttonElement-pressed.oo-ui-flaggedElement-destructive > .oo-ui-buttonElement-button,
+.visualmode-contrast body .mw-ui-button:not(:disabled):active,
+.visualmode-contrast body .mw-ui-button:active,
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:focus:not(:active),
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-flaggedElement-progressive > .oo-ui-buttonElement-button:focus:not(:active),
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-flaggedElement-primary > .oo-ui-buttonElement-button:focus:not(:active),
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-flaggedElement-destructive > .oo-ui-buttonElement-button:focus:not(:active),
+.visualmode-contrast body .mw-ui-button:not(:disabled):focus,
+.visualmode-contrast body .mw-ui-button:focus:not(:active),
+/* OOUI Primary */
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-flaggedElement-primary.oo-ui-flaggedElement-progressive > .oo-ui-buttonElement-button:hover,
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-flaggedElement-primary.oo-ui-flaggedElement-destructive > .oo-ui-buttonElement-button:hover,
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-buttonElement-active > .oo-ui-buttonElement-button:focus:hover,
+.visualmode-contrast body .oo-ui-buttonSelectWidget.oo-ui-widget-enabled:focus .oo-ui-buttonOptionWidget.oo-ui-optionWidget-selected .oo-ui-buttonElement-button:hover,
+.visualmode-contrast body .mw-ui-button.mw-ui-progressive:not(:disabled):hover,
+.visualmode-contrast body .mw-ui-button.mw-ui-progressive:hover,
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-flaggedElement-primary.oo-ui-flaggedElement-progressive > .oo-ui-buttonElement-button:active, 
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-flaggedElement-primary.oo-ui-flaggedElement-destructive > .oo-ui-buttonElement-button:active, 
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-flaggedElement-primary.oo-ui-flaggedElement-progressive.oo-ui-buttonElement-pressed > .oo-ui-buttonElement-button, 
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-flaggedElement-primary.oo-ui-flaggedElement-progressive.oo-ui-buttonElement-active > .oo-ui-buttonElement-button, 
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-flaggedElement-primary.oo-ui-flaggedElement-progressive.oo-ui-popupToolGroup-active > .oo-ui-buttonElement-button,
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-buttonElement-active > .oo-ui-buttonElement-button:focus:active,
+.visualmode-contrast body .oo-ui-buttonSelectWidget.oo-ui-widget-enabled:focus .oo-ui-buttonOptionWidget.oo-ui-optionWidget-selected .oo-ui-buttonElement-button:active,
+.visualmode-contrast body .mw-ui-button.mw-ui-progressive:not(:disabled):active,
+.visualmode-contrast body .mw-ui-button.mw-ui-progressive:active,
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-flaggedElement-primary.oo-ui-flaggedElement-progressive > .oo-ui-buttonElement-button:focus:not(:active),
+.visualmode-contrast body .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-flaggedElement-primary.oo-ui-flaggedElement-destructive > .oo-ui-buttonElement-button:focus:not(:active),
+.visualmode-contrast body .mw-ui-button.mw-ui-progressive:not(:disabled):focus,
+.visualmode-contrast body .mw-ui-button.mw-ui-progressive:focus:not(:active)  {
+    border-color:var(--button-background-color);
+    color:var(--button-background-color);
+    background-color:var(--button-foreground-color);
+}
+
+
+.visualmode-contrast .cpe-button.is-tertiary:hover,
+.visualmode-contrast .cpe-button.is-tertiary:active, 
+.visualmode-contrast .cpe-button.is-tertiary:focus:not(:active), 
+.visualmode-contrast .cpe-button.is-tertiary.is-active, 
+.visualmode-contrast .selected .cpe-button.is-tertiary,
+.visualmode-contrast .cpe-dropdown:focus > .cpe-button.is-tertiary,
+.visualmode-contrast .cpe-dropdown:focus-within > .cpe-button.is-tertiary,
+/* Forced */
+.visualmode-contrast .force-tertiary .cpe-button:not(.is-primary):not(.is-secondary):not(.is-text):hover,
+.visualmode-contrast .force-tertiary .cpe-button:not(.is-primary):not(.is-secondary):not(.is-text):active, 
+.visualmode-contrast .force-tertiary .cpe-button:not(.is-primary):not(.is-secondary):not(.is-text):focus:not(:active), 
+.visualmode-contrast .force-tertiary .cpe-button:not(.is-primary):not(.is-secondary):not(.is-text).is-active, 
+.visualmode-contrast .force-tertiary .selected .cpe-button:not(.is-primary):not(.is-secondary):not(.is-text),
+.visualmode-contrast .force-tertiary .cpe-dropdown:focus > .cpe-button:not(.is-primary):not(.is-secondary):not(.is-text),
+.visualmode-contrast .force-tertiary .cpe-dropdown:focus-within > .cpe-button:not(.is-primary):not(.is-secondary):not(.is-text) {
+    border-color:var(--button-background-color);
+    color:var(--button-foreground-color);
+    background-color:var(--button-background-color);
+}
+
+.visualmode-contrast input[type="checkbox"], .visualmode-contrast input[type="radio"] {
+--checkbox-active-bg:var(--highlight-background-color);
+	--checkbox-checked-bg:var(--highlight-background-color);
+	--checkbox-checked-bg-hover:var(--highlight-background-color-hover);
+	--checkbox-checked-shadow:var(--checkbox-checked-bg);
+	--checkbox-checked-shadow-hover:var(--checkbox-checked-bg-hover);
+	--checkbox-checked-text:var(--highlight-foreground-color);
+}
+
+.visualmode-contrast input[type="checkbox"]:checked:not(:active):focus, .visualmode-contrast input[type="radio"]:checked:not(:active):focus,
+.visualmode-contrast .oo-ui-radioSelectWidget:focus  input[type="checkbox"]:checked:not(:active), .visualmode-contrast .oo-ui-radioSelectWidget:focus input[type="radio"]:checked:not(:active) {
+	--checkbox-focused-shadow:var(--checkbox-checked-text);
+}
+
+.visualmode-contrast input[type="checkbox"], .visualmode-contrast input[type="radio"] {
+	--checkbox-unchecked-shadow:rgb(var(--canvas-text-background-color-rgb));
+}
+
+.visualmode-contrast input[type="checkbox"]:checked, .visualmode-contrast input[type="radio"]:checked,
+.visualmode-contrast input[type="checkbox"]:indeterminate {
+  box-shadow:inset 0 0 0 1px var(--checkbox-focused-shadow)!important;
+}
+
+.visualmode-contrast input[type="checkbox"]:checked:hover, .visualmode-contrast input[type="radio"]:checked:hover, 
+.visualmode-contrast input[type="checkbox"]:indeterminate:hover {
+  box-shadow:inset 0 0 0 1px var(--checkbox-focused-shadow)!important;
+}
+
+.visualmode-contrast input[type="checkbox"]:checked:active, .visualmode-contrast input[type="radio"]:checked:active,
+.visualmode-contrast input[type="checkbox"]:indeterminate:active {
+  box-shadow:inset 0 0 0 1px var(--checkbox-focused-shadow)!important;
+}
+
+
+.visualmode-contrast .is-alert .cpe-banner-notification__icon{
+	background-color:var(--hyperlink-background-color);
+	color:var(--hyperlink-foreground-color);
+}
+.visualmode-contrast .is-pause .cpe-banner-notification__icon{
+	background-color:var(--inactive-text-background-color);
+	color:var(--inactive-text-foreground-color);
+}
+.visualmode-contrast .is-warning .cpe-banner-notification__icon{
+	background-color:var(--highlight-background-color);
+	color:var(--highlight-foreground-color);
+}
+.visualmode-contrast .is-success .cpe-banner-notification__icon{
+	background-color:var(--canvas-text-background-color);
+	color:var(--canvas-text-foreground-color);
+}
+.visualmode-contrast .is-progress .cpe-banner-notification__icon{
+	background-color:var(--active-title-background-color);
+	color:var(--active-title-foreground-color);
+}
+.visualmode-contrast .is-message .cpe-banner-notification__icon{
+	background-color:var(--inactive-title-background-color);
+	color:var(--inactive-title-foreground-color);
+}
+
+
+
 /* Low End Skins and Interpreters */
 	/* Ivilution */
 	.ivilution-loaded body,
@@ -3255,13 +3845,14 @@ input[type="range"]::-moz-range-progress {
 	.parmalution-ready .cpe-dropdown__content,
 	.parmalution-ready .cpe-dropdown__content .cpe-list.is-linked .cpe-dropdown-level-2 .cpe-dropdown-level-2__content   {
 		--dropdown-opacity:1!important;
-		--mica-opacity:1!important;
+		--mica-opacity:2!important;
 		--simple-fallback-color:var(--canvas-background-color)!important;
 	}
 
 	.ivilution-loaded,
 	.parmalution-ready /* For GTK Interpreter */ {
 		--acryllic-filter:none!important;
+		--mica-filter:none!important;
 	}
 
 	/* Ivilution */
@@ -3271,6 +3862,7 @@ input[type="range"]::-moz-range-progress {
 	.parmalution-ready body,
 	.parmalution-ready body [force-active] {
 		--luna-background-color:var(--canvas-secondary-background-color)!important;
+		--luna-mica-background-color:transparent;
 		--luna-background-color-rgb:var(--canvas-secondary-background-color-rgb)!important;
 		--luna-background-color-hover:var(--canvas-secondary-background-color-hover)!important;
 		--luna-text-background-color:var(--canvas-text-secondary-background-color)!important;
@@ -3287,6 +3879,7 @@ input[type="range"]::-moz-range-progress {
 		--luna-alternative-foreground-color-hover:var(--canvas-secondary-alternative-foreground-color-hover);
 		--luna-alternative-foreground-color-rgb:var(--canvas-secondary-alternative-foreground-color-rgb)!important;
 		--luna-hyperlink-background-color:var(--hyperlink-secondary-background-color)!important;
+		--luna-hyperlink-background-color-hover:var(--hyperlink-secondary-background-color-hover)!important;
 		--luna-hyperlink-background-color-rgb:var(--hyperlink-secondary-background-color-rgb)!important;
 	}
 
@@ -3297,6 +3890,7 @@ input[type="range"]::-moz-range-progress {
 	.parmalution-ready body:not(:focus):not(:focus-within),
 	.parmalution-ready body [force-inactive] {
 		--luna-background-color:var(--canvas-background-color)!important;
+		--luna-mica-background-color:var(--canvas-background-color);
 		--luna-background-color-rgb:var(--canvas-background-color-rgb)!important;
 		--luna-background-color-hover:var(--canvas-background-color-hover)!important;
 		--luna-text-background-color:var(--canvas-text-background-color-hover)!important;
