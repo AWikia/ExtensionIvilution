@@ -3,8 +3,10 @@
 	--desktop-background-color:#f6f6f6;
 	--desktop-text-color:#000000;
 	--hyperlink-background-color:#0645ad;
+	--visited-hyperlink-background-color:#0b0080;
 	--canvas-background-color:#ffffff;
 	--inactive-text-background-color:#a2a9b1;
+	--active-text-background-color:#faa700;
 	--canvas-text-background-color:#000000;
 	--highlight-background-color:#3366cc;
 	--active-title-background-color:#a7d7f9;
@@ -13,80 +15,82 @@
 
 /* Error Boxes */
 .messagebox, .errorbox, .warningbox, .successbox {
-    color: var(--message-foreground-color);
+    color: var(--canvas-foreground-color);
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     margin-bottom: 16px;
-    border: 1px solid;
+    border: 2px solid;
     padding: 12px 24px;
     word-wrap: break-word;
     overflow-wrap: break-word;
     overflow: hidden;
+    border-radius:var(--border-radius);
+    
 }
-
-.errorbox a,
-.errorbox a:visited {
-	color:rgba(var(--alert-alternative-foreground-color-rgb),0.8);
-}
-
-.errorbox a:hover,
-.errorbox a:visited:hover {
-	color:var(--alert-alternative-foreground-color);
-}
-
-
-.warningbox  a,
-.warningbox a:visited {
-	color:rgba(var(--warning-alternative-foreground-color-rgb),0.8);
-}
-
-.warningbox a:hover,
-.warningbox a:visited:hover {
-	color:var(--warning-alternative-foreground-color);
-}
-
-.successbox a,
-.successbox a:visited {
-	color:rgba(var(--success-alternative-foreground-color-rgb),0.8);
-}
-
-.successbox a:hover,
-.successbox a:visited:hover {
-	color:var(--success-alternative-foreground-color);
-}
-
-.messagebox a,
-.messagebox a:visited {
-	color:rgba(var(--message-alternative-foreground-color-rgb),0.8);
-}
-
-.messagebox a:hover,
-.messagebox a:visited:hover {
-	color:var(--message-alternative-foreground-color);
-}
-
 
 .messagebox {
-    background-color: var(--message-gradient-color);
-    border-color: var(--message-gradient-color-hover);
-    color: var(--message-foreground-color);
+    background-color: var(--message-fadeout-color);
+    border-color: var(--message-fadeout-color);
 }
 
 .errorbox {
-    background-color: var(--alert-gradient-color);
-    border-color: var(--alert-gradient-color-hover);
-    color: var(--alert-foreground-color);
+    background-color: var(--alert-fadeout-color);
+    border-color: var(--alert-fadeout-color);
 }
 
 .warningbox {
-    background-color: var(--warning-gradient-color);
-    border-color: var(--warning-gradient-color-hover);
-    color: var(--warning-foreground-color);
+    background-color: var(--warning-fadeout-color);
+    border-color: var(--warning-fadeout-color);
 }
 
 .successbox {
-    background-color: var(--success-gradient-color);
-    border-color: var(--success-gradient-color-hover);
-    color: var(--success-foreground-color);
+    background-color: var(--success-fadeout-color);
+    border-color: var(--success-fadeout-color);
+}
+
+.visualmode-contrast .messagebox, 
+.visualmode-contrast .errorbox, 
+.visualmode-contrast .warningbox, 
+.visualmode-contrast .successbox {
+	background-color:var(--canvas-secondary-background-color);
+	color:var(--canvas-text-secondary-background-color);
+}
+
+.visualmode-contrast .messagebox {
+    border-color: var(--inactive-title-background-color);
+}
+
+.visualmode-contrast .errorbox {
+    border-color: var(--hyperlink-background-color);
+}
+
+.visualmode-contrast .warningbox {
+    border-color: var(--highlight-background-color);
+}
+
+.visualmode-contrast .successbox {
+    border-color: var(--canvas-text-background-color);
+}
+
+.visualmode-contrast .messagebox a, 
+.visualmode-contrast .errorbox a, 
+.visualmode-contrast .warningbox a, 
+.visualmode-contrast .successbox a,
+.visualmode-contrast .messagebox a:visited, 
+.visualmode-contrast .errorbox a:visited, 
+.visualmode-contrast .warningbox a:visited, 
+.visualmode-contrast .successbox a:visited {
+	color:var(--hyperlink-secondary-background-color);
+}
+
+.visualmode-contrast .messagebox a.new, 
+.visualmode-contrast .errorbox a.new, 
+.visualmode-contrast .warningbox a.new, 
+.visualmode-contrast .successbox a.new,
+.visualmode-contrast .messagebox a.new:visited, 
+.visualmode-contrast .errorbox a.new:visited, 
+.visualmode-contrast .warningbox a.new:visited, 
+.visualmode-contrast .successbox a.new:visited {
+	color:var(--alert-secondary-background-color);
 }
