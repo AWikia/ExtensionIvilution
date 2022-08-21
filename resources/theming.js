@@ -28,9 +28,9 @@ window.MW18highContrast = 4.50;
 			'<div class="cpe-system-colors dcm-standard">' +
 				'<span class="fc-canvas" style="color:window; color:canvas;"></span>' +
 				'<span class="fc-canvastext" style="color:windowtext; color:canvastext;"></span>' +
-				'<span class="fc-linktext" style="color:linktext;"></span>' +
-				'<span class="fc-visitedtext" style="color:visitedtext;"></span>' +
-				'<span class="fc-activetext" style="color:activetext;"></span>' +
+				'<span class="fc-linktext" style="color:highlight; color:linktext;"></span>' +
+				'<span class="fc-visitedtext" style="color:highlight; color:visitedtext;"></span>' +
+				'<span class="fc-activetext" style="color:highlight; color:activetext;"></span>' +
 				'<span class="fc-buttonface" style="color:buttonface;"></span>' +
 				'<span class="fc-buttontext" style="color:buttontext;"></span>' +
 				'<span class="fc-buttonborder" style="color:buttontext; color:buttonborder;"></span>' +
@@ -47,8 +47,8 @@ window.MW18highContrast = 4.50;
 				'<span class="fc-accentcolortext" style="color:highlighttext; color:accentcolortext;"></span>' +
 			'</div>' +
 			'<div class="cpe-system-colors dcm-reversi">' +
-				'<span class="fc-canvas" style="color:canvastext;"></span>' +
-				'<span class="fc-canvastext" style="color:canvas;"></span>' +
+				'<span class="fc-canvas" style="color:windowtext; color:canvastext;"></span>' +
+				'<span class="fc-canvastext" style="color:window; color:canvas;"></span>' +
 				'<span class="fc-linktext" style="color:highlight;"></span>' +
 				'<span class="fc-visitedtext" style="color:highlight;"></span>' +
 				'<span class="fc-activetext" style="color:highlight;"></span>' +
@@ -57,7 +57,7 @@ window.MW18highContrast = 4.50;
 				'<span class="fc-buttonborder" style="color:buttonface"></span>' +
 				'<span class="fc-field" style="color:windowtext; color:canvastext; color:fieldtext;"></span>' +
 				'<span class="fc-fieldtext" style="color:window; color:canvas; color:field;"></span>' +
-				'<span class="fc-highlight" style="color:linktext;"></span>' +
+				'<span class="fc-highlight" style="color:highlight; color:linktext;"></span>' +
 				'<span class="fc-highlighttext" style="color:canvastext;"></span>' +
 				'<span class="fc-selecteditem" style="color:highlight; color:selecteditem;"></span>' +
 				'<span class="fc-selecteditemtext" style="color:highlighttext; color:selecteditemtext;"></span>' +
@@ -82,8 +82,8 @@ window.MW18highContrast = 4.50;
 	window.MW18HLColor = GetHighlight();
 	window.MW18ATColor = GetActiveTitle();
 	window.MW18ITColor = GetInactiveTitle();
-	VisualMode('standard',false);
 	CompileThemingEngine(true);
+	VisualMode('standard',false);
 	console.log("Ivilution has been succesfully initialized")
 }() );
 
@@ -143,6 +143,37 @@ function ForcedColorType() {
 	} else {
 		return 'standard';
 	}
+}
+
+/* Copied from Base JS */
+function UpdateSelectValue() { // Handles Blurring
+		setTimeout(
+		(function() { document.querySelector(' .cpe-dropdown.cpe-select:focus-within').blur(); 	document.querySelector('.focus-overlay').focus(); } )
+	,0)
+}
+
+
+function UpdateRange() {
+	var ranges = document.querySelectorAll('input[type="range"]');
+	ranges.forEach(function(x) {
+		x.style.setProperty("--range-percent",  (( ((x.value) - x.getAttribute('min') ) * 100) / (x.getAttribute('max') - x.getAttribute('min')) ) + '%'  );
+	});
+
+	var progresses = document.querySelectorAll('progress');
+	progresses.forEach(function(x) {
+		x.style.setProperty("--range-percent",  (( ((x.getAttribute('value')) - 0 ) * 100) / (x.getAttribute('max') - 0) ) + '%'  );
+	});
+
+}
+
+function UpdateRangeInputs() {
+	UpdateRange();
+
+	var ranges2 = document.querySelectorAll('input[type="range"]');
+	ranges2.forEach(function(x) {
+		x.addEventListener("input", function(e) { UpdateRange(); });
+	});
+
 }
 
 
@@ -777,6 +808,9 @@ function GetGradientVariable(color,name="canvas") {
 	}
 }
 
+/* End of this work */
+
+
 
 /* Downloads all modificative values of the current selected theme to a file */
 function DownloadTheme(full=false) {
@@ -802,6 +836,7 @@ function DownloadTheme(full=false) {
 				 '--desktop-alternative-foreground-color:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--desktop-alternative-foreground-color")  + ';\n' +
 				 '--desktop-alternative-foreground-color-hover:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--desktop-alternative-foreground-color-hover")  + ';\n' +
 				 '--desktop-background-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--desktop-background-color-rgb")  + ';\n' +
+				 '--desktop-background-color-hover-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--desktop-background-color-hover-rgb")  + ';\n' +
 				 '--desktop-foreground-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--desktop-foreground-color-rgb")  + ';\n' +
 				 '--desktop-foreground-color-hover-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--desktop-foreground-color-hover-rgb")  + ';\n' +
 				 '--desktop-alternative-foreground-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--desktop-alternative-foreground-color-rgb")  + ';\n' +
@@ -840,6 +875,7 @@ function DownloadTheme(full=false) {
 				 '--canvas-alternative-foreground-color:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-alternative-foreground-color")  + ';\n' +
 				 '--canvas-alternative-foreground-color-hover:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-alternative-foreground-color-hover")  + ';\n' +
 				 '--canvas-background-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-background-color-rgb")  + ';\n' +
+				 '--canvas-background-color-hover-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-background-color-hover-rgb")  + ';\n' +
 				 '--canvas-foreground-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-foreground-color-rgb")  + ';\n' +
 				 '--canvas-foreground-color-hover-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-foreground-color-hover-rgb")  + ';\n' +
 				 '--canvas-alternative-foreground-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-alternative-foreground-color-rgb")  + ';\n' +
@@ -857,6 +893,7 @@ function DownloadTheme(full=false) {
 				 '--canvas-secondary-alternative-foreground-color:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-secondary-alternative-foreground-color")  + ';\n' +
 				 '--canvas-secondary-alternative-foreground-color-hover:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-secondary-alternative-foreground-color-hover")  + ';\n' +
 				 '--canvas-secondary-background-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-secondary-background-color-rgb")  + ';\n' +
+				 '--canvas-secondary-background-color-hover-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-secondary-background-color-hover-rgb")  + ';\n' +
 				 '--canvas-secondary-foreground-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-secondary-foreground-color-rgb")  + ';\n' +
 				 '--canvas-secondary-foreground-color-hover-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-secondary-foreground-color-hover-rgb")  + ';\n' +
 				 '--canvas-secondary-alternative-foreground-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--canvas-secondary-alternative-foreground-color-rgb")  + ';\n' +
@@ -874,6 +911,7 @@ function DownloadTheme(full=false) {
 				 '--inactive-text-alternative-foreground-color:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--inactive-text-alternative-foreground-color")  + ';\n' +
 				 '--inactive-text-alternative-foreground-color-hover:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--inactive-text-alternative-foreground-color-hover")  + ';\n' +
 				 '--inactive-text-background-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--inactive-text-background-color-rgb")  + ';\n' +
+				 '--inactive-text-background-color-hover-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--inactive-text-background-color-hover-rgb")  + ';\n' +
 				 '--inactive-text-foreground-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--inactive-text-foreground-color-rgb")  + ';\n' +
 				 '--inactive-text-foreground-color-hover-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--inactive-text-foreground-color-hover-rgb")  + ';\n' +
 				 '--inactive-text-alternative-foreground-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--inactive-text-alternative-foreground-color-rgb")  + ';\n' +
@@ -952,6 +990,7 @@ function DownloadTheme(full=false) {
 				 '--highlight-alternative-foreground-color:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--highlight-alternative-foreground-color")  + ';\n' +
 				 '--highlight-alternative-foreground-color-hover:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--highlight-alternative-foreground-color-hover")  + ';\n' +
 				 '--highlight-background-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--highlight-background-color-rgb")  + ';\n' +
+				 '--highlight-background-color-hover-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--highlight-background-color-hover-rgb")  + ';\n' +
 				 '--highlight-foreground-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--highlight-foreground-color-rgb")  + ';\n' +
 				 '--highlight-foreground-color-hover-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--highlight-foreground-color-hover-rgb")  + ';\n' +
 				 '--highlight-alternative-foreground-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--highlight-alternative-foreground-color-rgb")  + ';\n' +
@@ -968,6 +1007,7 @@ function DownloadTheme(full=false) {
 				 '--highlight-text-alternative-foreground-color:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--highlight-text-alternative-foreground-color")  + ';\n' +
 				 '--highlight-text-alternative-foreground-color-hover:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--highlight-text-alternative-foreground-color-hover")  + ';\n' +
 				 '--highlight-text-background-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--highlight-text-background-color-rgb")  + ';\n' +
+				 '--highlight-text-background-color-hover-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--highlight-text-background-color-hover-rgb")  + ';\n' +
 				 '--highlight-text-foreground-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--highlight-text-foreground-color-rgb")  + ';\n' +
 				 '--highlight-text-foreground-color-hover-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--highlight-text-foreground-color-hover-rgb")  + ';\n' +
 				 '--highlight-text-alternative-foreground-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--highlight-text-alternative-foreground-color-rgb")  + ';\n' +
@@ -1038,6 +1078,7 @@ function DownloadTheme(full=false) {
 				 '--active-title-alternative-foreground-color-hover:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--active-title-alternative-foreground-color-hover")  + ';\n' +
 
 				 '--active-title-background-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--active-title-background-color-rgb")  + ';\n' +
+				 '--active-title-background-color-hover-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--active-title-background-color-hover-rgb")  + ';\n' +
 				 '--active-title-foreground-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--active-title-foreground-color-rgb")  + ';\n' +
 				 '--active-title-foreground-color-hover-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--active-title-foreground-color-hover-rgb")  + ';\n' +
 				 '--active-title-alternative-foreground-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--active-title-alternative-foreground-color-rgb")  + ';\n' +
@@ -1055,6 +1096,7 @@ function DownloadTheme(full=false) {
 				 '--active-title-text-alternative-foreground-color-hover:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--active-title-text-alternative-foreground-color-hover")  + ';\n' +
 
 				 '--active-title-text-background-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--active-title-text-background-color-rgb")  + ';\n' +
+				 '--active-title-text-background-color-hover-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--active-title-text-background-color-hover-rgb")  + ';\n' +
 				 '--active-title-text-foreground-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--active-title-text-foreground-color-rgb")  + ';\n' +
 				 '--active-title-text-foreground-color-hover-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--active-title-text-foreground-color-hover-rgb")  + ';\n' +
 				 '--active-title-text-alternative-foreground-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--active-title-text-alternative-foreground-color-rgb")  + ';\n' +
@@ -1071,6 +1113,7 @@ function DownloadTheme(full=false) {
 				 '--inactive-title-alternative-foreground-color:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--inactive-title-alternative-foreground-color")  + ';\n' +
 				 '--inactive-title-alternative-foreground-color-hover:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--inactive-title-alternative-foreground-color-hover")  + ';\n' +
 				 '--inactive-title-background-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--inactive-title-background-color-rgb")  + ';\n' +
+				 '--inactive-title-background-color-hover-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--inactive-title-background-color-hover-rgb")  + ';\n' +
 				 '--inactive-title-foreground-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--inactive-title-foreground-color-rgb")  + ';\n' +
 				 '--inactive-title-foreground-color-hover-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--inactive-title-foreground-color-hover-rgb")  + ';\n' +
 				 '--inactive-title-alternative-foreground-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--inactive-title-alternative-foreground-color-rgb")  + ';\n' +
@@ -1087,6 +1130,7 @@ function DownloadTheme(full=false) {
 				 '--inactive-title-text-alternative-foreground-color:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--inactive-title-text-alternative-foreground-color")  + ';\n' +
 				 '--inactive-title-text-alternative-foreground-color-hover:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--inactive-title-text-alternative-foreground-color-hover")  + ';\n' +
 				 '--inactive-title-text-background-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--inactive-title-text-background-color-rgb")  + ';\n' +
+				 '--inactive-title-text-background-color-hover-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--inactive-title-text-background-color-hover-rgb")  + ';\n' +
 				 '--inactive-title-text-foreground-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--inactive-title-text-foreground-color-rgb")  + ';\n' +
 				 '--inactive-title-text-foreground-color-hover-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--inactive-title-text-foreground-color-hover-rgb")  + ';\n' +
 				 '--inactive-title-text-alternative-foreground-color-rgb:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--inactive-title-text-alternative-foreground-color-rgb")  + ';\n' +
@@ -1203,6 +1247,7 @@ function DownloadTheme(full=false) {
 				 '--icon-filter-duration:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--icon-filter-duration")  + ';\n' +
 				 '--icon-filter-delay:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--icon-filter-delay")  + ';\n' +
 				 '--system-acryllic-opacity:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--system-acryllic-opacity")  + ';\n' +
+				 '--system-mica-opacity:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--system-mica-opacity")  + ';\n' +
 				 '--system-generic-color-hue-shift:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--system-generic-color-hue-shift")  + ';\n' +
 				 '--system-generic-color-saturation:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--system-generic-color-saturation")  + ';\n' +
 				 '--mica-background-color:' + getComputedStyle(document.querySelector('body')).getPropertyValue("--mica-background-color")  + ';\n' +
@@ -1441,7 +1486,7 @@ if (refresh === true) {
 //	ToggleTheme(window.MW18ActiveTheme,false,false);
 //	VisualColor(window.MW18ActiveColors,false,false);
 	if (DisabledColorManagement()) {
-		var colorstyle =".color-management-on { display:none!important;}\n"
+		var colorstyle =".color-management-on { display:none!important;} @supports (not (color-scheme:normal)) { .color-modes { display:none!important } }\n"
 	} else {
 		var colorstyle= ".color-management-off { display:none!important;}\n"
 	}
@@ -1873,6 +1918,7 @@ if (imgfilter == 'none') {
 	var imgfilter = 'opacity(1)';
 }
 
+aopacity = getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--system-acryllic-opacity");
 
 // Gradient Sets
 		// Dledlen
@@ -2040,6 +2086,7 @@ var invfilters = [
 						  "--canvas-secondary-gradient-color-hover:" + dropdowncolor_gradient[1] + ";\n" +
 						  "--canvas-secondary-foreground-color:" + dropdowncolor_fg[0] + ";\n" +
 						  "--canvas-secondary-foreground-color-hover:" +  dropdowncolor_fg[1] + ";\n" + 
+						  "--canvas-secondary-foreground-color-inverted:" + GetForegroundVariables(dropdowncolorH)[0] + ";\n" +
 						  "--canvas-3d-background-color:" + tdbg + ";\n" +
 						  "--canvas-3d-background-color-dark:" + tdbg2 + ";\n" +
 						  "--canvas-background-color:" + content_color + ";\n" +
@@ -2048,10 +2095,13 @@ var invfilters = [
 						  "--canvas-gradient-color-hover:" + content_color_gradient[1] + ";\n" +
 						  "--canvas-foreground-color:" + content_color_fg[0] + ";\n" +
 						  "--canvas-foreground-color-hover:" +  content_color_fg[1] + ";\n" + 
+						  "--canvas-foreground-color-inverted:" + GetForegroundVariables(content_color2)[0] + ";\n" +
 						  "--canvas-secondary-background-color-rgb:" + ColorRGB(dropdowncolor) + ";\n" + 
+						  "--canvas-secondary-background-color-hover-rgb:" + ColorRGB(dropdowncolorH) + ";\n" +
 						  "--canvas-secondary-foreground-color-rgb:" + dropdowncolor_fg[2] + ";\n" +
 						  "--canvas-secondary-foreground-color-hover-rgb:" +  dropdowncolor_fg[3] + ";\n" + 
 						  "--canvas-background-color-rgb:" + ColorRGB( content_color ) + ";\n" +
+						  "--canvas-background-color-hover-rgb:" + ColorRGB(content_color2) + ";\n" +
 						  "--canvas-foreground-color-rgb:" +  content_color_fg[2] + ";\n" +
 						  "--canvas-foreground-color-hover-rgb:" +  content_color_fg[3] + ";\n" + 
 						  "--canvas-text-background-color:" + content_text + ";\n" +
@@ -2086,6 +2136,7 @@ var invfilters = [
 						  "--highlight-foreground-color-hover:" + button_fg[1] + ";\n" +
 						  "--highlight-foreground-color-inverted:" + GetForegroundVariables(buttoncolor1)[0] + ";\n" +
 						  "--highlight-background-color-rgb:" + ColorRGB(button_color) + ";\n" +
+						  "--highlight-background-color-hover-rgb:" + ColorRGB(buttoncolor1) + ";\n" +
 						  "--highlight-foreground-color-rgb:" + button_fg[2] + ";\n" +
 						  "--highlight-foreground-color-hover-rgb:" + button_fg[3] + ";\n" +
 						  "--highlight-text-background-color:" + buttontext_color + ";\n" +
@@ -2158,6 +2209,7 @@ var invfilters = [
 						  "--inactive-text-foreground-color-hover:" + border_fg[1] + ";\n" +
 						  "--inactive-text-foreground-color-inverted:" + GetForegroundVariables(bordercolor1)[0] + ";\n" +
 						  "--inactive-text-background-color-rgb:" + ColorRGB(border_color) + ";\n" +
+						  "--inactive-text-background-color-hover-rgb:" + ColorRGB(bordercolor1) + ";\n" +
 						  "--inactive-text-foreground-color-rgb:" + border_fg[2] + ";\n" +
 						  "--inactive-text-foreground-color-hover-rgb:" + border_fg[3] + ";\n" +
 						  "--desktop-background-color:" + head_color + ";\n" +
@@ -2168,6 +2220,7 @@ var invfilters = [
 						  "--desktop-foreground-color-hover:" + head_fg[1] + ";\n" +
 						  "--desktop-foreground-color-inverted:" + GetForegroundVariables(headcolor1)[0] + ";\n" +
 						  "--desktop-background-color-rgb:" + ColorRGB(head_color) + ";\n" +
+						  "--desktop-background-color-hover-rgb:" + ColorRGB(headcolor1) + ";\n" +
 						  "--desktop-foreground-color-rgb:" + head_fg[2] + ";\n" +
 						  "--desktop-foreground-color-hover-rgb:" + head_fg[3] + ";\n" +
 						  "--desktop-text-background-color:" + headertext_color + ";\n" +
@@ -2189,6 +2242,7 @@ var invfilters = [
 						  "--active-title-foreground-color-hover:" + caret_fg[1] + ";\n" +
 						  "--active-title-foreground-color-inverted:" + GetForegroundVariables(caretcolor1)[0] + ";\n" +
 						  "--active-title-background-color-rgb:" + ColorRGB( caret_color ) + ";\n" +
+						  "--active-title-background-color-hover-rgb:" + ColorRGB(caretcolor1) + ";\n" +
 						  "--active-title-foreground-color-rgb:" + caret_fg[2] + ";\n" +
 						  "--active-title-foreground-color-hover-rgb:" + caret_fg[3] + ";\n" +
 						  "--active-title-text-background-color:" + carettext_color + ";\n" +
@@ -2210,6 +2264,7 @@ var invfilters = [
 						  "--inactive-title-foreground-color-hover:" + caret2_fg[1] + ";\n" +
 						  "--inactive-title-foreground-color-inverted:" + GetForegroundVariables(caret2color1)[0] + ";\n" +
 						  "--inactive-title-background-color-rgb:" + ColorRGB( caret2_color ) + ";\n" +
+						  "--inactive-title-background-color-hover-rgb:" + ColorRGB(caret2color1) + ";\n" +
 						  "--inactive-title-foreground-color-rgb:" + caret2_fg[2] + ";\n" +
 						  "--inactive-title-foreground-color-hover-rgb:" + caret2_fg[3] + ";\n" +
 						  "--inactive-title-text-background-color:" + caret2text_color + ";\n" +
@@ -2322,7 +2377,8 @@ var invfilters = [
 						 '--icon-filter-hover:' + wordfilter2  + ';\n' +
 						 '--icon-filter-duration:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--icon-filter-duration")  + ';\n' +
 						 '--icon-filter-delay:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--icon-filter-delay")  + ';\n' +
-						 '--system-acryllic-opacity:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--system-acryllic-opacity")  + ';\n' +
+						 '--system-acryllic-opacity:' + aopacity  + ';\n' +
+						 '--system-mica-opacity:' + (1 - aopacity)  + ';\n' +
 						 '--system-generic-color-hue-shift:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--system-generic-color-hue-shift")  + ';\n' +
 						 '--system-generic-color-saturation:' + getComputedStyle(document.querySelector('.cpe-theming.visualcolors-' + window.MW18ActiveColors + '.theme-' + window.MW18ActiveTheme)).getPropertyValue("--system-generic-color-saturation")  + ';\n' +
 
