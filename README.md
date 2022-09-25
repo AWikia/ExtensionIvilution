@@ -1,3 +1,5 @@
+Starting from 25/9//2022, this project will no longer be maintained because the main DB trasmitter of that project burned out. You should uninstall the extension from your wiki, if you have it installed as Ivilution may break in future MW Versions despite working in MW 1.38
+
 # Description
 Ivilution is a MediaWiki extension that brings the CPE Language experience to other MediaWiki skins. It also brings out the following:
 - Themed OOUI Icons
